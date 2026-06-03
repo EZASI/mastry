@@ -82,7 +82,7 @@ body.jp .hero-sub{font-style:normal;line-height:1.9}
   background:linear-gradient(90deg,var(--resin-deep),var(--resin-bright));box-shadow:0 0 12px var(--resin)}
 
 /* nav */
-#nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;justify-content:space-between;
+#nav{position:fixed;top:0;left:0;width:100%;z-index:1100;display:flex;justify-content:space-between;
   align-items:center;padding:1.6rem clamp(1.2rem,4vw,3.5rem);transition:background .5s,backdrop-filter .5s,padding .5s}
 #nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
 .logo{font-family:var(--serif);font-size:1.6rem;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--bone)}
@@ -99,7 +99,36 @@ body.jp .hero-sub{font-style:normal;line-height:1.9}
   letter-spacing:inherit;padding:.2rem .1rem;transition:color .3s;white-space:nowrap}
 .lang button.active{color:var(--resin)}
 .lang .sep{color:var(--bone-dim);opacity:.4}
-@media(max-width:880px){.nav-links{display:none}}
+/* ---- mobile nav / hamburger menu ---- */
+html{scroll-padding-top:5rem;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{-webkit-tap-highlight-color:transparent}
+.menu-btn{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;
+  background:none;border:none;cursor:pointer;padding:0;z-index:1002}
+.menu-btn span{display:block;width:24px;height:1.6px;background:var(--bone);border-radius:2px;
+  transition:transform .35s var(--ease),opacity .25s}
+.menu-btn.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:1001;background:rgba(8,10,9,.97);backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.7rem;
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+.mobile-menu.open{opacity:1;visibility:visible}
+.mobile-menu a{color:var(--bone);text-decoration:none;font-family:var(--serif);font-size:2rem;letter-spacing:.06em;
+  opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.mobile-menu.open a{opacity:1;transform:none}
+.mobile-menu.open a:nth-child(1){transition-delay:.08s}.mobile-menu.open a:nth-child(2){transition-delay:.14s}
+.mobile-menu.open a:nth-child(3){transition-delay:.20s}.mobile-menu.open a:nth-child(4){transition-delay:.26s}
+.mobile-menu .mm-cta{margin-top:.5rem;background:var(--resin);color:var(--ink);border-radius:44px;
+  padding:.85rem 2.4rem;font-family:var(--sans);font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;transition-delay:.32s}
+body.jp .mobile-menu a{font-family:var(--mincho)}
+body.jp .mobile-menu .mm-cta{font-family:var(--sans)}
+@media(max-width:880px){.nav-links{display:none}.menu-btn{display:flex}.nav-right{gap:1.2rem}}
+@media(min-width:881px){.mobile-menu{display:none!important}}
+@media(max-width:420px){
+  .logo{font-size:1.4rem}.nav-right{gap:.85rem}
+  .signup{padding-left:1.1rem}.signup button{padding:.85rem 1.2rem}
+  #nav{padding:1.1rem 1.2rem}
+}
 
 /* hero */
 .hero{min-height:100svh;display:grid;grid-template-rows:1fr auto 1fr;align-items:center;justify-items:center;
@@ -559,8 +588,17 @@ body.jp .feat span{font-family:var(--mincho)}
     <div class="lang">
       <button id="enBtn" class="active">EN</button><span class="sep">/</span><button id="jpBtn">日本</button>
     </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
+  <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
+  <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+  <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
+  <a href="#cta" class="mm-cta" data-en="Begin the ritual" data-jp="儀式を始める">Begin the ritual</a>
+</div>
 
 <header class="hero">
   <div class="hero-bg"><svg class="hero-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><use href="#aegean"/></svg></div>
@@ -857,6 +895,21 @@ body.jp .feat span{font-family:var(--mincho)}
   enBtn.onclick=()=>setLang('en'); jpBtn.onclick=()=>setLang('jp');
   let saved='en'; try{saved=localStorage.getItem('mastry-lang')||'en'}catch(e){}
   if(saved==='jp') setLang('jp');
+
+  /* ---- mobile menu ---- */
+  const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+  if(menuBtn&&mobileMenu){
+    const closeMenu=()=>{menuBtn.classList.remove('open');mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';};
+    menuBtn.addEventListener('click',()=>{
+      const open=!mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open',open);menuBtn.classList.toggle('open',open);
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+      document.body.style.overflow=open?'hidden':'';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+    addEventListener('resize',()=>{if(innerWidth>880)closeMenu();});
+  }
 
   /* ---- image graceful fallback ---- */
   document.querySelectorAll('.img-wrap > img').forEach(img=>{
