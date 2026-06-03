@@ -471,6 +471,8 @@ body.jp .feat span{font-family:var(--mincho)}
 /* placed last so it wins source-order over base rules it overrides */
 @media(max-width:768px){
   body{cursor:auto}
+  /* mobile: never keep content hidden behind scroll-reveal (prevents blank voids) */
+  .reveal{opacity:1!important;transform:none!important}
   .marquee,.tagline-band,.coords,.feats{display:none}
   section{padding:clamp(5rem,17vw,7.5rem) 1.5rem}
   .h2{font-size:clamp(2.1rem,8.5vw,3rem)}
