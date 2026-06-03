@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MASTRY — 木の涙 · Tears of the Tree</title>
-<meta name="description" content="MASTRY — a premium sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan. By 森スパークリング." />
+<meta name="description" content="MASTRY — a premium sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
@@ -31,7 +31,7 @@ body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight
 body.jp .h2,body.jp .lede,body.jp .body,body.jp .hero-sub,body.jp .step h3,body.jp .step p,
 body.jp .sku p,body.jp .place,body.jp .f-sub,body.jp .band-text,body.jp .media-cap span:last-child{
   font-family:var(--mincho);font-weight:400}
-body.jp .h2{letter-spacing:.04em;line-height:1.18}
+body.jp .h2{font-size:clamp(1.9rem,4.3vw,3.4rem);letter-spacing:.03em;line-height:1.34}
 body.jp .hero-sub{font-style:normal;line-height:1.9}
 
 /* atmosphere */
@@ -82,9 +82,9 @@ body.jp .hero-sub{font-style:normal;line-height:1.9}
   background:linear-gradient(90deg,var(--resin-deep),var(--resin-bright));box-shadow:0 0 12px var(--resin)}
 
 /* nav */
-nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;justify-content:space-between;
+#nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;justify-content:space-between;
   align-items:center;padding:1.6rem clamp(1.2rem,4vw,3.5rem);transition:background .5s,backdrop-filter .5s,padding .5s}
-nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+#nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
 .logo{font-family:var(--serif);font-size:1.6rem;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--bone)}
 .nav-right{display:flex;align-items:center;gap:2.2rem}
 .nav-links{display:flex;gap:2.2rem;align-items:center}
@@ -92,25 +92,34 @@ nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:
   text-transform:uppercase;font-weight:400;transition:color .4s;position:relative}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--resin);transition:width .4s var(--ease)}
 .nav-links a:hover{color:var(--bone)}.nav-links a:hover::after{width:100%}
-.nav-cta{border:1px solid var(--line);padding:.6rem 1.2rem;border-radius:40px;color:var(--bone)!important}
+.nav-cta{border:1px solid var(--line);padding:.6rem 1.2rem;border-radius:40px;color:var(--bone)!important;white-space:nowrap}
 .nav-cta:hover{border-color:var(--resin);background:rgba(214,163,71,.08)}
 .lang{display:flex;gap:.5rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
 .lang button{background:none;border:none;cursor:none;color:var(--bone-dim);font-family:inherit;font-size:inherit;
-  letter-spacing:inherit;padding:.2rem .1rem;transition:color .3s}
+  letter-spacing:inherit;padding:.2rem .1rem;transition:color .3s;white-space:nowrap}
 .lang button.active{color:var(--resin)}
 .lang .sep{color:var(--bone-dim);opacity:.4}
 @media(max-width:880px){.nav-links{display:none}}
 
 /* hero */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;position:relative;padding:7rem 1.2rem 4rem;overflow:hidden}
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto 1fr;align-items:center;justify-items:center;
+  text-align:center;position:relative;padding:5.5rem 1.2rem 1.8rem;overflow:hidden}
+.hero-inner{grid-row:2;display:flex;flex-direction:column;align-items:center}
+@media(max-height:800px){
+  .hero .hero-mono{display:none}
+  .eyebrow{margin-bottom:1.1rem}
+  .hero h1{font-size:clamp(3rem,11vw,7.5rem)}
+  .kanji{margin:.8rem 0 .2rem}
+  .hero-sub{margin-top:.9rem;font-size:clamp(1rem,2vw,1.2rem)}
+  .hero-actions{margin-top:1.5rem}
+}
 .hero-bg{position:absolute;inset:0;z-index:-1}
 .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s var(--ease)}
 .hero-bg img.ready{opacity:.42}
 .hero-bg::after{content:"";position:absolute;inset:0;
   background:radial-gradient(110% 90% at 50% 40%,transparent 30%,var(--ink) 88%)}
 .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
-  color:var(--resin);margin-bottom:2.2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center}
+  color:var(--resin);margin-bottom:1.6rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center}
 .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--resin);box-shadow:0 0 8px var(--resin)}
 .hero h1{font-family:var(--serif);font-weight:400;line-height:.86;letter-spacing:.02em;
   font-size:clamp(3.2rem,15vw,12rem);
@@ -121,12 +130,12 @@ nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:
 .loaded .hero h1 span{animation:charIn 1.3s var(--ease) forwards}
 @keyframes charIn{to{opacity:1;transform:none;filter:blur(0)}}
 .kanji{font-family:var(--mincho);font-size:clamp(1.3rem,4vw,2.4rem);letter-spacing:1.1em;
-  color:var(--bone);margin:1.6rem 0 .4rem;padding-left:1.1em;opacity:0}
+  color:var(--bone);margin:1.1rem 0 .3rem;padding-left:1.1em;opacity:0}
 .loaded .kanji{animation:fadeUp 1.4s var(--ease) 1s forwards}
 .hero-sub{max-width:560px;font-family:var(--serif);font-style:italic;font-weight:300;
-  font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--bone-dim);margin-top:1.6rem;opacity:0;line-height:1.55}
+  font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--bone-dim);margin-top:1.1rem;opacity:0;line-height:1.55}
 .loaded .hero-sub{animation:fadeUp 1.4s var(--ease) 1.25s forwards}
-.hero-actions{display:flex;gap:1.4rem;margin-top:3rem;opacity:0;flex-wrap:wrap;justify-content:center}
+.hero-actions{display:flex;gap:1.4rem;margin-top:2rem;opacity:0;flex-wrap:wrap;justify-content:center}
 .loaded .hero-actions{animation:fadeUp 1.4s var(--ease) 1.5s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .btn{font-family:var(--sans);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
@@ -135,7 +144,7 @@ nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:
 .btn-primary:hover{background:var(--resin-bright);transform:translateY(-3px);box-shadow:0 16px 40px rgba(214,163,71,.3)}
 .btn-ghost{border:1px solid var(--line);color:var(--bone)}
 .btn-ghost:hover{border-color:var(--resin);background:rgba(214,163,71,.06)}
-.scroll-cue{position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
+.scroll-cue{grid-row:3;align-self:end;position:relative;
   font-family:var(--mono);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--bone-dim);
   display:flex;flex-direction:column;align-items:center;gap:.8rem;opacity:0}
 .loaded .scroll-cue{animation:fadeUp 1.4s var(--ease) 1.9s forwards}
@@ -172,7 +181,7 @@ section{position:relative;padding:clamp(6rem,12vw,11rem) clamp(1.2rem,6vw,7rem)}
 .coords{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--bone-dim);
   margin-top:2.4rem;display:flex;flex-direction:column;gap:.6rem}
 .coords span{color:var(--resin)}
-.origin-media{aspect-ratio:3/4;border-radius:18px;border:1px solid var(--line);
+.origin-media{position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:18px;border:1px solid var(--line);
   background:linear-gradient(160deg,rgba(214,163,71,.10),rgba(111,143,106,.06));display:grid;place-items:center}
 .resin-blob{position:absolute;inset:0;z-index:0;background:
   radial-gradient(40% 30% at 60% 30%,rgba(240,200,115,.5),transparent 60%),
@@ -219,15 +228,15 @@ section{position:relative;padding:clamp(6rem,12vw,11rem) clamp(1.2rem,6vw,7rem)}
 .exp-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:4rem}
 .skus{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
 @media(max-width:900px){.skus{grid-template-columns:1fr}}
-.sku{position:relative;border:1px solid var(--line);border-radius:16px;padding:2.6rem 2rem 2.4rem;
-  overflow:hidden;transition:transform .6s var(--ease),border-color .6s;min-height:480px;
-  display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate}
+.sku{position:relative;border:1px solid var(--line);border-radius:16px;padding:2.8rem 2rem 2.4rem;
+  overflow:hidden;transition:transform .6s var(--ease),border-color .6s;min-height:520px;
+  display:flex;flex-direction:column;justify-content:flex-start;isolation:isolate}
 .sku-bg{position:absolute;inset:0;z-index:-2}
 .sku-bg img{width:100%;height:100%;object-fit:cover}
-.sku::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .6s;
+.sku::before{content:"";position:absolute;inset:0;z-index:-3;opacity:0;transition:opacity .6s;
   background:radial-gradient(80% 60% at 50% 0%,var(--c,rgba(214,163,71,.25)),transparent 70%)}
-.sku:not(.no-img)::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(to top,var(--ink) 12%,rgba(8,10,9,.2) 55%,transparent 80%)}
+.sku::after{content:"";position:absolute;left:0;right:0;top:0;height:62%;z-index:-1;
+  background:radial-gradient(120% 80% at 50% 18%,var(--c,rgba(214,163,71,.18)),transparent 72%)}
 .sku.no-img::before{opacity:1}
 .sku:hover{transform:translateY(-10px);border-color:var(--cb,var(--resin))}
 .sku:hover::before{opacity:1}
@@ -274,12 +283,55 @@ body.jp .place{text-transform:none;letter-spacing:.08em}
 .signup button{border:none;cursor:none;background:var(--resin);color:var(--ink);border-radius:40px;padding:.9rem 1.8rem;
   font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .4s}
 .signup button:hover{background:var(--resin-bright)}
+.signup.shake{animation:shakeX .5s}
+@keyframes shakeX{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.signup-done{max-width:480px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.85rem;
+  border:1px solid var(--resin);border-radius:48px;padding:1.1rem 1.7rem;background:rgba(214,163,71,.08);
+  color:var(--bone);font-size:.92rem;letter-spacing:.03em;line-height:1.4;text-align:left;
+  opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+body.jp .signup-done{font-family:var(--mincho)}
+.signup-done.show{opacity:1;transform:none}
+.signup-done .chk{width:20px;height:20px;flex:none;color:var(--resin)}
+.toast{position:fixed;left:50%;bottom:2.2rem;transform:translateX(-50%) translateY(24px);z-index:9500;
+  background:rgba(12,16,13,.92);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:40px;
+  padding:.85rem 1.6rem;color:var(--bone);font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease),transform .4s var(--ease);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+body.jp .toast{font-family:var(--mincho);letter-spacing:.08em;text-transform:none;font-size:.82rem}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-footer{padding:4rem clamp(1.2rem,6vw,7rem) 3rem;border-top:1px solid var(--line);
-  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem}
+footer{padding:clamp(4rem,7vw,6rem) clamp(1.2rem,6vw,7rem) 2.6rem;border-top:1px solid var(--line);position:relative}
+.f-top{display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2.2rem,6vw,5rem);padding-bottom:3.2rem;border-bottom:1px solid var(--line)}
+@media(max-width:860px){.f-top{grid-template-columns:1fr;gap:3rem}}
+.f-brand-col .f-logo{margin-bottom:0}
+.f-desc{color:var(--bone-dim);font-size:.9rem;line-height:1.75;max-width:340px;margin-top:1.4rem}
+body.jp .f-desc{font-family:var(--mincho)}
+.f-social{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:1.9rem}
+.f-social a{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);text-decoration:none;transition:color .35s}
+.f-social a:hover{color:var(--resin)}
+.f-social .arr{font-size:.8em;opacity:.6;transition:transform .35s var(--ease)}
+.f-social a:hover .arr{transform:translate(2px,-2px)}
+.f-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem 1.4rem}
+@media(max-width:600px){.f-cols{grid-template-columns:1fr 1fr;gap:2.4rem 1.4rem}}
+.f-col{display:flex;flex-direction:column;gap:.9rem}
+.f-col h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.35rem}
+body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.12em}
+.f-col a{font-family:var(--sans);font-size:.85rem;letter-spacing:.03em;color:var(--bone-dim);text-decoration:none;transition:color .35s}
+body.jp .f-col a{font-family:var(--mincho)}
+.f-col a:hover{color:var(--bone)}
+.f-company{display:flex;justify-content:space-between;align-items:flex-start;gap:2.4rem;flex-wrap:wrap;padding:3rem 0}
+.f-company dl{display:grid;grid-template-columns:auto 1fr;gap:.85rem 1.8rem;max-width:580px;margin:0}
+.f-company dt{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);white-space:nowrap;padding-top:.15rem}
+body.jp .f-company dt{font-family:var(--mincho);letter-spacing:.08em;text-transform:none}
+.f-company dd{font-size:.84rem;color:var(--bone);line-height:1.55;margin:0}
+body.jp .f-company dd{font-family:var(--mincho)}
+.f-company dd a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .35s}
+.f-company dd a:hover{border-color:var(--resin)}
+.f-company .ph{color:var(--resin-deep);font-style:italic;opacity:.85}
+.f-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem 1.6rem;flex-wrap:wrap;padding-top:2.4rem;border-top:1px solid var(--line)}
+.f-bottom div{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--bone-dim)}
+@media(max-width:560px){.f-bottom div{font-size:.56rem}}
 .f-logo{font-family:var(--serif);font-size:2.2rem;letter-spacing:.34em;padding-left:.34em;color:var(--bone)}
 .f-sub{font-family:var(--mincho);font-size:.8rem;letter-spacing:.3em;color:var(--bone-dim);margin-top:.8rem}
-.f-meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--bone-dim);text-align:right;line-height:2}
 .f-meta a{color:var(--bone-dim);text-decoration:none;transition:color .3s}.f-meta a:hover{color:var(--resin)}
 
 /* monogram + brand mark */
@@ -287,7 +339,7 @@ footer{padding:4rem clamp(1.2rem,6vw,7rem) 3rem;border-top:1px solid var(--line)
 .mono{display:inline-block;line-height:0}
 .mono svg{display:block;width:100%;height:100%}
 .logo .mono{width:30px;height:30px;color:var(--resin)}
-.hero-mono{width:clamp(52px,8vw,82px);height:clamp(52px,8vw,82px);color:var(--resin);margin:0 auto 1.2rem;opacity:0}
+.hero-mono{width:clamp(48px,7vw,72px);height:clamp(48px,7vw,72px);color:var(--resin);margin:0 auto .9rem;opacity:0}
 .loaded .hero-mono{animation:fadeUp 1.4s var(--ease) .15s forwards}
 .f-logo{display:flex;align-items:center;gap:.8rem}
 .f-logo .mono{width:32px;height:32px;color:var(--resin)}
@@ -307,9 +359,9 @@ body.jp .feat b{font-family:var(--mincho);letter-spacing:.08em;text-transform:no
 .feat span{font-size:.8rem;color:var(--bone-dim);line-height:1.5}
 body.jp .feat span{font-family:var(--mincho)}
 /* vector bottle in SKU cards */
-.sku .bottle{position:absolute;top:6%;left:50%;transform:translateX(-50%);height:60%;width:auto;z-index:0;
-  filter:drop-shadow(0 24px 44px rgba(0,0,0,.55));transition:transform .6s var(--ease)}
-.sku:hover .bottle{transform:translateX(-50%) translateY(-10px)}
+.sku .bottle{position:relative;height:246px;width:auto;margin:0 auto 1.8rem;z-index:0;
+  filter:drop-shadow(0 26px 46px rgba(0,0,0,.55));transition:transform .6s var(--ease)}
+.sku:hover .bottle{transform:translateY(-10px)}
 .sku:not(.no-img) .bottle{display:none}
 .sku .glyph{display:none}
 /* illustrated scenes */
@@ -317,7 +369,7 @@ body.jp .feat span{font-family:var(--mincho)}
 .band>.band-scene{position:absolute;inset:0;width:100%;height:100%}
 .band .band-overlay{background:rgba(8,10,9,.42)}
 .origin-media .branch-art{position:absolute;inset:0;width:100%;height:100%;padding:7%}
-.craft-media{display:grid;place-items:center;overflow:visible;border:none;background:none}
+.craft-media{position:relative;display:grid;place-items:center;overflow:visible;border:none;background:none}
 .trio{display:flex;align-items:flex-end;justify-content:center;width:100%;height:100%;padding:8% 2%;position:relative;z-index:2}
 .trio .bottle{height:84%;width:auto;filter:drop-shadow(0 26px 46px rgba(0,0,0,.55))}
 .trio .bottle:nth-child(2){height:100%;margin:0 -7%;z-index:2}
@@ -331,6 +383,20 @@ body.jp .feat span{font-family:var(--mincho)}
 </style>
 </head>
 <body>
+
+<template id="__bundler_thumbnail" data-bg-color="#080a09">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#080a09"/>
+    <g transform="translate(600 360)" fill="none" stroke="#d6a347">
+      <circle r="150" stroke-width="5"/>
+      <circle cx="0" cy="-99" r="7" fill="#d6a347" stroke="none"/>
+      <path d="M-70 102 L-70 -40 L0 35 L70 -40 L70 102" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M0 28 C-19 65 -19 99 0 118 C19 99 19 65 0 28 Z" fill="#d6a347" stroke="none"/>
+    </g>
+    <text x="600" y="610" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="92" letter-spacing="22" fill="#ece5d6">MASTRY</text>
+    <text x="600" y="680" text-anchor="middle" font-family="serif" font-size="34" letter-spacing="26" fill="#d6a347">木 の 涙</text>
+  </svg>
+</template>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="mono" viewBox="0 0 100 100">
@@ -478,7 +544,7 @@ body.jp .feat span{font-family:var(--mincho)}
 <div class="progress" id="progress"></div>
 
 <div class="side-label left">ΜΑΣΤΙΧΑ · CHIOS 38.37°N</div>
-<div class="side-label right">森スパークリング · EST. MMXXVI</div>
+<div class="side-label right">MASTRY · EST. MMXXVI</div>
 
 <nav id="nav">
   <div class="logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></span>MASTRY</div>
@@ -498,6 +564,7 @@ body.jp .feat span{font-family:var(--mincho)}
 
 <header class="hero">
   <div class="hero-bg"><svg class="hero-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><use href="#aegean"/></svg></div>
+  <div class="hero-inner">
   <div class="eyebrow">
     <span class="dot"></span>
     <span data-en="ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE" data-jp="マスティハ — ギリシャ・ヒオス島">ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE</span>
@@ -514,6 +581,7 @@ body.jp .feat span{font-family:var(--mincho)}
   <div class="hero-actions">
     <a href="#expressions" class="btn btn-primary" data-cursor data-en="Discover the expressions" data-jp="三種を見る">Discover the expressions</a>
     <a href="#origin" class="btn btn-ghost" data-cursor data-en="The origin →" data-jp="起源へ →">The origin →</a>
+  </div>
   </div>
   <div class="scroll-cue"><span data-en="Scroll" data-jp="スクロール">Scroll</span><div class="tear-line"></div></div>
 </header>
@@ -577,7 +645,7 @@ body.jp .feat span{font-family:var(--mincho)}
 
 <section id="ritual" class="ritual">
   <div class="tag reveal" style="justify-content:center" data-en="Chapter II — The Ritual" data-jp="第二章 — 作法">Chapter II — The Ritual</div>
-  <h2 class="h2 reveal" data-d="1" data-en="Not a drink. &lt;em&gt;A pause.&lt;/em&gt;" data-jp="飲み物ではない。&lt;em&gt;ひと呼吸である。&lt;/em&gt;">Not a drink. <em>A pause.</em></h2>
+  <h2 class="h2 reveal" data-d="1" data-en="Not a drink. &lt;em&gt;A pause.&lt;/em&gt;" data-jp="飲み物ではない。&#10;&lt;em&gt;ひと呼吸である。&lt;/em&gt;">Not a drink. <em>A pause.</em></h2>
   <p class="body reveal" data-d="2"
      data-en="MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention."
      data-jp="MASTRYは“その後”のためにある——熱のあと、一日のあと、喧噪のあと。冷たく供され、ただ注意だけを求める。">MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention.</p>
@@ -614,8 +682,7 @@ body.jp .feat span{font-family:var(--mincho)}
        data-jp="ひとつの樹脂を、三通りに読む——ギリシャの涙に、日本の森や木立を重ねて。">One resin, read three ways — each pairing a Greek tear with a Japanese forest or grove.</p>
   </div>
   <div class="skus">
-    <article class="sku img-wrap reveal" data-d="1" style="--c:rgba(214,163,71,.30);--cb:#d6a347" data-cursor>
-      <div class="sku-bg"><img src="mastry-img/sku-yuzu.jpg" alt="MASTRY Yuzu bottle"></div>
+    <article class="sku no-img reveal" data-d="1" style="--c:rgba(214,163,71,.30);--cb:#d6a347" data-cursor>
       <svg class="bottle" style="color:#d6a347" viewBox="0 0 160 460"><use href="#bottle"/></svg>
       <div class="glyph">柚</div>
       <div class="idx">N°01 — 柚子</div>
@@ -624,8 +691,7 @@ body.jp .feat span{font-family:var(--mincho)}
       <p data-en="Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table." data-jp="森、つぎに柑橘、そして後味にかすかな山椒。最も開かれた一本——ハイボールにも、食卓にも。">Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table.</p>
       <div class="spec"><span><b>80</b> ppm</span><span><b>3.5</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
     </article>
-    <article class="sku img-wrap reveal" data-d="2" style="--c:rgba(111,143,106,.34);--cb:#6f8f6a" data-cursor>
-      <div class="sku-bg"><img src="mastry-img/sku-hinoki.jpg" alt="MASTRY Hinoki bottle"></div>
+    <article class="sku no-img reveal" data-d="2" style="--c:rgba(111,143,106,.34);--cb:#6f8f6a" data-cursor>
       <svg class="bottle" style="color:#6f8f6a" viewBox="0 0 160 460"><use href="#bottle"/></svg>
       <div class="glyph">檜</div>
       <div class="idx">N°02 — 森</div>
@@ -634,8 +700,7 @@ body.jp .feat span{font-family:var(--mincho)}
       <p data-en="Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends." data-jp="木曽檜をギリシャの樹脂に重ねる——同じ静かな分子を分かちあう、二つの木。サウナを終えた、その瞬間のために。">Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends.</p>
       <div class="spec"><span><b>70</b> ppm</span><span><b>40</b> <span data-en="hinoki" data-jp="檜">hinoki</span></span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
     </article>
-    <article class="sku img-wrap reveal" data-d="3" style="--c:rgba(159,196,190,.30);--cb:#9fc4be" data-cursor>
-      <div class="sku-bg"><img src="mastry-img/sku-pure.jpg" alt="MASTRY Pure bottle"></div>
+    <article class="sku no-img reveal" data-d="3" style="--c:rgba(159,196,190,.30);--cb:#9fc4be" data-cursor>
       <svg class="bottle" style="color:#9fc4be" viewBox="0 0 160 460"><use href="#bottle"/></svg>
       <div class="glyph">純</div>
       <div class="idx">N°03 — 純</div>
@@ -688,27 +753,89 @@ body.jp .feat span{font-family:var(--mincho)}
   <div class="tag reveal" style="justify-content:center" data-en="Begin" data-jp="始まり">Begin</div>
   <h2 class="h2 reveal" data-d="1" data-en="Be among the first&lt;br&gt;to taste the &lt;em&gt;tears.&lt;/em&gt;" data-jp="いちばん最初に、&lt;br&gt;&lt;em&gt;涙を味わう。&lt;/em&gt;">Be among the first<br>to taste the <em>tears.</em></h2>
   <p class="lede reveal" data-d="2" data-en="Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual." data-jp="ファウンディング・メンバーには、最初のリリース、ヒオス島の起源を描いた映像、そして開幕の儀式へのご招待を。">Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual.</p>
-  <form class="signup reveal" data-d="3" onsubmit="return false">
-    <input type="email" placeholder="your@email.com" aria-label="email" />
+  <form class="signup reveal" id="signupForm" data-d="3" onsubmit="return false">
+    <input type="email" placeholder="your@email.com" aria-label="email" required />
     <button type="submit" data-cursor data-en="Join" data-jp="登録">Join</button>
   </form>
+  <div class="signup-done" id="signupDone" hidden>
+    <svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Thank you — you're on the list. We'll send you the first release." data-jp="ご登録ありがとうございます。最初のリリースにてご案内いたします。">Thank you — you're on the list. We'll send you the first release.</span>
+  </div>
 </section>
 
 <footer>
-  <div class="f-brand">
-    <div>
+  <div class="f-top">
+    <div class="f-brand-col">
       <div class="f-logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></span>MASTRY</div>
-      <div class="f-sub">森スパークリング — MORI SPARKLING</div>
+      <p class="f-desc"
+         data-en="A premium non-alcoholic sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan."
+         data-jp="ギリシャ・ヒオス島の稀少なマスティハ樹脂と、日本のやわらかな湧水から生まれた、プレミアム・ノンアルコール炭酸水。">A premium non-alcoholic sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan.</p>
+      <div class="f-social">
+        <a href="#" data-cursor>Instagram <span class="arr">↗</span></a>
+        <a href="#" data-cursor>X <span class="arr">↗</span></a>
+        <a href="#" data-cursor>note <span class="arr">↗</span></a>
+        <a href="#" data-cursor data-en="LINE" data-jp="LINE">LINE <span class="arr">↗</span></a>
+      </div>
     </div>
+    <nav class="f-cols" aria-label="Footer">
+      <div class="f-col">
+        <h4 data-en="Explore" data-jp="探る">Explore</h4>
+        <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
+        <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
+        <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+        <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
+      </div>
+      <div class="f-col">
+        <h4 data-en="Company" data-jp="会社">Company</h4>
+        <a href="#" data-en="About us" data-jp="私たちについて">About us</a>
+        <a href="#" data-en="Sustainability" data-jp="サステナビリティ">Sustainability</a>
+        <a href="#" data-en="Press &amp; media" data-jp="プレス">Press &amp; media</a>
+        <a href="#" data-en="Stockists" data-jp="取扱店">Stockists</a>
+      </div>
+      <div class="f-col">
+        <h4 data-en="Support" data-jp="サポート">Support</h4>
+        <a href="#" data-en="Contact" data-jp="お問い合わせ">Contact</a>
+        <a href="#" data-en="FAQ" data-jp="よくある質問">FAQ</a>
+        <a href="#" data-en="Wholesale" data-jp="業務用・卸">Wholesale</a>
+        <a href="#" data-en="Shipping &amp; returns" data-jp="配送・返品">Shipping &amp; returns</a>
+      </div>
+      <div class="f-col">
+        <h4 data-en="Legal" data-jp="法務">Legal</h4>
+        <a href="#" data-en="Privacy policy" data-jp="プライバシーポリシー">Privacy policy</a>
+        <a href="#" data-en="Terms of service" data-jp="利用規約">Terms of service</a>
+        <a href="#" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記">Commercial transactions</a>
+        <a href="#" data-en="Cookie settings" data-jp="Cookie設定">Cookie settings</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="f-company">
+    <dl>
+      <dt data-en="Operated by" data-jp="運営会社">Operated by</dt>
+      <dd>MASTRY株式会社 — MASTRY Inc.</dd>
+      <dt data-en="Address" data-jp="所在地">Address</dt>
+      <dd class="ph"
+          data-en="［ Head office address — e.g. 1-2-3 Jingumae, Shibuya-ku, Tokyo 150-0001 ］"
+          data-jp="［ 本社所在地を入力 — 例：〒150-0001 東京都渋谷区神宮前1-2-3 ］">［ Head office address — e.g. 1-2-3 Jingumae, Shibuya-ku, Tokyo 150-0001 ］</dd>
+      <dt data-en="Representative" data-jp="代表者">Representative</dt>
+      <dd class="ph" data-en="［ Representative name ］" data-jp="［ 代表者名を入力 ］">［ Representative name ］</dd>
+      <dt data-en="Founded" data-jp="設立">Founded</dt>
+      <dd>2026</dd>
+      <dt data-en="Business" data-jp="事業内容">Business</dt>
+      <dd data-en="Development, production &amp; sale of premium beverages" data-jp="清涼飲料水の企画・製造・販売">Development, production &amp; sale of premium beverages</dd>
+      <dt data-en="Contact" data-jp="お問い合わせ">Contact</dt>
+      <dd><a href="mailto:hello@morisparkling.jp">hello@morisparkling.jp</a> &nbsp;<span class="ph" data-en="［ verify address ］" data-jp="［ 要差し替え ］">［ verify address ］</span></dd>
+    </dl>
     <span class="seal"><svg viewBox="0 0 100 100"><use href="#hanko"/></svg></span>
   </div>
-  <div class="f-meta">
-    <div>μαστίχα × 湧水 · GREECE × JAPAN</div>
-    <div>CHIOS 38.37°N · 26.14°E</div>
-    <div><a href="#origin" data-en="Origin" data-jp="起源">Origin</a> · <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a> · <a href="#cta" data-en="Membership" data-jp="会員">Membership</a></div>
-    <div>© MMXXVI · TEARS OF THE TREE</div>
+
+  <div class="f-bottom">
+    <div>© MMXXVI MASTRY株式会社 · TEARS OF THE TREE</div>
+    <div>μαστίχα × 湧水 · CHIOS 38.37°N 26.14°E · GREECE × JAPAN</div>
   </div>
 </footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -720,7 +847,7 @@ body.jp .feat span{font-family:var(--mincho)}
     document.body.classList.toggle('jp',lang==='jp');
     document.querySelectorAll('[data-en]').forEach(el=>{
       const v=el.getAttribute('data-'+lang); if(v==null) return;
-      if(/&lt;|<br|<em/.test(v)) el.innerHTML=v.replace(/&lt;/g,'<').replace(/&gt;/g,'>'); else el.textContent=v;
+      if(/&lt;|<br|<em|[\r\n]/.test(v)) el.innerHTML=v.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\r?\n/g,'<br>'); else el.textContent=v;
     });
     enBtn.classList.toggle('active',lang==='en');
     jpBtn.classList.toggle('active',lang==='jp');
@@ -793,6 +920,31 @@ body.jp .feat span{font-family:var(--mincho)}
   let raf;function frame(){ctx.clearRect(0,0,W,H);bubbles.forEach(b=>{b.step();b.draw();});raf=requestAnimationFrame(frame);}
   if(!reduce)frame();else bubbles.forEach(b=>b.draw());
   document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(!reduce)frame();});
+
+  /* ---- CTA: email signup ---- */
+  const signupForm=document.getElementById('signupForm');
+  if(signupForm){
+    const sInput=signupForm.querySelector('input'),sDone=document.getElementById('signupDone');
+    signupForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sInput.value.trim());
+      if(!ok){signupForm.classList.remove('shake');void signupForm.offsetWidth;signupForm.classList.add('shake');sInput.focus();return;}
+      signupForm.style.display='none';
+      sDone.hidden=false;
+      requestAnimationFrame(()=>sDone.classList.add('show'));
+    });
+  }
+
+  /* ---- CTA: placeholder links -> toast ---- */
+  const toast=document.getElementById('toast');let toastT;
+  function showToast(){
+    toast.textContent=(document.documentElement.lang==='jp')?'近日公開予定':'Coming soon';
+    toast.classList.add('show');
+    clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove('show'),2200);
+  }
+  document.querySelectorAll('a[href="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{e.preventDefault();showToast();});
+  });
 })();
 </script>
 </body>
