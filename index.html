@@ -137,6 +137,8 @@ body.jp .mm-links a{font-family:var(--mincho)}
 body.jp .mm-foot{font-family:var(--mincho);letter-spacing:.12em;text-transform:none}
 body.menu-open{overflow:hidden}
 .mason-mark{position:absolute;right:clamp(1.2rem,5vw,3.2rem);bottom:2.6rem;width:26px;height:26px;opacity:.05;pointer-events:none}
+.craft-photo{width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 34px 80px rgba(20,50,110,.2);animation:floatY 7s var(--ease) infinite alternate}
+@keyframes floatY{from{transform:translateY(0)}to{transform:translateY(-15px)}}
 
 /* mobile polish */
 @media(max-width:560px){
@@ -156,7 +158,10 @@ body.menu-open{overflow:hidden}
 /* hero */
 .hero{min-height:100vh;min-height:100svh;display:grid;grid-template-rows:1fr auto 1fr;align-items:center;justify-items:center;
   text-align:center;position:relative;padding:5.5rem 1.2rem 1.8rem;overflow:hidden}
-.hero-inner{grid-row:2;display:flex;flex-direction:column;align-items:center}
+.hero-inner{grid-row:2;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.hero-inner::before{content:"";position:absolute;z-index:-1;inset:-14% -10%;
+  background:radial-gradient(58% 56% at 50% 48%,rgba(255,255,255,.78),rgba(255,255,255,.42) 52%,transparent 78%);
+  filter:blur(14px);pointer-events:none}
 @media(max-height:800px){
   .hero .hero-mono{display:none}
   .eyebrow{margin-bottom:1.1rem}
@@ -169,7 +174,9 @@ body.menu-open{overflow:hidden}
 .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s var(--ease)}
 .hero-bg img.ready{opacity:.42}
 .hero-bg::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 60%,var(--ink) 100%)}
+  background:radial-gradient(115% 78% at 50% 50%,rgba(255,255,255,.86),rgba(255,255,255,.5) 46%,rgba(255,255,255,.66) 100%)}
+.hero-bg .hero-photo{opacity:1;object-position:center;animation:kenburns 26s ease-in-out infinite alternate}
+.hero .hero-tree{display:none}
 .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--resin);margin-bottom:1.6rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center}
 .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--resin);box-shadow:0 0 8px var(--resin)}
@@ -182,10 +189,11 @@ body.menu-open{overflow:hidden}
 .loaded .hero h1 span{animation:charIn 1.3s var(--ease) forwards}
 @keyframes charIn{to{opacity:1;transform:none;filter:blur(0)}}
 .kanji{font-family:var(--mincho);font-size:clamp(1.3rem,4vw,2.4rem);letter-spacing:1.1em;
-  color:var(--bone);margin:1.1rem 0 .3rem;padding-left:1.1em;opacity:0}
+  color:var(--bone);margin:1.1rem 0 .3rem;padding-left:1.1em;opacity:0;text-shadow:0 1px 16px rgba(255,255,255,.7)}
 .loaded .kanji{animation:fadeUp 1.4s var(--ease) 1s forwards}
-.hero-sub{max-width:560px;font-family:var(--serif);font-style:italic;font-weight:300;
-  font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--bone-dim);margin-top:1.1rem;opacity:0;line-height:1.55}
+.hero-sub{max-width:560px;font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.1rem,2.4vw,1.45rem);color:#243a59;margin-top:1.1rem;opacity:0;line-height:1.55;
+  text-shadow:0 1px 12px rgba(255,255,255,.85)}
 .loaded .hero-sub{animation:fadeUp 1.4s var(--ease) 1.25s forwards}
 .hero-actions{display:flex;gap:1.4rem;margin-top:2rem;opacity:0;flex-wrap:wrap;justify-content:center}
 .loaded .hero-actions{animation:fadeUp 1.4s var(--ease) 1.5s forwards}
@@ -247,7 +255,7 @@ section{position:relative;padding:clamp(6rem,12vw,11rem) clamp(1.2rem,6vw,7rem)}
 .media-cap span:last-child{font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--resin);display:block;margin-top:.6rem}
 
 /* full-bleed band */
-.band{height:78vh;min-height:460px;display:grid;place-items:center;text-align:center;
+.band{height:clamp(300px,42vh,460px);display:grid;place-items:center;text-align:center;
   background:linear-gradient(120deg,rgba(23,67,148,.22),rgba(225,235,248,.5))}
 .band>img{position:absolute;inset:0}
 .band .band-overlay{position:absolute;inset:0;background:rgba(255,255,255,.5);z-index:1}
@@ -319,11 +327,26 @@ body.jp .stat .l{font-family:var(--mincho);letter-spacing:.06em;text-transform:n
 /* where */
 .where{text-align:center}
 .where .h2{margin:1.4rem 0 3.5rem}
-.places{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
-.place{border:1px solid var(--line);border-radius:40px;padding:.9rem 1.8rem;font-size:.82rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--bone-dim);transition:all .4s var(--ease)}
-body.jp .place{text-transform:none;letter-spacing:.08em}
-.place:hover{border-color:var(--resin);color:var(--bone);background:rgba(37,99,235,.06)}
+.places{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:1100px;margin:0 auto}
+.place{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;
+  aspect-ratio:4/5;display:flex;align-items:flex-end;justify-content:flex-start;
+  padding:1.4rem 1.5rem;text-align:left;cursor:none;
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .55s}
+.place .place-label{position:relative;z-index:2;font-size:.92rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:#fff;text-shadow:0 2px 14px rgba(8,18,38,.6)}
+.place .place-no{position:absolute;top:1.1rem;left:1.4rem;z-index:2;font-family:var(--mono);
+  font-size:.62rem;letter-spacing:.3em;color:rgba(255,255,255,.82)}
+body.jp .place .place-label{text-transform:none;letter-spacing:.06em;font-size:1rem}
+.place .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center;z-index:0;
+  transform:scale(1.04);transition:transform 1s var(--ease);filter:saturate(1.02)}
+.place::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(75deg,rgba(8,18,38,.72) 0%,rgba(8,18,38,.32) 38%,transparent 62%)}
+.place.noimg{background:linear-gradient(165deg,#2563eb,#174394)}
+.place.noimg::after{background:radial-gradient(120% 80% at 20% 0%,rgba(255,255,255,.16),transparent 60%)}
+.place:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(23,67,148,.22);border-color:var(--resin)}
+.place:hover .ph{transform:scale(1.1)}
+@media(max-width:760px){.places{grid-template-columns:repeat(2,1fr);gap:.8rem}.place{aspect-ratio:3/4}.place .ph{object-position:68% center}}
+@media(max-width:430px){.places{grid-template-columns:1fr 1fr}}
 
 /* cta */
 .cta{text-align:center;border-top:1px solid var(--line);position:relative}
@@ -449,9 +472,11 @@ body.jp .feat span{font-family:var(--mincho)}
 .loaded .hero-tree .leaves circle:nth-child(12){animation-delay:2.58s}
 @keyframes grow{to{stroke-dashoffset:0}}
 @keyframes leafIn{from{opacity:0;transform:scale(0)}to{opacity:.9;transform:scale(1)}}
-.band>.band-scene{position:absolute;inset:0;width:100%;height:100%}
-.band .band-overlay{background:rgba(255,255,255,.42)}
-.origin-media .branch-art{position:absolute;inset:0;width:100%;height:100%;padding:7%}
+.band>.band-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;animation:kenburns 24s ease-in-out infinite alternate}
+.band .band-overlay{background:rgba(255,255,255,.5)}
+.origin-media .branch-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.origin-media:hover .branch-photo{transform:scale(1.05)}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
 .craft-media{position:relative;display:grid;place-items:center;overflow:visible;border:none;background:none}
 .trio{display:flex;align-items:flex-end;justify-content:center;width:100%;height:100%;padding:8% 2%;position:relative;z-index:2}
 .trio .bottle{height:84%;width:auto;filter:drop-shadow(0 26px 46px rgba(0,0,0,.55))}
@@ -481,7 +506,7 @@ body.jp .feat span{font-family:var(--mincho)}
   .tag{margin-bottom:1.6rem}
   .origin{gap:2.6rem}
   .origin .h2{margin:1rem 0 1.4rem}
-  .band{height:58vh;min-height:360px}
+  .band{height:clamp(260px,34vh,360px)}
   .band-text{font-size:clamp(1.35rem,6.5vw,2rem);line-height:1.4}
 
   /* EXPRESSIONS -> tap to expand */
@@ -511,6 +536,10 @@ body.jp .feat span{font-family:var(--mincho)}
 
   .craft{gap:2.4rem}
   .craft .h2{margin-bottom:1.2rem}
+  .craft-media{overflow:hidden}
+  .trio{padding:8% 2%}
+  .trio .bottle{height:60%}
+  .trio .bottle:nth-child(2){height:72%;margin:0 -6%}
 }
 </style>
 </head>
@@ -708,7 +737,7 @@ body.jp .feat span{font-family:var(--mincho)}
 </div>
 
 <header class="hero">
-  <div class="hero-bg"><svg class="hero-tree" viewBox="0 0 1600 900" preserveAspectRatio="xMinYMax slice" aria-hidden="true">
+  <div class="hero-bg"><img class="hero-photo" src="assets/fuji.png" alt="MASTRY bottle before Mount Fuji at a lake" loading="eager" /><svg class="hero-tree" viewBox="0 0 1600 900" preserveAspectRatio="xMinYMax slice" aria-hidden="true">
     <g fill="none" stroke="#1d4ed8" stroke-linecap="round" stroke-linejoin="round">
       <path class="tw" stroke-width="7" d="M260 900 C256 778 262 656 286 558 C306 480 322 424 342 376"/>
       <path class="tw" stroke-width="5.2" d="M300 600 C384 558 474 522 562 474"/>
@@ -795,18 +824,9 @@ body.jp .feat span{font-family:var(--mincho)}
     </div>
   </div>
   <figure class="origin-media reveal" data-d="2">
-    <svg class="branch-art" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet"><use href="#branch"/></svg>
+    <img class="branch-photo" src="assets/origin-crop.png" alt="Mastiha resin weeping from the bark of the tree" loading="lazy" />
     <figcaption class="media-cap"><span class="big">5,000</span><span data-en="Years of harvest" data-jp="採取の歴史">Years of harvest</span></figcaption>
   </figure>
-</section>
-
-<section class="band img-wrap">
-  <svg class="band-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><use href="#aegean"/></svg>
-  <div class="band-overlay"></div>
-  <div class="band-text">
-    <span data-en="“The mastic tree grows everywhere on Chios — but it only weeps in the south.”" data-jp="「マスティハの木はヒオス島のどこにでも育つ。けれど、涙を流すのは南だけだ。」">“The mastic tree grows everywhere on Chios — but it only weeps in the south.”</span>
-    <span class="src" data-en="Mastichochoria · The villages of mastic" data-jp="マスティホリア · 樹脂の村々">Mastichochoria · The villages of mastic</span>
-  </div>
 </section>
 
 <div class="marquee">
@@ -847,36 +867,18 @@ body.jp .feat span{font-family:var(--mincho)}
 <section id="expressions">
   <div class="exp-head">
     <div>
-      <div class="tag reveal" data-en="Chapter III — Expressions" data-jp="第三章 — 三種">Chapter III — Expressions</div>
-      <h2 class="h2 reveal" data-d="1" data-en="Three&lt;br&gt;&lt;em&gt;expressions.&lt;/em&gt;" data-jp="三つの、&lt;br&gt;&lt;em&gt;相。&lt;/em&gt;">Three<br><em>expressions.</em></h2>
+      <div class="tag reveal" data-en="Chapter III — The Expression" data-jp="第三章 — 純">Chapter III — The Expression</div>
+      <h2 class="h2 reveal" data-d="1" data-en="Simply,&lt;br&gt;&lt;em&gt;pure.&lt;/em&gt;" data-jp="ただ、&lt;br&gt;&lt;em&gt;純。&lt;/em&gt;">Simply,<br><em>pure.</em></h2>
     </div>
     <p class="body reveal" data-d="2" style="margin-bottom:.4rem"
-       data-en="One resin, read three ways — each pairing a Greek tear with a Japanese forest or grove."
-       data-jp="ひとつの樹脂を、三通りに読む——ギリシャの涙に、日本の森や木立を重ねて。">One resin, read three ways — each pairing a Greek tear with a Japanese forest or grove.</p>
+       data-en="Nothing added. Mastiha and water, lightly bound by bubbles — as the island intended."
+       data-jp="何も加えない。マスティハと水、わずかな泡だけ——島のままに。">Nothing added. Mastiha and water, lightly bound by bubbles — as the island intended.</p>
   </div>
-  <div class="skus">
-    <article class="sku no-img reveal" data-d="1" style="--c:rgba(37,99,235,.30);--cb:#2563eb" data-cursor>
+  <div class="skus" style="display:flex;justify-content:center">
+    <article class="sku no-img reveal" data-d="1" style="--c:rgba(37,99,235,.30);--cb:#2563eb;flex:0 0 420px;max-width:92vw" data-cursor>
       <svg class="bottle" style="color:#2563eb" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-      <div class="glyph">柚</div>
-      <div class="idx">N°01 — 柚子</div>
-      <h3 data-en="Yuzu" data-jp="柚子">Yuzu</h3>
-      <div class="romaji" data-en="Aegean × Kochi" data-jp="エーゲ海 × 高知">Aegean × Kochi</div>
-      <p data-en="Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table." data-jp="森、つぎに柑橘、そして後味にかすかな山椒。最も開かれた一本——ハイボールにも、食卓にも。">Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table.</p>
-      <div class="spec"><span><b>80</b> ppm</span><span><b>3.5</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
-    </article>
-    <article class="sku no-img reveal" data-d="2" style="--c:rgba(63,127,209,.34);--cb:#3f7fd1" data-cursor>
-      <svg class="bottle" style="color:#3f7fd1" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-      <div class="glyph">檜</div>
-      <div class="idx">N°02 — 森</div>
-      <h3 data-en="Hinoki" data-jp="檜">Hinoki</h3>
-      <div class="romaji" data-en="Two forests, one breath" data-jp="二つの森、ひとつの息">Two forests, one breath</div>
-      <p data-en="Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends." data-jp="木曽檜をギリシャの樹脂に重ねる——同じ静かな分子を分かちあう、二つの木。サウナを終えた、その瞬間のために。">Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends.</p>
-      <div class="spec"><span><b>70</b> ppm</span><span><b>40</b> <span data-en="hinoki" data-jp="檜">hinoki</span></span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
-    </article>
-    <article class="sku no-img reveal" data-d="3" style="--c:rgba(127,168,230,.30);--cb:#7fa8e6" data-cursor>
-      <svg class="bottle" style="color:#7fa8e6" viewBox="0 0 160 460"><use href="#bottle"/></svg>
       <div class="glyph">純</div>
-      <div class="idx">N°03 — 純</div>
+      <div class="idx" data-en="Mastiha × Japanese spring water" data-jp="マスティハ × 日本の湧水">Mastiha × Japanese spring water</div>
       <h3 data-en="Pure" data-jp="純">Pure</h3>
       <div class="romaji" data-en="As the island intended" data-jp="島のままに">As the island intended</div>
       <p data-en="Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree." data-jp="何も加えない。マスティハと水、わずかな泡だけ。すでに樹を知る者のための一杯。">Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree.</p>
@@ -888,11 +890,7 @@ body.jp .feat span{font-family:var(--mincho)}
 <section id="craft" class="craft">
   <figure class="craft-media reveal" data-d="2" style="order:2">
     <div class="resin-blob"></div>
-    <div class="trio">
-      <svg class="bottle" style="color:#7fa8e6" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-      <svg class="bottle" style="color:#2563eb" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-      <svg class="bottle" style="color:#3f7fd1" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-    </div>
+    <img class="craft-photo" src="assets/bottles.png" alt="MASTRY sparkling water bottles in an olive grove" loading="lazy" />
   </figure>
   <div style="order:1">
     <div class="tag reveal" data-en="Chapter IV — Craft" data-jp="第四章 — 製法">Chapter IV — Craft</div>
@@ -913,12 +911,21 @@ body.jp .feat span{font-family:var(--mincho)}
   <div class="tag reveal" style="justify-content:center" data-en="Chapter V — Found" data-jp="第五章 — 出会う場所">Chapter V — Found</div>
   <h2 class="h2 reveal" data-d="1" data-en="Where the &lt;em&gt;quiet&lt;/em&gt;&lt;br&gt;people gather." data-jp="静かな人々の、&lt;br&gt;&lt;em&gt;集う場所。&lt;/em&gt;">Where the <em>quiet</em><br>people gather.</h2>
   <div class="places">
-    <div class="place reveal" data-d="1" data-cursor data-en="Premium Saunas" data-jp="プレミアムサウナ">Premium Saunas</div>
-    <div class="place reveal" data-d="1" data-cursor data-en="Cocktail Bars" data-jp="カクテルバー">Cocktail Bars</div>
-    <div class="place reveal" data-d="2" data-cursor data-en="Ryokan &amp; Spa" data-jp="旅館・スパ">Ryokan &amp; Spa</div>
-    <div class="place reveal" data-d="2" data-cursor data-en="Hotel Lounges" data-jp="ホテルラウンジ">Hotel Lounges</div>
-    <div class="place reveal" data-d="3" data-cursor data-en="Select Retail" data-jp="セレクト小売">Select Retail</div>
-    <div class="place reveal" data-d="3" data-cursor data-en="The Atelier — D2C" data-jp="アトリエ — D2C">The Atelier — D2C</div>
+    <div class="place reveal" data-d="1" data-cursor>
+      <img class="ph" src="assets/venue-sauna.png" style="object-position:78% center" alt="MASTRY in a premium sauna" loading="lazy" />
+      <span class="place-no">01</span>
+      <span class="place-label" data-en="Premium Saunas" data-jp="プレミアムサウナ">Premium Saunas</span>
+    </div>
+    <div class="place reveal" data-d="1" data-cursor>
+      <img class="ph" src="assets/venue-lounge.png" style="object-position:76% center" alt="MASTRY at a cocktail bar" loading="lazy" />
+      <span class="place-no">02</span>
+      <span class="place-label" data-en="Cocktail Bars" data-jp="カクテルバー">Cocktail Bars</span>
+    </div>
+    <div class="place reveal" data-d="2" data-cursor>
+      <img class="ph" src="assets/venue-ryokan.png" style="object-position:58% center" alt="MASTRY at a ryokan" loading="lazy" />
+      <span class="place-no">03</span>
+      <span class="place-label" data-en="Ryokan &amp; Spa" data-jp="旅館・スパ">Ryokan &amp; Spa</span>
+    </div>
   </div>
 </section>
 
@@ -1074,7 +1081,7 @@ body.jp .feat span{font-family:var(--mincho)}
   addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60);
     const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(scrollY/h*100)+'%';},{passive:true});
 
-  /* ---- reveal (with no-IO fallback so nothing ever stays hidden) ---- */
+  /* ---- reveal ---- */
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
