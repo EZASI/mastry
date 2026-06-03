@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MASTRY — 木の涙 · Tears of the Tree</title>
+<meta name="description" content="MASTRY — a premium sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan. By 森スパークリング." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
+<style>
+:root{
+  --ink:#080a09; --ink-2:#0c100d;
+  --bone:#ece5d6; --bone-dim:#a8a292;
+  --resin:#d6a347; --resin-bright:#f0c873; --resin-deep:#9a6f24;
+  --jade:#6f8f6a; --aegean:#9fc4be;
+  --line:rgba(214,163,71,.18);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',sans-serif;
+  --mono:'Space Mono',monospace;
+  --mincho:'Zen Old Mincho',serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;
+  overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;line-height:1.6}
+@media(max-width:768px){body{cursor:auto}}
+
+/* JP typography overrides */
+body.jp .h2,body.jp .lede,body.jp .body,body.jp .hero-sub,body.jp .step h3,body.jp .step p,
+body.jp .sku p,body.jp .place,body.jp .f-sub,body.jp .band-text,body.jp .media-cap span:last-child{
+  font-family:var(--mincho);font-weight:400}
+body.jp .h2{letter-spacing:.04em;line-height:1.18}
+body.jp .hero-sub{font-style:normal;line-height:1.9}
+
+/* atmosphere */
+.atmos{position:fixed;inset:0;z-index:-3;overflow:hidden;background:var(--ink)}
+.atmos::before,.atmos::after{content:"";position:absolute;border-radius:50%;filter:blur(120px);opacity:.5}
+.atmos::before{width:60vw;height:60vw;left:-10vw;top:-15vw;
+  background:radial-gradient(circle,rgba(214,163,71,.30),transparent 70%);animation:drift1 26s var(--ease) infinite alternate}
+.atmos::after{width:55vw;height:55vw;right:-12vw;bottom:-10vw;
+  background:radial-gradient(circle,rgba(111,143,106,.26),transparent 70%);animation:drift2 32s var(--ease) infinite alternate}
+@keyframes drift1{to{transform:translate(18vw,14vh) scale(1.18)}}
+@keyframes drift2{to{transform:translate(-14vw,-10vh) scale(1.22)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#bubbles{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 0%,transparent 55%,rgba(0,0,0,.55) 100%)}
+
+/* image fallback engine */
+.img-wrap{position:relative;overflow:hidden}
+.img-wrap>img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.4s var(--ease)}
+.img-wrap>img.ready{opacity:1}
+.img-wrap.no-img>img{display:none}
+
+/* cursor */
+.cursor,.cursor-dot{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;
+  mix-blend-mode:screen;transform:translate(-50%,-50%)}
+.cursor{width:34px;height:34px;border:1px solid rgba(214,163,71,.55);
+  transition:width .35s var(--ease),height .35s var(--ease),background .35s,border-color .35s}
+.cursor-dot{width:5px;height:5px;background:var(--resin-bright)}
+.cursor.grow{width:74px;height:74px;background:rgba(214,163,71,.10);border-color:transparent}
+@media(max-width:768px){.cursor,.cursor-dot{display:none}}
+
+/* intro */
+.intro{position:fixed;inset:0;z-index:10000;background:var(--ink);display:grid;place-items:center;
+  transition:opacity 1s var(--ease),visibility 1s}
+.intro.gone{opacity:0;visibility:hidden}
+.intro .mark{font-family:var(--mincho);font-size:clamp(2.5rem,8vw,5rem);color:var(--resin);
+  letter-spacing:.3em;opacity:0;transform:translateY(18px);animation:introUp 1.4s var(--ease) .2s forwards}
+.intro .en{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bone-dim);
+  letter-spacing:.5em;text-transform:uppercase;margin-top:1.2rem;opacity:0;
+  animation:introUp 1.4s var(--ease) .6s forwards;text-align:center}
+.intro .bar{position:absolute;bottom:18%;left:50%;width:0;height:1px;background:var(--line);
+  transform:translateX(-50%);animation:introBar 1.8s var(--ease) .4s forwards}
+@keyframes introUp{to{opacity:1;transform:translateY(0)}}
+@keyframes introBar{to{width:min(320px,40vw)}}
+
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:9000;
+  background:linear-gradient(90deg,var(--resin-deep),var(--resin-bright));box-shadow:0 0 12px var(--resin)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;justify-content:space-between;
+  align-items:center;padding:1.6rem clamp(1.2rem,4vw,3.5rem);transition:background .5s,backdrop-filter .5s,padding .5s}
+nav.scrolled{background:rgba(8,10,9,.55);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:500;letter-spacing:.34em;padding-left:.34em;color:var(--bone)}
+.nav-right{display:flex;align-items:center;gap:2.2rem}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{color:var(--bone-dim);text-decoration:none;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:400;transition:color .4s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--resin);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--bone)}.nav-links a:hover::after{width:100%}
+.nav-cta{border:1px solid var(--line);padding:.6rem 1.2rem;border-radius:40px;color:var(--bone)!important}
+.nav-cta:hover{border-color:var(--resin);background:rgba(214,163,71,.08)}
+.lang{display:flex;gap:.5rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.lang button{background:none;border:none;cursor:none;color:var(--bone-dim);font-family:inherit;font-size:inherit;
+  letter-spacing:inherit;padding:.2rem .1rem;transition:color .3s}
+.lang button.active{color:var(--resin)}
+.lang .sep{color:var(--bone-dim);opacity:.4}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;padding:7rem 1.2rem 4rem;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s var(--ease)}
+.hero-bg img.ready{opacity:.42}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(110% 90% at 50% 40%,transparent 30%,var(--ink) 88%)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--resin);margin-bottom:2.2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center}
+.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--resin);box-shadow:0 0 8px var(--resin)}
+.hero h1{font-family:var(--serif);font-weight:400;line-height:.86;letter-spacing:.02em;
+  font-size:clamp(3.2rem,15vw,12rem);
+  background:linear-gradient(175deg,var(--bone) 20%,var(--resin-bright) 60%,var(--resin-deep));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 8px 40px rgba(214,163,71,.18))}
+.hero h1 span{display:inline-block;opacity:0;transform:translateY(40px) rotate(6deg);filter:blur(12px)}
+.loaded .hero h1 span{animation:charIn 1.3s var(--ease) forwards}
+@keyframes charIn{to{opacity:1;transform:none;filter:blur(0)}}
+.kanji{font-family:var(--mincho);font-size:clamp(1.3rem,4vw,2.4rem);letter-spacing:1.1em;
+  color:var(--bone);margin:1.6rem 0 .4rem;padding-left:1.1em;opacity:0}
+.loaded .kanji{animation:fadeUp 1.4s var(--ease) 1s forwards}
+.hero-sub{max-width:560px;font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--bone-dim);margin-top:1.6rem;opacity:0;line-height:1.55}
+.loaded .hero-sub{animation:fadeUp 1.4s var(--ease) 1.25s forwards}
+.hero-actions{display:flex;gap:1.4rem;margin-top:3rem;opacity:0;flex-wrap:wrap;justify-content:center}
+.loaded .hero-actions{animation:fadeUp 1.4s var(--ease) 1.5s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.btn{font-family:var(--sans);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:1rem 2.2rem;border-radius:44px;text-decoration:none;transition:all .45s var(--ease);position:relative;overflow:hidden}
+.btn-primary{background:var(--resin);color:var(--ink);font-weight:500}
+.btn-primary:hover{background:var(--resin-bright);transform:translateY(-3px);box-shadow:0 16px 40px rgba(214,163,71,.3)}
+.btn-ghost{border:1px solid var(--line);color:var(--bone)}
+.btn-ghost:hover{border-color:var(--resin);background:rgba(214,163,71,.06)}
+.scroll-cue{position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--bone-dim);
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;opacity:0}
+.loaded .scroll-cue{animation:fadeUp 1.4s var(--ease) 1.9s forwards}
+.tear-line{width:1px;height:54px;background:linear-gradient(var(--resin),transparent);position:relative;overflow:hidden}
+.tear-line::after{content:"";position:absolute;top:0;left:0;width:1px;height:14px;background:var(--resin-bright);
+  box-shadow:0 0 8px var(--resin);animation:tearDrop 2.4s var(--ease) infinite}
+@keyframes tearDrop{0%{top:-14px}60%,100%{top:54px}}
+
+.side-label{position:fixed;z-index:800;font-family:var(--mono);font-size:.62rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--bone-dim);writing-mode:vertical-rl;opacity:0;transition:opacity 1s 2s}
+.loaded .side-label{opacity:.6}
+.side-label.left{left:1.6rem;top:50%;transform:translateY(-50%)}
+.side-label.right{right:1.6rem;top:50%;transform:translateY(-50%) rotate(180deg)}
+@media(max-width:1100px){.side-label{display:none}}
+
+section{position:relative;padding:clamp(6rem,12vw,11rem) clamp(1.2rem,6vw,7rem)}
+.tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--resin);display:flex;align-items:center;gap:.9rem;margin-bottom:2rem}
+.tag::before{content:"";width:34px;height:1px;background:var(--resin)}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;letter-spacing:.01em}
+.h2 em{font-style:italic;color:var(--resin)}
+.body{color:var(--bone-dim);max-width:520px;font-size:1rem;line-height:1.8}
+.lede{font-family:var(--serif);font-size:clamp(1.2rem,2.4vw,1.6rem);font-style:italic;color:var(--bone-dim);max-width:640px;line-height:1.5;font-weight:300}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.12s}.reveal[data-d="2"]{transition-delay:.24s}
+.reveal[data-d="3"]{transition-delay:.36s}.reveal[data-d="4"]{transition-delay:.48s}
+
+/* origin */
+.origin{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+@media(max-width:900px){.origin{grid-template-columns:1fr}}
+.origin .h2{margin:1.2rem 0 2rem}
+.coords{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--bone-dim);
+  margin-top:2.4rem;display:flex;flex-direction:column;gap:.6rem}
+.coords span{color:var(--resin)}
+.origin-media{aspect-ratio:3/4;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(214,163,71,.10),rgba(111,143,106,.06));display:grid;place-items:center}
+.resin-blob{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(40% 30% at 60% 30%,rgba(240,200,115,.5),transparent 60%),
+  radial-gradient(50% 40% at 30% 70%,rgba(111,143,106,.35),transparent 60%);
+  filter:blur(20px);animation:blob 14s var(--ease) infinite alternate}
+.origin-media:not(.no-img) .resin-blob{opacity:0}
+@keyframes blob{to{transform:scale(1.2) translate(6%,-4%)}}
+.media-cap{position:absolute;left:0;bottom:0;width:100%;padding:1.8rem;z-index:3;text-align:center;
+  background:linear-gradient(transparent,rgba(8,10,9,.75))}
+.media-cap .big{display:block;font-family:var(--serif);font-size:clamp(3rem,9vw,6rem);color:var(--bone);line-height:.9}
+.media-cap span:last-child{font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--resin);display:block;margin-top:.6rem}
+
+/* full-bleed band */
+.band{height:78vh;min-height:460px;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(120deg,rgba(154,111,36,.22),rgba(26,40,30,.5))}
+.band>img{position:absolute;inset:0}
+.band .band-overlay{position:absolute;inset:0;background:rgba(8,10,9,.5);z-index:1}
+.band-text{position:relative;z-index:2;max-width:820px;padding:2rem;
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,4.5vw,3.4rem);line-height:1.3;color:var(--bone)}
+.band-text .src{display:block;font-family:var(--mono);font-style:normal;font-size:.7rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--resin);margin-top:2rem}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.6rem 0;overflow:hidden;white-space:nowrap;position:relative}
+.marquee-track{display:inline-block;animation:scrollX 32s linear infinite}
+.marquee-track span{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--bone);margin:0 1.4rem;letter-spacing:.06em}
+.marquee-track .gr{font-style:italic;color:var(--resin)}
+.marquee-track .jp{font-family:var(--mincho);color:var(--aegean)}
+@keyframes scrollX{to{transform:translateX(-50%)}}
+
+/* ritual */
+.ritual{text-align:center}
+.ritual .h2{max-width:900px;margin:1.4rem auto 2rem}
+.ritual .body{margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3.5rem);margin-top:5rem}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{text-align:left;border-top:1px solid var(--line);padding-top:1.6rem;position:relative}
+.step .no{font-family:var(--mono);font-size:.72rem;color:var(--resin);letter-spacing:.2em}
+.step h3{font-family:var(--serif);font-size:1.7rem;font-weight:400;margin:1rem 0 .6rem}
+.step .jpsm{font-family:var(--mincho);color:var(--aegean);font-size:.9rem;letter-spacing:.2em;margin-bottom:.8rem}
+.step p{color:var(--bone-dim);font-size:.94rem;line-height:1.7}
+
+/* expressions */
+.exp-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:4rem}
+.skus{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+@media(max-width:900px){.skus{grid-template-columns:1fr}}
+.sku{position:relative;border:1px solid var(--line);border-radius:16px;padding:2.6rem 2rem 2.4rem;
+  overflow:hidden;transition:transform .6s var(--ease),border-color .6s;min-height:480px;
+  display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate}
+.sku-bg{position:absolute;inset:0;z-index:-2}
+.sku-bg img{width:100%;height:100%;object-fit:cover}
+.sku::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .6s;
+  background:radial-gradient(80% 60% at 50% 0%,var(--c,rgba(214,163,71,.25)),transparent 70%)}
+.sku:not(.no-img)::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top,var(--ink) 12%,rgba(8,10,9,.2) 55%,transparent 80%)}
+.sku.no-img::before{opacity:1}
+.sku:hover{transform:translateY(-10px);border-color:var(--cb,var(--resin))}
+.sku:hover::before{opacity:1}
+.sku .glyph{position:absolute;top:1.6rem;right:1.8rem;font-family:var(--mincho);font-size:5.5rem;
+  color:var(--cb,var(--resin));opacity:.16;transition:opacity .6s,transform .6s;line-height:1;z-index:0}
+.sku:not(.no-img) .glyph{opacity:.0}
+.sku:hover .glyph{opacity:.32;transform:translateY(-6px)}
+.sku .idx{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;color:var(--bone-dim)}
+.sku h3{font-family:var(--serif);font-size:2.6rem;font-weight:400;margin:.5rem 0 .2rem;letter-spacing:.04em}
+body.jp .sku h3{font-family:var(--mincho)}
+.sku .romaji{font-family:var(--mono);font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cb,var(--resin));margin-bottom:1.1rem}
+.sku p{color:var(--bone-dim);font-size:.95rem;line-height:1.7}
+.sku .spec{margin-top:1.4rem;display:flex;gap:1.2rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--bone-dim);flex-wrap:wrap}
+.sku .spec b{color:var(--bone);font-weight:700}
+
+/* craft */
+.craft{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+@media(max-width:900px){.craft{grid-template-columns:1fr}}
+.craft-media{aspect-ratio:4/5;border-radius:16px;border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(214,163,71,.08),rgba(111,143,106,.05))}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:2.4rem}
+.stat{background:var(--ink-2);padding:2.2rem 1.6rem;text-align:left}
+.stat .v{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.2rem);color:var(--bone);line-height:1}
+.stat .v em{color:var(--resin);font-style:normal}
+.stat .l{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);margin-top:.9rem;line-height:1.5}
+body.jp .stat .l{font-family:var(--mincho);letter-spacing:.06em;text-transform:none}
+
+/* where */
+.where{text-align:center}
+.where .h2{margin:1.4rem 0 3.5rem}
+.places{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+.place{border:1px solid var(--line);border-radius:40px;padding:.9rem 1.8rem;font-size:.82rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bone-dim);transition:all .4s var(--ease)}
+body.jp .place{text-transform:none;letter-spacing:.08em}
+.place:hover{border-color:var(--resin);color:var(--bone);background:rgba(214,163,71,.06)}
+
+/* cta */
+.cta{text-align:center;border-top:1px solid var(--line);position:relative}
+.cta .h2{margin:1.4rem auto 1rem;max-width:780px}
+.cta .lede{margin:0 auto 3rem}
+.signup{display:flex;max-width:480px;margin:0 auto;border:1px solid var(--line);border-radius:48px;padding:.4rem .4rem .4rem 1.6rem;background:rgba(255,255,255,.02)}
+.signup input{flex:1;background:none;border:none;outline:none;color:var(--bone);font-family:var(--sans);font-size:.9rem;letter-spacing:.05em}
+.signup input::placeholder{color:var(--bone-dim)}
+.signup button{border:none;cursor:none;background:var(--resin);color:var(--ink);border-radius:40px;padding:.9rem 1.8rem;
+  font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .4s}
+.signup button:hover{background:var(--resin-bright)}
+
+footer{padding:4rem clamp(1.2rem,6vw,7rem) 3rem;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem}
+.f-logo{font-family:var(--serif);font-size:2.2rem;letter-spacing:.34em;padding-left:.34em;color:var(--bone)}
+.f-sub{font-family:var(--mincho);font-size:.8rem;letter-spacing:.3em;color:var(--bone-dim);margin-top:.8rem}
+.f-meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--bone-dim);text-align:right;line-height:2}
+.f-meta a{color:var(--bone-dim);text-decoration:none;transition:color .3s}.f-meta a:hover{color:var(--resin)}
+
+/* monogram + brand mark */
+.logo{display:flex;align-items:center;gap:.7rem}
+.mono{display:inline-block;line-height:0}
+.mono svg{display:block;width:100%;height:100%}
+.logo .mono{width:30px;height:30px;color:var(--resin)}
+.hero-mono{width:clamp(52px,8vw,82px);height:clamp(52px,8vw,82px);color:var(--resin);margin:0 auto 1.2rem;opacity:0}
+.loaded .hero-mono{animation:fadeUp 1.4s var(--ease) .15s forwards}
+.f-logo{display:flex;align-items:center;gap:.8rem}
+.f-logo .mono{width:32px;height:32px;color:var(--resin)}
+.f-brand{display:flex;align-items:center;gap:1.4rem}
+.seal{width:48px;height:48px;display:block;flex:none;transform:rotate(-3deg);filter:drop-shadow(0 4px 12px rgba(181,64,47,.3))}
+.seal svg{width:100%;height:100%;display:block}
+/* tagline band */
+.tagline-band{display:flex;align-items:center;justify-content:center;gap:1.6rem;padding:3.6rem 1.2rem;text-align:center}
+.tagline-band .rule{height:1px;width:min(120px,16vw);background:var(--line);flex:none}
+.tagline{font-family:var(--mincho);font-size:clamp(1.05rem,2.4vw,1.45rem);letter-spacing:.16em;color:var(--resin)}
+/* feature marks */
+.feats{display:flex;flex-wrap:wrap;gap:2.2rem;margin-top:2.8rem}
+.feat{display:flex;gap:.85rem;align-items:flex-start;max-width:240px}
+.feat .fi{width:26px;height:26px;color:var(--resin);flex:none;margin-top:1px}
+.feat b{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone);margin-bottom:.25rem}
+body.jp .feat b{font-family:var(--mincho);letter-spacing:.08em;text-transform:none}
+.feat span{font-size:.8rem;color:var(--bone-dim);line-height:1.5}
+body.jp .feat span{font-family:var(--mincho)}
+/* vector bottle in SKU cards */
+.sku .bottle{position:absolute;top:6%;left:50%;transform:translateX(-50%);height:60%;width:auto;z-index:0;
+  filter:drop-shadow(0 24px 44px rgba(0,0,0,.55));transition:transform .6s var(--ease)}
+.sku:hover .bottle{transform:translateX(-50%) translateY(-10px)}
+.sku:not(.no-img) .bottle{display:none}
+.sku .glyph{display:none}
+/* illustrated scenes */
+.hero-bg .hero-scene{position:absolute;inset:0;width:100%;height:100%;opacity:.2}
+.band>.band-scene{position:absolute;inset:0;width:100%;height:100%}
+.band .band-overlay{background:rgba(8,10,9,.42)}
+.origin-media .branch-art{position:absolute;inset:0;width:100%;height:100%;padding:7%}
+.craft-media{display:grid;place-items:center;overflow:visible;border:none;background:none}
+.trio{display:flex;align-items:flex-end;justify-content:center;width:100%;height:100%;padding:8% 2%;position:relative;z-index:2}
+.trio .bottle{height:84%;width:auto;filter:drop-shadow(0 26px 46px rgba(0,0,0,.55))}
+.trio .bottle:nth-child(2){height:100%;margin:0 -7%;z-index:2}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .hero h1 span,.kanji,.hero-sub,.hero-actions,.scroll-cue{opacity:1!important}
+  .img-wrap>img{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mono" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="50" cy="23" r="1.9" fill="currentColor"/>
+    <path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="bottle" viewBox="0 0 160 460">
+    <defs>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="currentColor" stop-opacity="0.30"/><stop offset="0.45" stop-color="currentColor" stop-opacity="0.10"/><stop offset="1" stop-color="currentColor" stop-opacity="0.24"/>
+      </linearGradient>
+    </defs>
+    <g fill="currentColor">
+      <rect x="62" y="10" width="36" height="22" rx="2.5" opacity="0.85"/>
+      <g opacity="0.45"><rect x="66" y="12" width="1.5" height="18"/><rect x="72" y="12" width="1.5" height="18"/><rect x="78.5" y="12" width="1.5" height="18"/><rect x="85" y="12" width="1.5" height="18"/><rect x="91" y="12" width="1.5" height="18"/></g>
+      <rect x="60" y="30" width="40" height="7" rx="2" opacity="0.55"/>
+    </g>
+    <path d="M68 40 L92 40 L92 66 C92 80 126 92 126 152 L126 408 C126 426 114 436 98 436 L62 436 C46 436 34 426 34 408 L34 152 C34 92 68 80 68 66 Z" fill="url(#glass)" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+    <path d="M35 120 C60 112 100 112 125 120" fill="none" stroke="currentColor" stroke-opacity="0.4" stroke-width="1.2"/>
+    <path d="M46 150 C42 240 42 340 50 402" fill="none" stroke="#fff" stroke-opacity="0.30" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M116 172 C119 250 119 330 113 392" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round"/>
+    <g fill="currentColor" fill-opacity="0.5">
+      <circle cx="58" cy="402" r="3"/><circle cx="74" cy="418" r="2"/><circle cx="66" cy="386" r="2.4"/><circle cx="84" cy="406" r="2.6"/><circle cx="52" cy="372" r="1.8"/><circle cx="92" cy="392" r="2"/>
+    </g>
+    <rect x="34" y="248" width="92" height="138" rx="4" fill="#ece5d6"/>
+    <rect x="34" y="248" width="92" height="138" rx="4" fill="none" stroke="#000" stroke-opacity="0.08"/>
+    <g style="color:#9a6f24"><use href="#mono" x="66" y="258" width="28" height="28"/></g>
+    <text x="80" y="320" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="16" letter-spacing="2.5" fill="#33291a">MASTRY</text>
+    <line x1="62" y1="330" x2="98" y2="330" stroke="#9a6f24" stroke-width="0.8"/>
+    <text x="80" y="346" text-anchor="middle" font-family="Jost, sans-serif" font-size="6" letter-spacing="1.6" fill="#6b5f48">SPARKLING WATER</text>
+    <text x="80" y="358" text-anchor="middle" font-family="Jost, sans-serif" font-size="5" letter-spacing="1.2" fill="#8a7e64">WITH MASTIHA</text>
+    <text x="80" y="374" text-anchor="middle" font-family="Zen Old Mincho, serif" font-size="6" letter-spacing="3" fill="#6b5f48">マスティハ</text>
+  </symbol>
+  <symbol id="aegean" viewBox="0 0 1600 900">
+    <defs>
+      <radialGradient id="sky" cx="0.72" cy="0.32" r="0.75">
+        <stop offset="0" stop-color="#d6a347" stop-opacity="0.16"/><stop offset="0.5" stop-color="#6f8f6a" stop-opacity="0.05"/><stop offset="1" stop-color="#080a09" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="hFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aa483" stop-opacity="0.30"/><stop offset="1" stop-color="#8aa483" stop-opacity="0.07"/></linearGradient>
+      <linearGradient id="hMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f8f6a" stop-opacity="0.42"/><stop offset="1" stop-color="#4a6147" stop-opacity="0.12"/></linearGradient>
+      <linearGradient id="hFore" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f5640" stop-opacity="0.6"/><stop offset="1" stop-color="#2a3a2b" stop-opacity="0.22"/></linearGradient>
+    </defs>
+    <rect width="1600" height="900" fill="url(#sky)"/>
+    <circle cx="1150" cy="290" r="120" fill="#d6a347" fill-opacity="0.12"/>
+    <circle cx="1150" cy="290" r="120" fill="none" stroke="#d6a347" stroke-opacity="0.30" stroke-width="1.6"/>
+    <circle cx="1150" cy="290" r="84" fill="none" stroke="#d6a347" stroke-opacity="0.15" stroke-width="1"/>
+    <g fill="none" stroke="#4a6147" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round">
+      <path d="M360 200 q14 -12 28 0 q14 -12 28 0"/><path d="M442 168 q11 -9 22 0 q11 -9 22 0"/><path d="M300 240 q9 -8 18 0 q9 -8 18 0"/>
+    </g>
+    <g fill="#8aa483" fill-opacity="0.12" stroke="#8aa483" stroke-opacity="0.40" stroke-width="2">
+      <path d="M150 250 a28 28 0 0 1 56 0 a24 24 0 0 1 48 0 a20 20 0 0 1 40 0 a15 15 0 0 1 30 0 L324 270 L150 270 Z"/>
+      <path d="M980 200 a24 24 0 0 1 48 0 a20 20 0 0 1 40 0 a16 16 0 0 1 32 0 L1100 218 L980 218 Z"/>
+      <path d="M120 356 a18 18 0 0 1 36 0 a15 15 0 0 1 30 0 a12 12 0 0 1 24 0 L210 372 L120 372 Z"/>
+    </g>
+    <path d="M0 548 C220 500 420 496 640 520 C880 546 1080 500 1320 512 C1460 519 1540 536 1600 548 L1600 560 L0 560 Z" fill="url(#hFar)"/>
+    <line x1="0" y1="560" x2="1600" y2="560" stroke="#9fc4be" stroke-opacity="0.55" stroke-width="1.6"/>
+    <g stroke="#d6a347" stroke-opacity="0.32" stroke-linecap="round">
+      <line x1="1110" y1="582" x2="1190" y2="582" stroke-width="2"/><line x1="1122" y1="600" x2="1178" y2="600" stroke-width="2"/><line x1="1100" y1="620" x2="1200" y2="620" stroke-width="2.4"/><line x1="1126" y1="640" x2="1174" y2="640" stroke-width="2"/><line x1="1108" y1="662" x2="1192" y2="662" stroke-width="2.4"/>
+    </g>
+    <g stroke="#9fc4be" stroke-opacity="0.22" stroke-width="1.4" stroke-linecap="round">
+      <line x1="120" y1="596" x2="260" y2="596"/><line x1="360" y1="624" x2="520" y2="624"/><line x1="600" y1="606" x2="740" y2="606"/><line x1="300" y1="672" x2="470" y2="672"/><line x1="560" y1="664" x2="720" y2="664"/><line x1="140" y1="700" x2="320" y2="700"/>
+    </g>
+    <path d="M1180 560 C1280 506 1420 502 1540 528 C1570 534 1590 544 1600 552 L1600 560 Z" fill="url(#hMid)"/>
+    <g fill="#ece5d6" fill-opacity="0.85" stroke="#4a6147" stroke-opacity="0.45" stroke-width="1.3">
+      <rect x="1300" y="508" width="34" height="30"/><rect x="1334" y="516" width="26" height="22"/><rect x="1284" y="520" width="22" height="18"/><rect x="1360" y="510" width="30" height="28"/><rect x="1390" y="520" width="22" height="18"/>
+      <path d="M1342 508 a14 14 0 0 1 28 0 z" fill="#9fc4be" fill-opacity="0.7"/>
+    </g>
+    <path d="M0 740 C180 672 380 668 540 716 C560 722 580 730 600 742 L600 900 L0 900 Z" fill="url(#hFore)"/>
+    <g stroke="#2a3a2b" stroke-opacity="0.3" stroke-width="1.2" fill="none">
+      <path d="M40 790 C160 758 300 758 420 786"/><path d="M20 830 C160 798 320 800 460 832"/>
+    </g>
+    <g fill="#2f4030" fill-opacity="0.55">
+      <circle cx="110" cy="760" r="12"/><circle cx="160" cy="778" r="10"/><circle cx="225" cy="762" r="13"/><circle cx="300" cy="784" r="10"/><circle cx="370" cy="778" r="12"/><circle cx="70" cy="792" r="9"/>
+    </g>
+    <g fill="#2a3a2b" fill-opacity="0.7">
+      <path d="M470 740 C462 700 466 660 472 632 C478 660 482 700 474 740 Z"/>
+      <path d="M510 752 C504 718 507 686 512 662 C517 686 520 718 514 752 Z"/>
+    </g>
+    <g stroke="#3f5640" stroke-opacity="0.8" stroke-width="2.4">
+      <path d="M700 552 h64 l-11 17 h-42 z" fill="#3f5640" fill-opacity="0.2"/>
+      <path d="M733 552 L733 490 L767 542 Z" fill="#ece5d6" fill-opacity="0.14"/>
+      <path d="M730 552 L700 542 L730 502 Z" fill="#ece5d6" fill-opacity="0.14"/>
+    </g>
+    <g stroke="#3f5640" stroke-opacity="0.6" stroke-width="1.8">
+      <path d="M905 556 h40 l-7 11 h-26 z" fill="#3f5640" fill-opacity="0.16"/>
+      <path d="M925 556 L925 520 L946 550 Z" fill="#ece5d6" fill-opacity="0.1"/>
+    </g>
+  </symbol>
+  <symbol id="branch" viewBox="0 0 400 600">
+    <defs><linearGradient id="dropG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4d489"/><stop offset="0.5" stop-color="#d6a347"/><stop offset="1" stop-color="#a8741f"/></linearGradient></defs>
+    <path d="M64 46 C150 110 198 176 240 286 C254 320 266 350 272 380" fill="none" stroke="#56694c" stroke-width="8" stroke-linecap="round"/>
+    <g stroke="#3c4a36" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round">
+      <path d="M150 150 l16 -8"/><path d="M170 186 l16 -7"/><path d="M196 230 l16 -6"/>
+    </g>
+    <path d="M132 104 C158 138 196 150 236 150" fill="none" stroke="#56694c" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M205 222 C184 244 160 252 126 248" fill="none" stroke="#56694c" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M250 300 C276 300 300 296 326 300" fill="none" stroke="#56694c" stroke-width="3.5" stroke-linecap="round"/>
+    <g fill="#7d9a6e" stroke="#43583c" stroke-opacity="0.55" stroke-width="1.2">
+      <path d="M236 150 C264 140 306 146 326 170 C298 180 258 176 236 150 Z"/>
+      <path d="M236 150 C246 120 282 96 314 94 C312 128 284 154 236 150 Z"/>
+      <path d="M126 248 C98 242 68 252 52 278 C82 286 116 280 126 248 Z"/>
+      <path d="M126 248 C140 218 136 182 112 156 C90 188 96 230 126 248 Z"/>
+      <path d="M240 286 C268 278 308 286 326 310 C298 318 260 312 240 286 Z"/>
+      <path d="M188 200 C170 174 168 138 186 110 C212 134 214 174 188 200 Z"/>
+      <path d="M132 104 C146 78 144 44 122 20 C100 50 104 86 132 104 Z"/>
+      <path d="M96 130 C66 128 36 142 24 168 C56 174 88 162 96 130 Z"/>
+    </g>
+    <g stroke="#43583c" stroke-opacity="0.45" stroke-width="1" fill="none">
+      <path d="M236 150 L320 162"/><path d="M236 150 L306 104"/><path d="M126 248 L60 268"/><path d="M126 248 L110 168"/><path d="M240 286 L320 300"/><path d="M188 200 L180 122"/><path d="M132 104 L126 32"/><path d="M96 130 L34 160"/>
+    </g>
+    <path d="M272 380 C265 404 256 424 272 450 C288 424 279 404 272 380 Z" fill="url(#dropG)"/>
+    <ellipse cx="266" cy="418" rx="3.6" ry="7" fill="#fff" fill-opacity="0.6"/>
+    <path d="M214 250 C209 264 203 276 214 292 C225 276 219 264 214 250 Z" fill="url(#dropG)"/>
+    <ellipse cx="210.5" cy="268" rx="2.2" ry="4" fill="#fff" fill-opacity="0.55"/>
+    <circle cx="252" cy="338" r="5.5" fill="url(#dropG)"/><circle cx="300" cy="324" r="4" fill="url(#dropG)"/><circle cx="234" cy="360" r="3" fill="url(#dropG)"/>
+    <ellipse cx="250" cy="335.5" rx="1.8" ry="3" fill="#fff" fill-opacity="0.5"/>
+    <g fill="#9aae7e" stroke="#43583c" stroke-opacity="0.4" stroke-width="0.8">
+      <circle cx="318" cy="300" r="4"/><circle cx="328" cy="308" r="3.4"/>
+    </g>
+  </symbol>
+  <symbol id="hanko" viewBox="0 0 100 100">
+    <rect x="6" y="6" width="88" height="88" rx="7" fill="#b5402f"/>
+    <rect x="6" y="6" width="88" height="88" rx="7" fill="#000" fill-opacity="0.08"/>
+    <text x="50" y="70" text-anchor="middle" font-family="Zen Old Mincho, serif" font-size="60" font-weight="600" fill="#f4ece0">森</text>
+  </symbol>
+</svg>
+
+<div class="atmos"></div>
+<canvas id="bubbles"></canvas>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+
+<div class="intro" id="intro">
+  <div style="position:relative;display:grid;place-items:center">
+    <div class="mark">木の涙</div>
+    <div class="en">Tears&nbsp;of&nbsp;the&nbsp;Tree</div>
+  </div>
+  <div class="bar"></div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<div class="side-label left">ΜΑΣΤΙΧΑ · CHIOS 38.37°N</div>
+<div class="side-label right">森スパークリング · EST. MMXXVI</div>
+
+<nav id="nav">
+  <div class="logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></span>MASTRY</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
+      <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
+      <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+      <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
+      <a href="#cta" class="nav-cta" data-en="Begin the ritual" data-jp="儀式を始める">Begin the ritual</a>
+    </div>
+    <div class="lang">
+      <button id="enBtn" class="active">EN</button><span class="sep">/</span><button id="jpBtn">日本</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"><svg class="hero-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><use href="#aegean"/></svg></div>
+  <div class="eyebrow">
+    <span class="dot"></span>
+    <span data-en="ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE" data-jp="マスティハ — ギリシャ・ヒオス島">ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE</span>
+    <span class="dot"></span>
+    <span data-en="JAPANESE SPRING WATER" data-jp="日本の湧水">JAPANESE SPRING WATER</span>
+  </div>
+  <div class="mono hero-mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></div>
+  <h1 id="heroTitle" aria-label="MASTRY">MASTRY</h1>
+  <div class="kanji">木 の 涙</div>
+  <p class="hero-sub"
+     data-en="The tears of the mastic tree — drawn from a single Greek island for five thousand years, now carried in the soft spring water of Japan."
+     data-jp="木の涙——五千年ものあいだ、ただひとつのギリシャの島で採られ続けた樹脂が、いま、日本のやわらかな湧水に溶けてゆく。">
+     The tears of the mastic tree — drawn from a single Greek island for five thousand years, now carried in the soft spring water of Japan.</p>
+  <div class="hero-actions">
+    <a href="#expressions" class="btn btn-primary" data-cursor data-en="Discover the expressions" data-jp="三種を見る">Discover the expressions</a>
+    <a href="#origin" class="btn btn-ghost" data-cursor data-en="The origin →" data-jp="起源へ →">The origin →</a>
+  </div>
+  <div class="scroll-cue"><span data-en="Scroll" data-jp="スクロール">Scroll</span><div class="tear-line"></div></div>
+</header>
+
+<div class="tagline-band reveal" data-d="1">
+  <span class="rule"></span>
+  <span class="tagline" data-en="The gift of the Mediterranean — the shimmer of mastiha." data-jp="地中海の恵み、マスティハの煌めき。">The gift of the Mediterranean — the shimmer of mastiha.</span>
+  <span class="rule"></span>
+</div>
+
+<section id="origin" class="origin">
+  <div>
+    <div class="tag reveal" data-en="Chapter I — Origin" data-jp="第一章 — 起源">Chapter I — Origin</div>
+    <h2 class="h2 reveal" data-d="1"
+        data-en="One island.&#10;One tree.&#10;One resin the world&#10;has chased for&#10;five millennia."
+        data-jp="ひとつの島。&#10;ひとつの木。&#10;五千年、世界が&#10;追い求めてきた、&#10;ひとつの樹脂。">One island.<br>One tree.<br>One resin the world<br>has chased for<br>five millennia.</h2>
+    <p class="body reveal" data-d="2"
+       data-en="Mastiha grows nowhere else on earth but the sun-cracked southern groves of Chios. Each summer the bark is scored by hand, and the tree weeps — slow, crystalline tears of aromatic resin. We press these tears into a single pure essential oil, then let them dissolve into the mineral-quiet spring water of Japan."
+       data-jp="マスティハは、地球上でヒオス島南部の陽に灼けた木立にしか育たない。夏ごとに樹皮を手で傷つけると、木は涙を流す——ゆっくりと結晶になる、芳香の樹脂の涙を。その涙をただ一滴の純粋な精油へと搾り、日本のミネラル静かな湧水に溶かしてゆく。">Mastiha grows nowhere else on earth but the sun-cracked southern groves of Chios. Each summer the bark is scored by hand, and the tree weeps — slow, crystalline tears of aromatic resin. We press these tears into a single pure essential oil, then let them dissolve into the mineral-quiet spring water of Japan.</p>
+    <div class="coords reveal" data-d="3">
+      <div><span data-en="HARVEST" data-jp="採取">HARVEST</span> &nbsp;·&nbsp; <span>Mastichochoria, Chios — 38.3682° N, 26.1356° E</span></div>
+      <div><span data-en="WATER" data-jp="水">WATER</span> &nbsp;·&nbsp; <span data-en="Japan soft spring — hardness 30–50 mg/L" data-jp="日本の軟水湧水 — 硬度 30–50 mg/L">Japan soft spring — hardness 30–50 mg/L</span></div>
+      <div><span data-en="DOSE" data-jp="配合">DOSE</span> &nbsp;·&nbsp; <span data-en="100% pure oil · 100 ppm · zero sugar" data-jp="100%純精油 · 100ppm · 糖類ゼロ">100% pure oil · 100 ppm · zero sugar</span></div>
+    </div>
+    <div class="feats reveal" data-d="4">
+      <div class="feat">
+        <svg class="fi" viewBox="0 0 24 24"><path d="M12 3 C12 3 5 11 5 16 a7 7 0 0 0 14 0 C19 11 12 3 12 3 Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div><b data-en="Chios Mastiha" data-jp="ヒオス島産マスティハ">Chios Mastiha</b><span data-en="Resin from the island of Chios" data-jp="ヒオス島産マスティハ使用">Resin from the island of Chios</span></div>
+      </div>
+      <div class="feat">
+        <svg class="fi" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="16.5" cy="16.5" r="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div><b data-en="Fine Bubbles" data-jp="ファインバブル">Fine Bubbles</b><span data-en="Delicate, soft carbonation" data-jp="きめ細やかな炭酸">Delicate, soft carbonation</span></div>
+      </div>
+      <div class="feat">
+        <svg class="fi" viewBox="0 0 24 24"><path d="M12 21 C7 17 5 11 7.5 5 C13 7 17 9.5 17 15 C17 18.5 14.5 21 12 21 Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M9 17 C11 14 12.5 12 13.5 9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div><b data-en="Refreshing &amp; Clean" data-jp="すっきり爽やか">Refreshing &amp; Clean</b><span data-en="A crisp, clean finish" data-jp="すっきり爽やかな味わい">A crisp, clean finish</span></div>
+      </div>
+    </div>
+  </div>
+  <figure class="origin-media reveal" data-d="2">
+    <svg class="branch-art" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet"><use href="#branch"/></svg>
+    <figcaption class="media-cap"><span class="big">5,000</span><span data-en="Years of harvest" data-jp="採取の歴史">Years of harvest</span></figcaption>
+  </figure>
+</section>
+
+<section class="band img-wrap">
+  <svg class="band-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><use href="#aegean"/></svg>
+  <div class="band-overlay"></div>
+  <div class="band-text">
+    <span data-en="“The mastic tree grows everywhere on Chios — but it only weeps in the south.”" data-jp="「マスティハの木はヒオス島のどこにでも育つ。けれど、涙を流すのは南だけだ。」">“The mastic tree grows everywhere on Chios — but it only weeps in the south.”</span>
+    <span class="src" data-en="Mastichochoria · The villages of mastic" data-jp="マスティホリア · 樹脂の村々">Mastichochoria · The villages of mastic</span>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track" id="marquee">
+    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">森</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
+    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">森</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
+  </div>
+</div>
+
+<section id="ritual" class="ritual">
+  <div class="tag reveal" style="justify-content:center" data-en="Chapter II — The Ritual" data-jp="第二章 — 作法">Chapter II — The Ritual</div>
+  <h2 class="h2 reveal" data-d="1" data-en="Not a drink. &lt;em&gt;A pause.&lt;/em&gt;" data-jp="飲み物ではない。&lt;em&gt;ひと呼吸である。&lt;/em&gt;">Not a drink. <em>A pause.</em></h2>
+  <p class="body reveal" data-d="2"
+     data-en="MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention."
+     data-jp="MASTRYは“その後”のためにある——熱のあと、一日のあと、喧噪のあと。冷たく供され、ただ注意だけを求める。">MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention.</p>
+  <div class="steps">
+    <div class="step reveal" data-d="1">
+      <div class="no">01</div>
+      <h3 data-en="Chill" data-jp="冷やす">Chill</h3>
+      <div class="jpsm">六度</div>
+      <p data-en="Serve at 6–8°C. Cold tempers the resin and lets the forest rise slowly, never sharp." data-jp="6〜8℃で供する。冷たさが樹脂をなだめ、森の香りをゆっくりと、決して鋭くなく立ち上らせる。">Serve at 6–8°C. Cold tempers the resin and lets the forest rise slowly, never sharp.</p>
+    </div>
+    <div class="step reveal" data-d="2">
+      <div class="no">02</div>
+      <h3 data-en="Open" data-jp="開く">Open</h3>
+      <div class="jpsm">一滴</div>
+      <p data-en="The first note is woody and clean — the tree. Then citrus, then a long mineral finish that lingers like breath." data-jp="最初の香りは木のように清らか——樹。つぎに柑橘、そして長くミネラルの余韻が、呼吸のように残る。">The first note is woody and clean — the tree. Then citrus, then a long mineral finish that lingers like breath.</p>
+    </div>
+    <div class="step reveal" data-d="3">
+      <div class="no">03</div>
+      <h3 data-en="Arrive" data-jp="整う">Arrive</h3>
+      <div class="jpsm">ととのい</div>
+      <p data-en="Drink slowly. This is ととのい — the quiet equilibrium the Japanese chase, and the calm the Aegean has always known." data-jp="ゆっくりと飲む。これがととのい——日本人が追い求める静かな均衡であり、エーゲ海が古来知っていた安らぎである。">Drink slowly. This is ととのい — the quiet equilibrium the Japanese chase, and the calm the Aegean has always known.</p>
+    </div>
+  </div>
+</section>
+
+<section id="expressions">
+  <div class="exp-head">
+    <div>
+      <div class="tag reveal" data-en="Chapter III — Expressions" data-jp="第三章 — 三種">Chapter III — Expressions</div>
+      <h2 class="h2 reveal" data-d="1" data-en="Three&lt;br&gt;&lt;em&gt;expressions.&lt;/em&gt;" data-jp="三つの、&lt;br&gt;&lt;em&gt;相。&lt;/em&gt;">Three<br><em>expressions.</em></h2>
+    </div>
+    <p class="body reveal" data-d="2" style="margin-bottom:.4rem"
+       data-en="One resin, read three ways — each pairing a Greek tear with a Japanese forest or grove."
+       data-jp="ひとつの樹脂を、三通りに読む——ギリシャの涙に、日本の森や木立を重ねて。">One resin, read three ways — each pairing a Greek tear with a Japanese forest or grove.</p>
+  </div>
+  <div class="skus">
+    <article class="sku img-wrap reveal" data-d="1" style="--c:rgba(214,163,71,.30);--cb:#d6a347" data-cursor>
+      <div class="sku-bg"><img src="mastry-img/sku-yuzu.jpg" alt="MASTRY Yuzu bottle"></div>
+      <svg class="bottle" style="color:#d6a347" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+      <div class="glyph">柚</div>
+      <div class="idx">N°01 — 柚子</div>
+      <h3 data-en="Yuzu" data-jp="柚子">Yuzu</h3>
+      <div class="romaji" data-en="Aegean × Kochi" data-jp="エーゲ海 × 高知">Aegean × Kochi</div>
+      <p data-en="Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table." data-jp="森、つぎに柑橘、そして後味にかすかな山椒。最も開かれた一本——ハイボールにも、食卓にも。">Forest, then citrus, then a whisper of sanshō pepper on the finish. The most open expression — built for the highball and the table.</p>
+      <div class="spec"><span><b>80</b> ppm</span><span><b>3.5</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
+    </article>
+    <article class="sku img-wrap reveal" data-d="2" style="--c:rgba(111,143,106,.34);--cb:#6f8f6a" data-cursor>
+      <div class="sku-bg"><img src="mastry-img/sku-hinoki.jpg" alt="MASTRY Hinoki bottle"></div>
+      <svg class="bottle" style="color:#6f8f6a" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+      <div class="glyph">檜</div>
+      <div class="idx">N°02 — 森</div>
+      <h3 data-en="Hinoki" data-jp="檜">Hinoki</h3>
+      <div class="romaji" data-en="Two forests, one breath" data-jp="二つの森、ひとつの息">Two forests, one breath</div>
+      <p data-en="Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends." data-jp="木曽檜をギリシャの樹脂に重ねる——同じ静かな分子を分かちあう、二つの木。サウナを終えた、その瞬間のために。">Kiso cypress laid over Greek resin — two woods that share the same quiet molecule. Made for the moment the sauna ends.</p>
+      <div class="spec"><span><b>70</b> ppm</span><span><b>40</b> <span data-en="hinoki" data-jp="檜">hinoki</span></span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
+    </article>
+    <article class="sku img-wrap reveal" data-d="3" style="--c:rgba(159,196,190,.30);--cb:#9fc4be" data-cursor>
+      <div class="sku-bg"><img src="mastry-img/sku-pure.jpg" alt="MASTRY Pure bottle"></div>
+      <svg class="bottle" style="color:#9fc4be" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+      <div class="glyph">純</div>
+      <div class="idx">N°03 — 純</div>
+      <h3 data-en="Pure" data-jp="純">Pure</h3>
+      <div class="romaji" data-en="As the island intended" data-jp="島のままに">As the island intended</div>
+      <p data-en="Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree." data-jp="何も加えない。マスティハと水、わずかな泡だけ。すでに樹を知る者のための一杯。">Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree.</p>
+      <div class="spec"><span><b>100</b> ppm</span><span><b>4.0</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
+    </article>
+  </div>
+</section>
+
+<section id="craft" class="craft">
+  <figure class="craft-media reveal" data-d="2" style="order:2">
+    <div class="resin-blob"></div>
+    <div class="trio">
+      <svg class="bottle" style="color:#9fc4be" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+      <svg class="bottle" style="color:#d6a347" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+      <svg class="bottle" style="color:#6f8f6a" viewBox="0 0 160 460"><use href="#bottle"/></svg>
+    </div>
+  </figure>
+  <div style="order:1">
+    <div class="tag reveal" data-en="Chapter IV — Craft" data-jp="第四章 — 製法">Chapter IV — Craft</div>
+    <h2 class="h2 reveal" data-d="1" data-en="Rare by&lt;br&gt;&lt;em&gt;nature.&lt;/em&gt;" data-jp="稀少は、&lt;br&gt;&lt;em&gt;自然のままに。&lt;/em&gt;">Rare by<br><em>nature.</em></h2>
+    <p class="body reveal" data-d="2"
+       data-en="A single kilogram of mastiha oil takes a season of hand-scored bark to gather — and it is so concentrated that one kilogram perfumes thirty thousand bottles. We add nothing the island didn't: no sugar, no sweetener, no preservative. Only resin, water, and air."
+       data-jp="マスティハ精油わずか1キロのために、ひと夏、手作業で樹皮を傷つけ続ける。そしてその精油はあまりに濃く、1キロで三万本を香らせる。島が加えなかったものは、私たちも加えない——砂糖も、甘味料も、保存料も。あるのは樹脂と、水と、空気だけ。">A single kilogram of mastiha oil takes a season of hand-scored bark to gather — and it is so concentrated that one kilogram perfumes thirty thousand bottles. We add nothing the island didn't: no sugar, no sweetener, no preservative. Only resin, water, and air.</p>
+    <div class="stats reveal" data-d="3">
+      <div class="stat"><div class="v"><em>1</em></div><div class="l" data-en="Island on earth where it grows" data-jp="育つ島は地球にひとつ">Island on earth where it grows</div></div>
+      <div class="stat"><div class="v">100<em>ppm</em></div><div class="l" data-en="Pure essential oil per bottle" data-jp="一本あたりの純精油">Pure essential oil per bottle</div></div>
+      <div class="stat"><div class="v">0<em>g</em></div><div class="l" data-en="Sugar · sweetener · preservative" data-jp="砂糖・甘味料・保存料">Sugar · sweetener · preservative</div></div>
+      <div class="stat"><div class="v">30<em>k</em></div><div class="l" data-en="Bottles from a single kilogram" data-jp="1キロから生まれる本数">Bottles from a single kilogram</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="where">
+  <div class="tag reveal" style="justify-content:center" data-en="Chapter V — Found" data-jp="第五章 — 出会う場所">Chapter V — Found</div>
+  <h2 class="h2 reveal" data-d="1" data-en="Where the &lt;em&gt;quiet&lt;/em&gt;&lt;br&gt;people gather." data-jp="静かな人々の、&lt;br&gt;&lt;em&gt;集う場所。&lt;/em&gt;">Where the <em>quiet</em><br>people gather.</h2>
+  <div class="places">
+    <div class="place reveal" data-d="1" data-cursor data-en="Premium Saunas" data-jp="プレミアムサウナ">Premium Saunas</div>
+    <div class="place reveal" data-d="1" data-cursor data-en="Cocktail Bars" data-jp="カクテルバー">Cocktail Bars</div>
+    <div class="place reveal" data-d="2" data-cursor data-en="Ryokan &amp; Spa" data-jp="旅館・スパ">Ryokan &amp; Spa</div>
+    <div class="place reveal" data-d="2" data-cursor data-en="Hotel Lounges" data-jp="ホテルラウンジ">Hotel Lounges</div>
+    <div class="place reveal" data-d="3" data-cursor data-en="Select Retail" data-jp="セレクト小売">Select Retail</div>
+    <div class="place reveal" data-d="3" data-cursor data-en="The Atelier — D2C" data-jp="アトリエ — D2C">The Atelier — D2C</div>
+  </div>
+</section>
+
+<section id="cta" class="cta">
+  <div class="tag reveal" style="justify-content:center" data-en="Begin" data-jp="始まり">Begin</div>
+  <h2 class="h2 reveal" data-d="1" data-en="Be among the first&lt;br&gt;to taste the &lt;em&gt;tears.&lt;/em&gt;" data-jp="いちばん最初に、&lt;br&gt;&lt;em&gt;涙を味わう。&lt;/em&gt;">Be among the first<br>to taste the <em>tears.</em></h2>
+  <p class="lede reveal" data-d="2" data-en="Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual." data-jp="ファウンディング・メンバーには、最初のリリース、ヒオス島の起源を描いた映像、そして開幕の儀式へのご招待を。">Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual.</p>
+  <form class="signup reveal" data-d="3" onsubmit="return false">
+    <input type="email" placeholder="your@email.com" aria-label="email" />
+    <button type="submit" data-cursor data-en="Join" data-jp="登録">Join</button>
+  </form>
+</section>
+
+<footer>
+  <div class="f-brand">
+    <div>
+      <div class="f-logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></span>MASTRY</div>
+      <div class="f-sub">森スパークリング — MORI SPARKLING</div>
+    </div>
+    <span class="seal"><svg viewBox="0 0 100 100"><use href="#hanko"/></svg></span>
+  </div>
+  <div class="f-meta">
+    <div>μαστίχα × 湧水 · GREECE × JAPAN</div>
+    <div>CHIOS 38.37°N · 26.14°E</div>
+    <div><a href="#origin" data-en="Origin" data-jp="起源">Origin</a> · <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a> · <a href="#cta" data-en="Membership" data-jp="会員">Membership</a></div>
+    <div>© MMXXVI · TEARS OF THE TREE</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- bilingual ---- */
+  function setLang(lang){
+    document.documentElement.lang=lang;
+    document.body.classList.toggle('jp',lang==='jp');
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const v=el.getAttribute('data-'+lang); if(v==null) return;
+      if(/&lt;|<br|<em/.test(v)) el.innerHTML=v.replace(/&lt;/g,'<').replace(/&gt;/g,'>'); else el.textContent=v;
+    });
+    enBtn.classList.toggle('active',lang==='en');
+    jpBtn.classList.toggle('active',lang==='jp');
+    try{localStorage.setItem('mastry-lang',lang)}catch(e){}
+  }
+  const enBtn=document.getElementById('enBtn'),jpBtn=document.getElementById('jpBtn');
+  enBtn.onclick=()=>setLang('en'); jpBtn.onclick=()=>setLang('jp');
+  let saved='en'; try{saved=localStorage.getItem('mastry-lang')||'en'}catch(e){}
+  if(saved==='jp') setLang('jp');
+
+  /* ---- image graceful fallback ---- */
+  document.querySelectorAll('.img-wrap > img').forEach(img=>{
+    const done=()=>img.classList.add('ready');
+    if(img.complete && img.naturalWidth>0) done();
+    img.addEventListener('load',done);
+    img.addEventListener('error',()=>img.closest('.img-wrap').classList.add('no-img'));
+    if(img.complete && img.naturalWidth===0) img.closest('.img-wrap').classList.add('no-img');
+  });
+
+  /* ---- intro ---- */
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{document.getElementById('intro').classList.add('gone');document.body.classList.add('loaded');},reduce?0:2200);
+  });
+
+  /* ---- hero title char split ---- */
+  const title=document.getElementById('heroTitle'),text=title.textContent.trim();
+  title.textContent='';
+  [...text].forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.animationDelay=(0.35+i*0.08)+'s';title.appendChild(s);});
+
+  /* ---- cursor ---- */
+  if(!reduce && window.matchMedia('(min-width:769px)').matches){
+    const cur=document.querySelector('.cursor'),dot=document.querySelector('.cursor-dot');
+    let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+    const bind=()=>document.querySelectorAll('a,button,[data-cursor]').forEach(el=>{
+      el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
+      el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));});
+    bind();
+  }
+
+  /* ---- nav + progress ---- */
+  const nav=document.getElementById('nav'),prog=document.getElementById('progress');
+  addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60);
+    const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(scrollY/h*100)+'%';},{passive:true});
+
+  /* ---- reveal ---- */
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ---- hero parallax ---- */
+  if(!reduce){const hero=document.querySelector('.hero');
+    addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){hero.style.transform=`translateY(${y*0.28}px)`;hero.style.opacity=1-y/innerHeight*0.9;}},{passive:true});}
+
+  /* ---- bubbles ---- */
+  const cv=document.getElementById('bubbles'),ctx=cv.getContext('2d');
+  let dpr=Math.min(devicePixelRatio||1,2),W,H,bubbles=[];
+  function size(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+  size();addEventListener('resize',size);
+  function B(){this.reset(true);}
+  B.prototype.reset=function(init){this.x=Math.random()*W;this.y=init?Math.random()*H:H+20*dpr;
+    this.r=(Math.random()*2.4+0.6)*dpr;this.sp=(Math.random()*0.6+0.25)*dpr;this.drift=Math.random()*0.6-0.3;
+    this.ph=Math.random()*Math.PI*2;this.a=Math.random()*0.4+0.12;};
+  B.prototype.step=function(){this.y-=this.sp;this.ph+=0.02;this.x+=Math.sin(this.ph)*0.3*dpr+this.drift*0.2;if(this.y<-10*dpr)this.reset(false);};
+  B.prototype.draw=function(){const fade=this.y<H*0.15?this.y/(H*0.15):1;
+    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(214,163,71,${this.a*fade*0.5})`;ctx.fill();
+    ctx.beginPath();ctx.arc(this.x-this.r*0.3,this.y-this.r*0.3,this.r*0.4,0,Math.PI*2);ctx.fillStyle=`rgba(240,200,115,${this.a*fade})`;ctx.fill();};
+  const COUNT=Math.min(90,Math.floor(innerWidth/14));
+  for(let i=0;i<COUNT;i++)bubbles.push(new B());
+  let raf;function frame(){ctx.clearRect(0,0,W,H);bubbles.forEach(b=>{b.step();b.draw();});raf=requestAnimationFrame(frame);}
+  if(!reduce)frame();else bubbles.forEach(b=>b.draw());
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(!reduce)frame();});
+})();
+</script>
+</body>
+</html>
