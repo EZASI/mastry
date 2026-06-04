@@ -439,6 +439,15 @@ body.jp .feat span{font-family:var(--mincho)}
 .sku:hover .bottle{transform:translateY(-10px)}
 .sku:not(.no-img) .bottle{display:none}
 .sku .glyph{display:none}
+/* full-bleed photo product card */
+.sku.photo-card{justify-content:flex-end;padding:0;overflow:hidden;min-height:560px}
+.sku.photo-card::before{display:none}
+.sku.photo-card .sku-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 30%;z-index:-2;transition:transform 1s var(--ease)}
+.sku.photo-card:hover .sku-photo{transform:scale(1.045)}
+.sku.photo-card::after{content:"";position:absolute;left:0;right:0;bottom:0;top:auto;height:70%;z-index:-1;
+  background:linear-gradient(to bottom,transparent 0%,rgba(255,255,255,.62) 32%,rgba(255,255,255,.96) 62%,#fff 84%)}
+.sku.photo-card .sku-body{padding:2.4rem 2.2rem 2.4rem;position:relative;z-index:1}
 /* illustrated scenes */
 .hero-bg .hero-tree{position:absolute;inset:0;width:100%;height:100%;opacity:.4}
 .hero-eye{position:absolute;top:21%;right:5%;width:clamp(34px,3.4vw,52px);height:auto;opacity:0;transition:opacity 2.2s var(--ease) 3s}
@@ -683,7 +692,7 @@ body.jp .feat span{font-family:var(--mincho)}
   <symbol id="hanko" viewBox="0 0 100 100">
     <rect x="6" y="6" width="88" height="88" rx="7" fill="#2563eb"/>
     <rect x="6" y="6" width="88" height="88" rx="7" fill="#000" fill-opacity="0.08"/>
-    <text x="50" y="70" text-anchor="middle" font-family="Zen Old Mincho, serif" font-size="60" font-weight="600" fill="#ffffff">森</text>
+    <text x="50" y="70" text-anchor="middle" font-family="Zen Old Mincho, serif" font-size="60" font-weight="600" fill="#ffffff">静</text>
   </symbol>
 </svg>
 
@@ -704,21 +713,21 @@ body.jp .feat span{font-family:var(--mincho)}
 
 <div class="progress" id="progress"></div>
 
-<div class="side-label left">ΜΑΣΤΙΧΑ · CHIOS 38.37°N</div>
+<div class="side-label left">ΜΑΣΤΙΧΑ · CHIOS 38.25°N</div>
 <div class="side-label right">MASTRY · EST. MMXXVI</div>
 
 <nav id="nav">
   <div class="logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"/></svg></span>MASTRY</div>
   <div class="nav-right">
     <div class="nav-links">
+      <a href="#ritual" data-en="Stillness" data-jp="静寂">Stillness</a>
       <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
-      <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
-      <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+      <a href="#expressions" data-en="Expressions" data-jp="ピュア">Expressions</a>
       <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
-      <a href="#cta" class="nav-cta" data-en="Begin the ritual" data-jp="儀式を始める">Begin the ritual</a>
+      <a href="#cta" class="nav-cta" data-en="Reserve" data-jp="予約する">Reserve</a>
     </div>
     <div class="lang">
-      <button id="enBtn" class="active">EN</button><span class="sep">/</span><button id="jpBtn">日本</button>
+      <button id="enBtn" class="active">EN</button><span class="sep">/</span><button id="jpBtn">JP</button>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -726,12 +735,12 @@ body.jp .feat span{font-family:var(--mincho)}
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <nav class="mm-links" aria-label="Mobile">
+    <a href="#ritual" data-en="Stillness" data-jp="静寂">Stillness</a>
     <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
-    <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
-    <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+    <a href="#expressions" data-en="Expressions" data-jp="ピュア">Expressions</a>
     <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
   </nav>
-  <a href="#cta" class="btn btn-primary mm-cta" data-en="Begin the ritual" data-jp="儀式を始める">Begin the ritual</a>
+  <a href="#cta" class="btn btn-primary mm-cta" data-en="Reserve yours" data-jp="予約する">Reserve yours</a>
   <div class="mm-rule"></div>
   <div class="mm-foot">μαστίχα × 湧水 · CHIOS × JAPAN</div>
 </div>
@@ -769,7 +778,7 @@ body.jp .feat span{font-family:var(--mincho)}
   <div class="hero-inner">
   <div class="eyebrow">
     <span class="dot"></span>
-    <span data-en="ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE" data-jp="マスティハ — ギリシャ・ヒオス島">ΜΑΣΤΙΧΑ — CHIOS ISLAND, GREECE</span>
+    <span data-en="PREMIUM NON-ALCOHOLIC SPARKLING" data-jp="プレミアム・ノンアルコール スパークリング">PREMIUM NON-ALCOHOLIC SPARKLING</span>
     <span class="dot"></span>
     <span data-en="JAPANESE SPRING WATER" data-jp="日本の湧水">JAPANESE SPRING WATER</span>
   </div>
@@ -777,11 +786,11 @@ body.jp .feat span{font-family:var(--mincho)}
   <h1 id="heroTitle" aria-label="MASTRY">MASTRY</h1>
   <div class="kanji">木 の 涙</div>
   <p class="hero-sub"
-     data-en="The tears of the mastic tree — drawn from a single Greek island for five thousand years, now carried in the soft spring water of Japan."
-     data-jp="木の涙——五千年ものあいだ、ただひとつのギリシャの島で採られ続けた樹脂が、いま、日本のやわらかな湧水に溶けてゆく。">
-     The tears of the mastic tree — drawn from a single Greek island for five thousand years, now carried in the soft spring water of Japan.</p>
+     data-en="The tears of the mastic tree — drawn for five thousand years from a single grove in the south of Chios, Greece, now carried in the soft spring water of Japan."
+     data-jp="木の涙——五千年もの歴史を紡ぎ、ただひとつのギリシャの島、ヒオス島南部で採られ続けた神秘の樹脂。それが今、日本のやわらかな湧水に溶けてゆく。">
+     The tears of the mastic tree — drawn for five thousand years from a single grove in the south of Chios, Greece, now carried in the soft spring water of Japan.</p>
   <div class="hero-actions">
-    <a href="#expressions" class="btn btn-primary" data-cursor data-en="Discover the expressions" data-jp="三種を見る">Discover the expressions</a>
+    <a href="#expressions" class="btn btn-primary" data-cursor data-en="Discover the expressions" data-jp="「純」を知る">Discover the expressions</a>
     <a href="#origin" class="btn btn-ghost" data-cursor data-en="The origin →" data-jp="起源へ →">The origin →</a>
   </div>
   </div>
@@ -794,95 +803,96 @@ body.jp .feat span{font-family:var(--mincho)}
   <span class="rule"></span>
 </div>
 
+<section id="ritual" class="ritual">
+  <div class="tag reveal" style="justify-content:center" data-en="Chapter I — Stillness" data-jp="第一章 — 静寂">Chapter I — Stillness</div>
+  <h2 class="h2 reveal" data-d="1" data-en="In a loud world, &#10;&lt;em&gt;a quiet glass.&lt;/em&gt;" data-jp="騒がしい世界に、&#10;&lt;em&gt;ひとつの静けさを。&lt;/em&gt;">In a loud world, <br><em>a quiet glass.</em></h2>
+  <p class="body reveal" data-d="2"
+     data-en="We are never quite off. The day bleeds into the night, the screen into the meal. MASTRY is the small, deliberate pause in between — a non-alcoholic sparkling water made to be poured slowly, and to quiet the noise for a moment."
+     data-jp="私たちは、いつもどこか“オン”のまま。一日は夜へ、画面は食卓へとにじんでいく。MASTRYは、その合間に置く小さな、意図された休息——ゆっくりと注ぎ、ひととき喧騒を鎮めるための、ノンアルコール・スパークリングウォーター。">We are never quite off. The day bleeds into the night, the screen into the meal. MASTRY is the small, deliberate pause in between — a non-alcoholic sparkling water made to be poured slowly, and to quiet the noise for a moment.</p>
+  <div class="steps">
+    <div class="step reveal" data-d="1">
+      <div class="no">01</div>
+      <h3 data-en="Chill" data-jp="冷やす">Chill</h3>
+      <div class="jpsm">適温</div>
+      <p data-en="Serve at 6–8°C. Cold settles the resin and lets its noble aroma rise slowly, never sharp." data-jp="6〜8℃で供する。冷たさが樹脂の成分を落ち着かせ、その高貴な香りをゆっくりと、尖らせることなく立ち上らせる。">Serve at 6–8°C. Cold settles the resin and lets its noble aroma rise slowly, never sharp.</p>
+    </div>
+    <div class="step reveal" data-d="2">
+      <div class="no">02</div>
+      <h3 data-en="Taste" data-jp="味わう">Taste</h3>
+      <div class="jpsm">一滴</div>
+      <p data-en="The first note is clean and woody, with a hint of forest. Then bright citrus, then a long mineral finish that recedes as quietly as a wave." data-jp="最初はどこまでも清らかで、かすかに森を思わせるウッディな香り。つぎに瑞々しい柑橘、そして長いミネラルの余韻が、波が引くように静かに残る。">The first note is clean and woody, with a hint of forest. Then bright citrus, then a long mineral finish that recedes as quietly as a wave.</p>
+    </div>
+    <div class="step reveal" data-d="3">
+      <div class="no">03</div>
+      <h3 data-en="Settle" data-jp="鎮まる">Settle</h3>
+      <div class="jpsm">静</div>
+      <p data-en="Drink slowly. The bracing bubbles fade, the outside noise fades, and for a moment there is only a gentle quiet." data-jp="ゆっくりと飲む。五感をリセットする強い泡が消え、外側の喧騒が消え、ひととき、ただ心地よい静けさだけが心に残る。">Drink slowly. The bracing bubbles fade, the outside noise fades, and for a moment there is only a gentle quiet.</p>
+    </div>
+  </div>
+</section>
+
 <section id="origin" class="origin">
   <div>
-    <div class="tag reveal" data-en="Chapter I — Origin" data-jp="第一章 — 起源">Chapter I — Origin</div>
+    <div class="tag reveal" data-en="Chapter II — Origin" data-jp="第二章 — 起源">Chapter II — Origin</div>
     <h2 class="h2 reveal" data-d="1"
         data-en="One island.&#10;One tree.&#10;One resin the world&#10;has chased for&#10;five millennia."
-        data-jp="ひとつの島。&#10;ひとつの木。&#10;五千年、世界が&#10;追い求めてきた、&#10;ひとつの樹脂。">One island.<br>One tree.<br>One resin the world<br>has chased for<br>five millennia.</h2>
+        data-jp="ひとつの島。&#10;ひとつの木。&#10;五千年の間、世界が&#10;追い求めてきた、&#10;ひとつの樹脂。">One island.<br>One tree.<br>One resin the world<br>has chased for<br>five millennia.</h2>
     <p class="body reveal" data-d="2"
-       data-en="Mastiha grows nowhere else on earth but the sun-cracked southern groves of Chios. Each summer the bark is scored by hand, and the tree weeps — slow, crystalline tears of aromatic resin. We press these tears into a single pure essential oil, then let them dissolve into the mineral-quiet spring water of Japan."
-       data-jp="マスティハは、地球上でヒオス島南部の陽に灼けた木立にしか育たない。夏ごとに樹皮を手で傷つけると、木は涙を流す——ゆっくりと結晶になる、芳香の樹脂の涙を。その涙をただ一滴の純粋な精油へと搾り、日本のミネラル静かな湧水に溶かしてゆく。">Mastiha grows nowhere else on earth but the sun-cracked southern groves of Chios. Each summer the bark is scored by hand, and the tree weeps — slow, crystalline tears of aromatic resin. We press these tears into a single pure essential oil, then let them dissolve into the mineral-quiet spring water of Japan.</p>
+       data-en="Mastiha grows nowhere else on earth but a few sun-warmed groves in the south of Chios. For five thousand years it has been prized to clear the head and settle the body — the Mediterranean's oldest taste of calm. Each summer the bark is scored gently by hand, and the tree weeps slow, crystalline tears of aromatic resin."
+       data-jp="マスティハは、地球上でヒオス島南部の陽光降り注ぐわずかな木立でしか育たない。五千年の歴史のなかで、頭を澄まし、心身を落ち着かせる神秘の恵みとして珍重されてきた——地中海でもっとも古い“静けさ”の味だ。夏が訪れるたび、樹皮を手作業で優しく傷つけると、木はゆっくりと結晶になる、芳しい樹脂の涙を流す。">Mastiha grows nowhere else on earth but a few sun-warmed groves in the south of Chios. For five thousand years it has been prized to clear the head and settle the body — the Mediterranean's oldest taste of calm. Each summer the bark is scored gently by hand, and the tree weeps slow, crystalline tears of aromatic resin.</p>
     <div class="coords reveal" data-d="3">
-      <div><span data-en="HARVEST" data-jp="採取">HARVEST</span> &nbsp;·&nbsp; <span>Mastichochoria, Chios — 38.3682° N, 26.1356° E</span></div>
-      <div><span data-en="WATER" data-jp="水">WATER</span> &nbsp;·&nbsp; <span data-en="Japan soft spring — hardness 30–50 mg/L" data-jp="日本の軟水湧水 — 硬度 30–50 mg/L">Japan soft spring — hardness 30–50 mg/L</span></div>
+      <div><span data-en="HARVEST" data-jp="採取">HARVEST</span> &nbsp;·&nbsp; <span>Mastichochoria, Chios — 38.2500° N, 25.9833° E</span></div>
+      <div><span data-en="WATER" data-jp="水">WATER</span> &nbsp;·&nbsp; <span data-en="Japan soft spring — hardness 30–50 mg/L" data-jp="日本の軟水（湧水） — 硬度 30–50 mg/L">Japan soft spring — hardness 30–50 mg/L</span></div>
       <div><span data-en="DOSE" data-jp="配合">DOSE</span> &nbsp;·&nbsp; <span data-en="100% pure oil · 100 ppm · zero sugar" data-jp="100%純精油 · 100ppm · 糖類ゼロ">100% pure oil · 100 ppm · zero sugar</span></div>
     </div>
     <div class="feats reveal" data-d="4">
       <div class="feat">
         <svg class="fi" viewBox="0 0 24 24"><path d="M12 3 C12 3 5 11 5 16 a7 7 0 0 0 14 0 C19 11 12 3 12 3 Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
-        <div><b data-en="Chios Mastiha" data-jp="ヒオス島産マスティハ">Chios Mastiha</b><span data-en="Resin from the island of Chios" data-jp="ヒオス島産マスティハ使用">Resin from the island of Chios</span></div>
+        <div><b data-en="Chios Mastiha" data-jp="ヒオス島産マスティハ">Chios Mastiha</b><span data-en="Resin from the island of Chios" data-jp="ヒオス島南部で採れた伝統の樹脂">Resin from the island of Chios</span></div>
       </div>
       <div class="feat">
         <svg class="fi" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="16.5" cy="16.5" r="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
-        <div><b data-en="Fine Bubbles" data-jp="ファインバブル">Fine Bubbles</b><span data-en="Delicate, soft carbonation" data-jp="きめ細やかな炭酸">Delicate, soft carbonation</span></div>
+        <div><b data-en="Fine Bubbles" data-jp="ファインバブル">Fine Bubbles</b><span data-en="Delicate, soft carbonation" data-jp="五感を研ぎ澄ますきめ細やかな炭酸">Delicate, soft carbonation</span></div>
       </div>
       <div class="feat">
         <svg class="fi" viewBox="0 0 24 24"><path d="M12 21 C7 17 5 11 7.5 5 C13 7 17 9.5 17 15 C17 18.5 14.5 21 12 21 Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M9 17 C11 14 12.5 12 13.5 9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <div><b data-en="Refreshing &amp; Clean" data-jp="すっきり爽やか">Refreshing &amp; Clean</b><span data-en="A crisp, clean finish" data-jp="すっきり爽やかな味わい">A crisp, clean finish</span></div>
+        <div><b data-en="Refreshing &amp; Clean" data-jp="すっきり爽やか">Refreshing &amp; Clean</b><span data-en="A crisp, clean finish" data-jp="クリアで澄んだ美しい後味">A crisp, clean finish</span></div>
       </div>
     </div>
   </div>
   <figure class="origin-media reveal" data-d="2">
     <img class="branch-photo" src="assets/origin-crop.png" alt="Mastiha resin weeping from the bark of the tree" loading="lazy" />
-    <figcaption class="media-cap"><span class="big">5,000</span><span data-en="Years of harvest" data-jp="採取の歴史">Years of harvest</span></figcaption>
+    <figcaption class="media-cap"><span class="big">5,000</span><span data-en="Years of human use" data-jp="人類が愛した採取の歴史">Years of human use</span></figcaption>
   </figure>
 </section>
 
 <div class="marquee">
   <div class="marquee-track" id="marquee">
-    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">森</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
-    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">森</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
+    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">静寂</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
+    <span class="gr">μαστίχα</span><span>·</span><span class="jp">木の涙</span><span>·</span><span>CHIOS ISLAND</span><span>·</span><span class="gr">δάκρυα του δέντρου</span><span>·</span><span class="jp">静寂</span><span>·</span><span>TEARS OF THE TREE</span><span>·</span>
   </div>
 </div>
-
-<section id="ritual" class="ritual">
-  <div class="tag reveal" style="justify-content:center" data-en="Chapter II — The Ritual" data-jp="第二章 — 作法">Chapter II — The Ritual</div>
-  <h2 class="h2 reveal" data-d="1" data-en="Not a drink. &lt;em&gt;A pause.&lt;/em&gt;" data-jp="飲み物ではない。&#10;&lt;em&gt;ひと呼吸である。&lt;/em&gt;">Not a drink. <em>A pause.</em></h2>
-  <p class="body reveal" data-d="2"
-     data-en="MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention."
-     data-jp="MASTRYは“その後”のためにある——熱のあと、一日のあと、喧噪のあと。冷たく供され、ただ注意だけを求める。">MASTRY is built for the moment after — after the heat, after the day, after the noise. Served cold, it asks for nothing but attention.</p>
-  <div class="steps">
-    <div class="step reveal" data-d="1">
-      <div class="no">01</div>
-      <h3 data-en="Chill" data-jp="冷やす">Chill</h3>
-      <div class="jpsm">六度</div>
-      <p data-en="Serve at 6–8°C. Cold tempers the resin and lets the forest rise slowly, never sharp." data-jp="6〜8℃で供する。冷たさが樹脂をなだめ、森の香りをゆっくりと、決して鋭くなく立ち上らせる。">Serve at 6–8°C. Cold tempers the resin and lets the forest rise slowly, never sharp.</p>
-    </div>
-    <div class="step reveal" data-d="2">
-      <div class="no">02</div>
-      <h3 data-en="Open" data-jp="開く">Open</h3>
-      <div class="jpsm">一滴</div>
-      <p data-en="The first note is woody and clean — the tree. Then citrus, then a long mineral finish that lingers like breath." data-jp="最初の香りは木のように清らか——樹。つぎに柑橘、そして長くミネラルの余韻が、呼吸のように残る。">The first note is woody and clean — the tree. Then citrus, then a long mineral finish that lingers like breath.</p>
-    </div>
-    <div class="step reveal" data-d="3">
-      <div class="no">03</div>
-      <h3 data-en="Arrive" data-jp="整う">Arrive</h3>
-      <div class="jpsm">ととのい</div>
-      <p data-en="Drink slowly. This is ととのい — the quiet equilibrium the Japanese chase, and the calm the Aegean has always known." data-jp="ゆっくりと飲む。これがととのい——日本人が追い求める静かな均衡であり、エーゲ海が古来知っていた安らぎである。">Drink slowly. This is ととのい — the quiet equilibrium the Japanese chase, and the calm the Aegean has always known.</p>
-    </div>
-  </div>
-</section>
 
 <section id="expressions">
   <div class="exp-head">
     <div>
-      <div class="tag reveal" data-en="Chapter III — The Expression" data-jp="第三章 — 純">Chapter III — The Expression</div>
-      <h2 class="h2 reveal" data-d="1" data-en="Simply,&lt;br&gt;&lt;em&gt;pure.&lt;/em&gt;" data-jp="ただ、&lt;br&gt;&lt;em&gt;純。&lt;/em&gt;">Simply,<br><em>pure.</em></h2>
+      <div class="tag reveal" data-en="Chapter III — The Expression" data-jp="第三章 — ピュア">Chapter III — The Expression</div>
+      <h2 class="h2 reveal" data-d="1" data-en="Simply,&lt;br&gt;&lt;em&gt;pure.&lt;/em&gt;" data-jp="何も、&lt;br&gt;&lt;em&gt;足さない。&lt;/em&gt;">Simply,<br><em>pure.</em></h2>
     </div>
     <p class="body reveal" data-d="2" style="margin-bottom:.4rem"
        data-en="Nothing added. Mastiha and water, lightly bound by bubbles — as the island intended."
-       data-jp="何も加えない。マスティハと水、わずかな泡だけ——島のままに。">Nothing added. Mastiha and water, lightly bound by bubbles — as the island intended.</p>
+       data-jp="何も加えない。マスティハと水、わずかな泡だけ——島が育んだ、そのままの姿で。">Nothing added. Mastiha and water, lightly bound by bubbles — as the island intended.</p>
   </div>
   <div class="skus" style="display:flex;justify-content:center">
-    <article class="sku no-img reveal" data-d="1" style="--c:rgba(37,99,235,.30);--cb:#2563eb;flex:0 0 420px;max-width:92vw" data-cursor>
-      <svg class="bottle" style="color:#2563eb" viewBox="0 0 160 460"><use href="#bottle"/></svg>
-      <div class="glyph">純</div>
-      <div class="idx" data-en="Mastiha × Japanese spring water" data-jp="マスティハ × 日本の湧水">Mastiha × Japanese spring water</div>
-      <h3 data-en="Pure" data-jp="純">Pure</h3>
-      <div class="romaji" data-en="As the island intended" data-jp="島のままに">As the island intended</div>
-      <p data-en="Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree." data-jp="何も加えない。マスティハと水、わずかな泡だけ。すでに樹を知る者のための一杯。">Nothing added. Mastiha and water, lightly bound by bubbles. The purist's pour — for those who already know the tree.</p>
-      <div class="spec"><span><b>100</b> ppm</span><span><b>4.0</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
+    <article class="sku photo-card reveal" data-d="1" style="--c:rgba(37,99,235,.30);--cb:#2563eb;flex:0 0 440px;max-width:92vw" data-cursor>
+      <img class="sku-photo" src="assets/pure-bottle.png" alt="MASTRY Pure — sparkling water with mastiha bottle" loading="lazy" />
+      <div class="sku-body">
+        <div class="idx" data-en="Mastiha × Japanese spring water" data-jp="マスティハ × 日本の湧水">Mastiha × Japanese spring water</div>
+        <h3 data-en="Pure" data-jp="ピュア">Pure</h3>
+        <div class="romaji" data-en="As the island intended" data-jp="島の恵みのままに">As the island intended</div>
+        <p data-en="Nothing added. Mastiha and water, lightly bound by bubbles — a clear, quiet first taste for anyone meeting the tree for the first time." data-jp="何も加えない。マスティハと水を、わずかな泡でそっと結ぶ。この樹にはじめて出会う人へ贈る、澄んで静かな最初の一杯。">Nothing added. Mastiha and water, lightly bound by bubbles — a clear, quiet first taste for anyone meeting the tree for the first time.</p>
+        <div class="spec"><span><b>100</b> ppm</span><span><b>4.0</b> GV</span><span><b>0</b> <span data-en="sugar" data-jp="糖類">sugar</span></span></div>
+      </div>
     </article>
   </div>
 </section>
@@ -890,26 +900,26 @@ body.jp .feat span{font-family:var(--mincho)}
 <section id="craft" class="craft">
   <figure class="craft-media reveal" data-d="2" style="order:2">
     <div class="resin-blob"></div>
-    <img class="craft-photo" src="assets/bottles.png" alt="MASTRY sparkling water bottles in an olive grove" loading="lazy" />
+    <img class="craft-photo" src="assets/craft-amalfi.jpg" alt="Two MASTRY bottles and a glass with lime and ice on a table at golden hour, overlooking the coast" loading="lazy" />
   </figure>
   <div style="order:1">
     <div class="tag reveal" data-en="Chapter IV — Craft" data-jp="第四章 — 製法">Chapter IV — Craft</div>
-    <h2 class="h2 reveal" data-d="1" data-en="Rare by&lt;br&gt;&lt;em&gt;nature.&lt;/em&gt;" data-jp="稀少は、&lt;br&gt;&lt;em&gt;自然のままに。&lt;/em&gt;">Rare by<br><em>nature.</em></h2>
+    <h2 class="h2 reveal" data-d="1" data-en="Rare by&lt;br&gt;&lt;em&gt;nature.&lt;/em&gt;" data-jp="希少な恵みは、&lt;br&gt;&lt;em&gt;自然のままに。&lt;/em&gt;">Rare by<br><em>nature.</em></h2>
     <p class="body reveal" data-d="2"
-       data-en="A single kilogram of mastiha oil takes a season of hand-scored bark to gather — and it is so concentrated that one kilogram perfumes thirty thousand bottles. We add nothing the island didn't: no sugar, no sweetener, no preservative. Only resin, water, and air."
-       data-jp="マスティハ精油わずか1キロのために、ひと夏、手作業で樹皮を傷つけ続ける。そしてその精油はあまりに濃く、1キロで三万本を香らせる。島が加えなかったものは、私たちも加えない——砂糖も、甘味料も、保存料も。あるのは樹脂と、水と、空気だけ。">A single kilogram of mastiha oil takes a season of hand-scored bark to gather — and it is so concentrated that one kilogram perfumes thirty thousand bottles. We add nothing the island didn't: no sugar, no sweetener, no preservative. Only resin, water, and air.</p>
+       data-en="A single kilogram of mastiha oil takes a season of hand-scored bark to gather — so concentrated that one kilogram scents thirty thousand bottles. Its character is intense; Japan's soft spring water is what carries it. Low in minerals, the water rounds the resin's edge and lets it open gently, never sharp. We add nothing else: no sugar, no sweetener, no preservative. Only resin, water, and air."
+       data-jp="マスティハ精油わずか1キロのために、ひと夏をかけて、手作業で樹皮を傷つけ続ける。その香りは濃く、強い——それを優しく運ぶのが、日本の軟水だ。ミネラルの少ないやわらかな水が樹脂の角をまろやかにほどき、尖らせることなく、ゆっくりと香りを開かせる。ほかには何も加えない——砂糖も、甘味料も、保存料も。あるのは樹脂と、水と、空気だけ。">A single kilogram of mastiha oil takes a season of hand-scored bark to gather — so concentrated that one kilogram scents thirty thousand bottles. Its character is intense; Japan's soft spring water is what carries it. Low in minerals, the water rounds the resin's edge and lets it open gently, never sharp. We add nothing else: no sugar, no sweetener, no preservative. Only resin, water, and air.</p>
     <div class="stats reveal" data-d="3">
       <div class="stat"><div class="v"><em>1</em></div><div class="l" data-en="Island on earth where it grows" data-jp="育つ島は地球にひとつ">Island on earth where it grows</div></div>
       <div class="stat"><div class="v">100<em>ppm</em></div><div class="l" data-en="Pure essential oil per bottle" data-jp="一本あたりの純精油">Pure essential oil per bottle</div></div>
       <div class="stat"><div class="v">0<em>g</em></div><div class="l" data-en="Sugar · sweetener · preservative" data-jp="砂糖・甘味料・保存料">Sugar · sweetener · preservative</div></div>
-      <div class="stat"><div class="v">30<em>k</em></div><div class="l" data-en="Bottles from a single kilogram" data-jp="1キロから生まれる本数">Bottles from a single kilogram</div></div>
+      <div class="stat"><div class="v">30,000</div><div class="l" data-en="Bottles from a single kilogram" data-jp="1キロの精油から生まれる本数">Bottles from a single kilogram</div></div>
     </div>
   </div>
 </section>
 
 <section class="where">
   <div class="tag reveal" style="justify-content:center" data-en="Chapter V — Found" data-jp="第五章 — 出会う場所">Chapter V — Found</div>
-  <h2 class="h2 reveal" data-d="1" data-en="Where the &lt;em&gt;quiet&lt;/em&gt;&lt;br&gt;people gather." data-jp="静かな人々の、&lt;br&gt;&lt;em&gt;集う場所。&lt;/em&gt;">Where the <em>quiet</em><br>people gather.</h2>
+  <h2 class="h2 reveal" data-d="1" data-en="Where the &lt;em&gt;quiet&lt;/em&gt;&lt;br&gt;people gather." data-jp="心静かな人々が、&lt;br&gt;&lt;em&gt;集う場所。&lt;/em&gt;">Where the <em>quiet</em><br>people gather.</h2>
   <div class="places">
     <div class="place reveal" data-d="1" data-cursor>
       <img class="ph" src="assets/venue-sauna.png" style="object-position:78% center" alt="MASTRY in a premium sauna" loading="lazy" />
@@ -931,15 +941,15 @@ body.jp .feat span{font-family:var(--mincho)}
 
 <section id="cta" class="cta">
   <div class="tag reveal" style="justify-content:center" data-en="Begin" data-jp="始まり">Begin</div>
-  <h2 class="h2 reveal" data-d="1" data-en="Be among the first&lt;br&gt;to taste the &lt;em&gt;tears.&lt;/em&gt;" data-jp="いちばん最初に、&lt;br&gt;&lt;em&gt;涙を味わう。&lt;/em&gt;">Be among the first<br>to taste the <em>tears.</em></h2>
-  <p class="lede reveal" data-d="2" data-en="Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual." data-jp="ファウンディング・メンバーには、最初のリリース、ヒオス島の起源を描いた映像、そして開幕の儀式へのご招待を。">Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual.</p>
+  <h2 class="h2 reveal" data-d="1" data-en="Be among the first&lt;br&gt;to taste the &lt;em&gt;tears.&lt;/em&gt;" data-jp="誰よりも先に、&lt;br&gt;&lt;em&gt;この神秘の一滴を。&lt;/em&gt;">Be among the first<br>to taste the <em>tears.</em></h2>
+  <p class="lede reveal" data-d="2" data-en="Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual." data-jp="ファウンディング・メンバーには、最初のリリース、ヒオス島の起源を描いた映像、そして開幕の儀式へのご招待をご用意しております。">Founding members receive the first release, the origin film from Chios, and an invitation to the opening ritual.</p>
   <form class="signup reveal" id="signupForm" data-d="3" onsubmit="return false">
     <input type="email" placeholder="your@email.com" aria-label="email" required />
     <button type="submit" data-cursor data-en="Join" data-jp="登録">Join</button>
   </form>
   <div class="signup-done" id="signupDone" hidden>
     <svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span data-en="Thank you — you're on the list. We'll send you the first release." data-jp="ご登録ありがとうございます。最初のリリースにてご案内いたします。">Thank you — you're on the list. We'll send you the first release.</span>
+    <span data-en="Thank you — you're on the list. We'll send you the first release." data-jp="ご登録ありがとうございます。最初のリリースの際にご案内いたします。">Thank you — you're on the list. We'll send you the first release.</span>
   </div>
 </section>
 
@@ -959,14 +969,14 @@ body.jp .feat span{font-family:var(--mincho)}
     </div>
     <nav class="f-cols" aria-label="Footer">
       <div class="f-col">
-        <h4 data-en="Explore" data-jp="探る">Explore</h4>
+        <h4 data-en="Explore" data-jp="知る">Explore</h4>
+        <a href="#ritual" data-en="Stillness" data-jp="静寂">Stillness</a>
         <a href="#origin" data-en="Origin" data-jp="起源">Origin</a>
-        <a href="#ritual" data-en="Ritual" data-jp="作法">Ritual</a>
-        <a href="#expressions" data-en="Expressions" data-jp="三種">Expressions</a>
+        <a href="#expressions" data-en="Expressions" data-jp="ピュア">Expressions</a>
         <a href="#craft" data-en="Craft" data-jp="製法">Craft</a>
       </div>
       <div class="f-col">
-        <h4 data-en="Company" data-jp="会社">Company</h4>
+        <h4 data-en="Company" data-jp="企業情報">Company</h4>
         <a href="#" data-en="About us" data-jp="私たちについて">About us</a>
         <a href="#" data-en="Sustainability" data-jp="サステナビリティ">Sustainability</a>
         <a href="#" data-en="Press &amp; media" data-jp="プレス">Press &amp; media</a>
@@ -994,30 +1004,28 @@ body.jp .feat span{font-family:var(--mincho)}
       <dt data-en="Operated by" data-jp="運営会社">Operated by</dt>
       <dd>MASTRY株式会社 — MASTRY Inc.</dd>
       <dt data-en="Address" data-jp="所在地">Address</dt>
-      <dd class="ph"
-          data-en="［ Head office address — e.g. 1-2-3 Jingumae, Shibuya-ku, Tokyo 150-0001 ］"
-          data-jp="［ 本社所在地を入力 — 例：〒150-0001 東京都渋谷区神宮前1-2-3 ］">［ Head office address — e.g. 1-2-3 Jingumae, Shibuya-ku, Tokyo 150-0001 ］</dd>
+      <dd data-en="2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan"
+          data-jp="〒227-0036 神奈川県横浜市青葉区奈良町2762-121">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</dd>
       <dt data-en="Representative" data-jp="代表者">Representative</dt>
-      <dd class="ph" data-en="［ Representative name ］" data-jp="［ 代表者名を入力 ］">［ Representative name ］</dd>
+      <dd data-en="Taisei Tomita" data-jp="冨田 大世">Taisei Tomita</dd>
       <dt data-en="Founded" data-jp="設立">Founded</dt>
       <dd>2026</dd>
       <dt data-en="Business" data-jp="事業内容">Business</dt>
       <dd data-en="Development, production &amp; sale of premium beverages" data-jp="清涼飲料水の企画・製造・販売">Development, production &amp; sale of premium beverages</dd>
       <dt data-en="Contact" data-jp="お問い合わせ">Contact</dt>
-      <dd><a href="mailto:hello@morisparkling.jp">hello@morisparkling.jp</a> &nbsp;<span class="ph" data-en="［ verify address ］" data-jp="［ 要差し替え ］">［ verify address ］</span></dd>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
     </dl>
     <span class="seal"><svg viewBox="0 0 100 100"><use href="#hanko"/></svg></span>
     <svg class="mason-mark" viewBox="0 0 100 100" aria-hidden="true">
       <path d="M24 44 L50 86 L76 44" fill="none" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="50" cy="17" r="3" fill="#1d4ed8"/>
       <path d="M50 19 L27 72 M50 19 L73 72" fill="none" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
-      <text x="50" y="60" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="27" fill="#1d4ed8">G</text>
     </svg>
   </div>
 
   <div class="f-bottom">
     <div>© MMXXVI MASTRY株式会社 · TEARS OF THE TREE</div>
-    <div>μαστίχα × 湧水 · CHIOS 38.37°N 26.14°E · GREECE × JAPAN</div>
+    <div>μαστίχα × 湧水 · CHIOS 38.25°N 25.98°E · GREECE × JAPAN</div>
   </div>
 </footer>
 
