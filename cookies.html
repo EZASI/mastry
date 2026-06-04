@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cookie Policy / Cookieポリシー · MASTRY</title>
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
+<style>
+:root{--ink:#fff;--bone:#0c1a2b;--bone-dim:#5a6b80;--resin:#2563eb;--resin-deep:#174394;--line:rgba(37,99,235,.16);
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;--mono:'Space Mono',monospace;--mincho:'Zen Old Mincho',serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(115% 80% at 50% -10%,rgba(37,99,235,.06),transparent 60%)}
+a{color:var(--resin);text-decoration:none}a:hover{text-decoration:underline}
+.lang-jp{display:none}body.jp .lang-en{display:none}body.jp .lang-jp{display:block}
+body.jp .doc-title,body.jp .doc-lede,body.jp h2,body.jp .doc-body,body.jp .doc dd,body.jp .doc dt{font-family:var(--mincho)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+padding:1.1rem clamp(1.2rem,5vw,3.5rem);background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:.32em;padding-left:.32em;color:var(--bone)}
+.logo .mono{width:26px;height:26px;color:var(--resin)}.logo .mono svg{display:block;width:100%;height:100%}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-home{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.lang{display:flex;gap:.4rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.lang button{background:none;border:none;cursor:pointer;color:var(--bone-dim);font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:.2rem}
+.lang button.active{color:var(--resin)}.lang .sep{color:var(--bone-dim);opacity:.4}
+/* doc */
+.doc{max-width:760px;margin:0 auto;padding:clamp(3rem,7vw,6rem) clamp(1.3rem,5vw,2rem) 4rem}
+.doc-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.05;letter-spacing:.01em;margin-bottom:1.1rem}
+.doc-lede{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--bone-dim);line-height:1.5;margin-bottom:2.6rem;font-weight:300}
+.doc-sec{margin:2.2rem 0;border-top:1px solid var(--line);padding-top:1.8rem}
+.doc-sec h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:.8rem;letter-spacing:.01em}
+.doc-sec p,.doc-body p{color:#26354a;font-size:1rem;line-height:1.85;margin:.6rem 0}
+.doc-sec ul,.doc-sec ol{margin:.6rem 0 .6rem 1.2rem;color:#26354a}.doc-sec li{margin:.4rem 0;line-height:1.7}
+.doc-sec dl{display:grid;grid-template-columns:max-content 1fr;gap:.7rem 1.6rem;margin:.6rem 0}
+.doc-sec dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);padding-top:.2rem}
+body.jp .doc-sec dt{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.82rem}
+.doc-sec dd{color:#26354a;font-size:.96rem;line-height:1.7}
+.faq-q{font-weight:500;color:var(--bone)}
+/* contact form */
+.cform{display:flex;flex-direction:column;gap:1.1rem;margin-top:1rem;max-width:620px}
+.cform label{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:.4rem;display:block}
+body.jp .cform label{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.8rem}
+.cform select,.cform input,.cform textarea{width:100%;font-family:var(--sans);font-size:1rem;color:var(--bone);
+background:#fff;border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;outline:none;transition:border-color .3s}
+.cform select:focus,.cform input:focus,.cform textarea:focus{border-color:var(--resin)}
+.cform textarea{min-height:150px;resize:vertical}
+.cbtn{align-self:flex-start;background:var(--resin);color:#fff;border:none;border-radius:40px;padding:.95rem 2.4rem;
+font-family:var(--sans);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background .3s}
+.cbtn:hover{background:#3b7bff}
+.cnote{font-size:.86rem;color:var(--bone-dim);margin-top:.4rem}
+/* footer */
+footer{border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) clamp(1.3rem,5vw,3.5rem) 2.4rem;background:#f7f9fc}
+.f-cols{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem 1.4rem}
+@media(max-width:600px){.f-cols{grid-template-columns:1fr 1fr;gap:2.2rem 1.2rem}}
+.f-col h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.9rem}
+body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.1em}
+.f-col a,.f-col span{display:block;font-size:.85rem;color:var(--bone-dim);margin:.55rem 0;line-height:1.4}
+body.jp .f-col a,body.jp .f-col span{font-family:var(--mincho)}
+.f-col a:hover{color:var(--bone)}
+.f-company{max-width:1100px;margin:2.6rem auto 0;padding-top:2rem;border-top:1px solid var(--line);
+display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.6rem;font-size:.8rem;color:var(--bone-dim)}
+.f-company dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding-top:.15rem}
+body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
+.f-company dd{color:#3a4a60;margin:0}
+.f-bottom{max-width:1100px;margin:1.8rem auto 0;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--bone-dim)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html"><span class="mono"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="50" cy="23" r="2.6" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg></span>MASTRY</a>
+  <div class="nav-right">
+    <a class="nav-home" href="index.html"><span class="lang-en">← Home</span><span class="lang-jp">← ホーム</span></a>
+    <div class="lang"><button id="enBtn">EN</button><span class="sep">/</span><button id="jpBtn">日本</button></div>
+  </div>
+</nav>
+<main class="doc">
+<div class="lang lang-en">
+  <h1 class="doc-title">Cookie Policy</h1>
+  <p class="doc-lede">This policy explains what cookies are, how MASTRY LLC uses them on mastry.jp, and the choices available to you. We keep our use of cookies deliberately minimal — your privacy matters as much to us as the purity of our water.</p>
+
+  <section class="doc-sec">
+    <h2>What Are Cookies?</h2>
+    <p>Cookies are small text files that a website saves on your browser or device when you visit. They help the site remember certain information — for example, a language preference — so you don't have to set it again on your next visit. Cookies do not contain executable code and cannot access other files on your device.</p>
+    <p>Similar technologies such as local storage (data saved directly by your browser rather than sent to a server) serve comparable purposes and are also covered by this policy.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>How mastry.jp Uses Cookies</h2>
+    <p>Our website is currently in a pre-launch, founding-member signup phase. We use only <strong>strictly necessary</strong> storage at this time:</p>
+    <dl>
+      <dt>Language preference</dt>
+      <dd>Saved in your browser's local storage so the site displays in the language you last chose (English or Japanese). This data never leaves your device and expires when you clear your browser storage.</dd>
+    </dl>
+    <p>We do <strong>not</strong> currently use analytics cookies, advertising cookies, social-media tracking pixels, or any third-party tracking tools. No personal information is collected through cookies.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Cookie Categories We May Use in the Future</h2>
+    <p>As mastry.jp grows, we may wish to add analytics or functionality cookies to understand how visitors use the site and to improve it. We will only do so after:</p>
+    <ul>
+      <li>Updating this Cookie Policy to describe the new cookies clearly.</li>
+      <li>Displaying a consent notice on the site and asking for your explicit permission before setting any non-essential cookies.</li>
+    </ul>
+    <p>You will always be able to accept, decline, or adjust your preferences through the consent notice at that time.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Managing and Disabling Cookies</h2>
+    <p>You can control cookies through your browser settings at any time. Most browsers allow you to view, block, or delete cookies. Below are direct links to the settings guides for common browsers:</p>
+    <ul>
+      <li><strong>Google Chrome</strong> — Settings &gt; Privacy and security &gt; Cookies and other site data</li>
+      <li><strong>Safari (macOS / iOS)</strong> — Settings &gt; Safari &gt; Privacy &amp; Security</li>
+      <li><strong>Mozilla Firefox</strong> — Settings &gt; Privacy &amp; Security &gt; Cookies and Site Data</li>
+      <li><strong>Microsoft Edge</strong> — Settings &gt; Cookies and site permissions &gt; Manage and delete cookies</li>
+    </ul>
+    <p>Because we currently use only browser-local storage for language preference, blocking cookies has no impact on the core functionality of mastry.jp. If you clear your browser storage, the language selector will simply reset to its default on your next visit.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Third-Party Services</h2>
+    <p>At present, mastry.jp does not embed any third-party services (such as Google Analytics, Meta Pixel, or social sharing widgets) that set their own cookies. Should this change, we will list each third-party service, its purpose, and a link to its own privacy and cookie policy in an updated version of this page.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Cookie Policy from time to time — for example, when we add new features to the site or when regulations change. The "Last updated" date at the bottom of this page will always reflect the most recent revision. We encourage you to check back periodically.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Contact Us</h2>
+    <p>If you have any questions about how we use cookies or this policy, please reach out:</p>
+    <dl>
+      <dt>Company</dt>
+      <dd>MASTRY LLC (MASTRY合同会社)</dd>
+      <dt>Representative</dt>
+      <dd>Toshiyo Tomita</dd>
+      <dt>Address</dt>
+      <dd>2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</dd>
+      <dt>Email</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+    </dl>
+  </section>
+
+  <p><small>Last updated: June 2026</small></p>
+</div>
+
+<div class="lang lang-jp">
+  <h1 class="doc-title">Cookieポリシー</h1>
+  <p class="doc-lede">本ポリシーは、Cookieとは何か、MASTRY合同会社がmastry.jpでどのように使用しているか、そしてお客様が行使できる選択肢について説明するものです。私たちは、水の純粋さと同様に、お客様のプライバシーを大切にしており、Cookieの使用を意図的に最小限に抑えています。</p>
+
+  <section class="doc-sec">
+    <h2>Cookieとは</h2>
+    <p>Cookieとは、ウェブサイトにアクセスした際にブラウザやデバイスに保存される小さなテキストファイルです。たとえば言語設定などの情報を記憶することで、次回アクセス時に再設定する手間を省きます。Cookieには実行可能なコードは含まれておらず、デバイス上の他のファイルにアクセスすることもありません。</p>
+    <p>ローカルストレージ（サーバーに送信されず、ブラウザ内に直接保存されるデータ）など類似の技術も同様の目的で使用されており、本ポリシーの対象となります。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>mastry.jpにおけるCookieの使用</h2>
+    <p>当ウェブサイトは現在、創設メンバー向けメール登録のプレローンチ段階にあります。現時点では、<strong>厳密に必要な</strong>ストレージのみを使用しています。</p>
+    <dl>
+      <dt>言語設定</dt>
+      <dd>お客様が最後に選択した言語（英語または日本語）でサイトを表示するため、ブラウザのローカルストレージに保存されます。このデータはお客様のデバイス外に送信されることはなく、ブラウザのストレージをクリアすると削除されます。</dd>
+    </dl>
+    <p>現在、分析Cookie・広告Cookie・ソーシャルメディアのトラッキングピクセル・その他サードパーティのトラッキングツールは一切使用していません。Cookieを通じた個人情報の収集も行っていません。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>今後使用する可能性のあるCookieの種類</h2>
+    <p>mastry.jpの成長にともない、サイトの利用状況を把握・改善するために分析Cookie や機能Cookieを追加する場合があります。その際は必ず以下の手順を踏みます。</p>
+    <ul>
+      <li>本Cookieポリシーを更新し、新たなCookieの内容を明確に説明します。</li>
+      <li>サイト上に同意通知を表示し、非必須Cookieの設定前にお客様の明示的な許可を求めます。</li>
+    </ul>
+    <p>その際も、同意通知を通じてCookieの許可・拒否・設定変更をいつでも行うことができます。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Cookieの管理・無効化</h2>
+    <p>Cookieはいつでもブラウザの設定から管理できます。ほとんどのブラウザでは、Cookieの表示・ブロック・削除が可能です。主なブラウザの設定方法は以下のとおりです。</p>
+    <ul>
+      <li><strong>Google Chrome</strong> — 設定 &gt; プライバシーとセキュリティ &gt; Cookieと他のサイトデータ</li>
+      <li><strong>Safari（macOS / iOS）</strong> — 設定 &gt; Safari &gt; プライバシーとセキュリティ</li>
+      <li><strong>Mozilla Firefox</strong> — 設定 &gt; プライバシーとセキュリティ &gt; Cookieとサイトデータ</li>
+      <li><strong>Microsoft Edge</strong> — 設定 &gt; Cookieとサイトのアクセス許可 &gt; Cookieの管理と削除</li>
+    </ul>
+    <p>現在、mastry.jpが使用しているのは言語設定のためのブラウザローカルストレージのみであるため、Cookieをブロックしてもサイトの主要機能には影響しません。ブラウザのストレージをクリアした場合、次回アクセス時に言語セレクターがデフォルトにリセットされます。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>サードパーティサービスについて</h2>
+    <p>現在、mastry.jpはGoogle Analytics・Meta Pixel・ソーシャル共有ウィジェットなど、独自のCookieを設定するサードパーティサービスを一切組み込んでいません。変更が生じた場合は、各サービス名・目的・そのプライバシー・Cookieポリシーへのリンクを、本ページの最新版に記載します。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>本ポリシーの変更</h2>
+    <p>サイトへの新機能追加や法令の改正などに応じて、本Cookieポリシーを改訂することがあります。改訂の都度、ページ下部の「最終更新日」を更新します。定期的にご確認いただくことをお勧めします。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>お問い合わせ</h2>
+    <p>Cookieの使用方法や本ポリシーに関するご質問は、下記までお気軽にご連絡ください。</p>
+    <dl>
+      <dt>販売事業者</dt>
+      <dd>MASTRY合同会社</dd>
+      <dt>代表者</dt>
+      <dd>冨田大世</dd>
+      <dt>所在地</dt>
+      <dd>〒227-0036 神奈川県横浜市青葉区奈良町2762-121</dd>
+      <dt>メールアドレス</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+    </dl>
+  </section>
+
+  <p><small>最終更新日：2026年6月</small></p>
+</div>
+</main>
+<footer>
+  <div class="f-cols">
+    <div class="f-col"><h4><span class="lang-en">Explore</span><span class="lang-jp">探る</span></h4>
+      <a href="index.html#ritual" data-en="Stillness" data-jp="静寂"><span class="lang-en">Stillness</span><span class="lang-jp">静寂</span></a><a href="index.html#origin" data-en="Origin" data-jp="起源"><span class="lang-en">Origin</span><span class="lang-jp">起源</span></a><a href="index.html#expressions" data-en="Pure" data-jp="ピュア"><span class="lang-en">Pure</span><span class="lang-jp">ピュア</span></a><a href="index.html#craft" data-en="Craft" data-jp="製法"><span class="lang-en">Craft</span><span class="lang-jp">製法</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Company</span><span class="lang-jp">会社</span></h4>
+      <a href="about.html" data-en="About us" data-jp="私たちについて"><span class="lang-en">About us</span><span class="lang-jp">私たちについて</span></a><a href="sustainability.html" data-en="Sustainability" data-jp="サステナビリティ"><span class="lang-en">Sustainability</span><span class="lang-jp">サステナビリティ</span></a><a href="press.html" data-en="Press &amp; media" data-jp="プレス"><span class="lang-en">Press &amp; media</span><span class="lang-jp">プレス</span></a><span><span class="lang-en">Stockists (soon)</span><span class="lang-jp">取扱店（準備中）</span></span></div>
+    <div class="f-col"><h4><span class="lang-en">Support</span><span class="lang-jp">サポート</span></h4>
+      <a href="contact.html" data-en="Contact" data-jp="お問い合わせ"><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></a><a href="faq.html" data-en="FAQ" data-jp="よくある質問"><span class="lang-en">FAQ</span><span class="lang-jp">よくある質問</span></a><a href="contact.html#wholesale" data-en="Wholesale" data-jp="業務用・卸"><span class="lang-en">Wholesale</span><span class="lang-jp">業務用・卸</span></a><a href="shipping.html" data-en="Shipping &amp; returns" data-jp="配送・返品"><span class="lang-en">Shipping &amp; returns</span><span class="lang-jp">配送・返品</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Legal</span><span class="lang-jp">法務</span></h4>
+      <a href="privacy.html" data-en="Privacy policy" data-jp="プライバシーポリシー"><span class="lang-en">Privacy policy</span><span class="lang-jp">プライバシーポリシー</span></a><a href="terms.html" data-en="Terms of service" data-jp="利用規約"><span class="lang-en">Terms of service</span><span class="lang-jp">利用規約</span></a><a href="tokushoho.html" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記"><span class="lang-en">Commercial transactions</span><span class="lang-jp">特定商取引法に基づく表記</span></a><a href="cookies.html" data-en="Cookie policy" data-jp="Cookieポリシー"><span class="lang-en">Cookie policy</span><span class="lang-jp">Cookieポリシー</span></a></div>
+  </div>
+  <dl class="f-company">
+    <dt><span class="lang-en">Operated by</span><span class="lang-jp">運営会社</span></dt><dd>MASTRY合同会社 — MASTRY LLC</dd>
+    <dt><span class="lang-en">Representative</span><span class="lang-jp">代表者</span></dt><dd>冨田大世</dd>
+    <dt><span class="lang-en">Address</span><span class="lang-jp">所在地</span></dt><dd><span class="lang-en">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</span><span class="lang-jp">〒227-0036 神奈川県横浜市青葉区奈良町2762-121</span></dd>
+    <dt><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></dt><dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+  </dl>
+  <div class="f-bottom">© MMXXVI MASTRY合同会社 · TEARS OF THE TREE · μαστίχα × 湧水</div>
+</footer>
+<script>
+(function(){
+  var EN=document.getElementById('enBtn'),JP=document.getElementById('jpBtn');
+  function set(l,save){document.documentElement.lang=(l==='jp')?'ja':'en';document.body.classList.toggle('jp',l==='jp');
+    if(EN)EN.classList.toggle('active',l!=='jp');if(JP)JP.classList.toggle('active',l==='jp');
+    if(save){try{localStorage.setItem('mastry-lang',l)}catch(e){}}}
+  if(EN)EN.onclick=function(){set('en',true)};if(JP)JP.onclick=function(){set('jp',true)};
+  var s=null;try{s=localStorage.getItem('mastry-lang')}catch(e){}
+  if(s){set(s,false);return;}
+  set((navigator.language||'').toLowerCase().indexOf('ja')===0?'jp':'en',false);
+  fetch('https://ipapi.co/country/').then(function(r){return r.text()}).then(function(cc){
+    try{if(localStorage.getItem('mastry-lang'))return;}catch(e){}
+    set((cc||'').trim().toUpperCase()==='JP'?'jp':'en',false);
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>

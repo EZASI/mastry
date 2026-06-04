@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>特定商取引法に基づく表記 · MASTRY</title>
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
+<style>
+:root{--ink:#fff;--bone:#0c1a2b;--bone-dim:#5a6b80;--resin:#2563eb;--resin-deep:#174394;--line:rgba(37,99,235,.16);
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;--mono:'Space Mono',monospace;--mincho:'Zen Old Mincho',serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(115% 80% at 50% -10%,rgba(37,99,235,.06),transparent 60%)}
+a{color:var(--resin);text-decoration:none}a:hover{text-decoration:underline}
+.lang-jp{display:none}body.jp .lang-en{display:none}body.jp .lang-jp{display:block}
+body.jp .doc-title,body.jp .doc-lede,body.jp h2,body.jp .doc-body,body.jp .doc dd,body.jp .doc dt{font-family:var(--mincho)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+padding:1.1rem clamp(1.2rem,5vw,3.5rem);background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:.32em;padding-left:.32em;color:var(--bone)}
+.logo .mono{width:26px;height:26px;color:var(--resin)}.logo .mono svg{display:block;width:100%;height:100%}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-home{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.lang{display:flex;gap:.4rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.lang button{background:none;border:none;cursor:pointer;color:var(--bone-dim);font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:.2rem}
+.lang button.active{color:var(--resin)}.lang .sep{color:var(--bone-dim);opacity:.4}
+/* doc */
+.doc{max-width:760px;margin:0 auto;padding:clamp(3rem,7vw,6rem) clamp(1.3rem,5vw,2rem) 4rem}
+.doc-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.05;letter-spacing:.01em;margin-bottom:1.1rem}
+.doc-lede{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--bone-dim);line-height:1.5;margin-bottom:2.6rem;font-weight:300}
+.doc-sec{margin:2.2rem 0;border-top:1px solid var(--line);padding-top:1.8rem}
+.doc-sec h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:.8rem;letter-spacing:.01em}
+.doc-sec p,.doc-body p{color:#26354a;font-size:1rem;line-height:1.85;margin:.6rem 0}
+.doc-sec ul,.doc-sec ol{margin:.6rem 0 .6rem 1.2rem;color:#26354a}.doc-sec li{margin:.4rem 0;line-height:1.7}
+.doc-sec dl{display:grid;grid-template-columns:max-content 1fr;gap:.7rem 1.6rem;margin:.6rem 0}
+.doc-sec dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);padding-top:.2rem}
+body.jp .doc-sec dt{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.82rem}
+.doc-sec dd{color:#26354a;font-size:.96rem;line-height:1.7}
+.faq-q{font-weight:500;color:var(--bone)}
+/* contact form */
+.cform{display:flex;flex-direction:column;gap:1.1rem;margin-top:1rem;max-width:620px}
+.cform label{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:.4rem;display:block}
+body.jp .cform label{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.8rem}
+.cform select,.cform input,.cform textarea{width:100%;font-family:var(--sans);font-size:1rem;color:var(--bone);
+background:#fff;border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;outline:none;transition:border-color .3s}
+.cform select:focus,.cform input:focus,.cform textarea:focus{border-color:var(--resin)}
+.cform textarea{min-height:150px;resize:vertical}
+.cbtn{align-self:flex-start;background:var(--resin);color:#fff;border:none;border-radius:40px;padding:.95rem 2.4rem;
+font-family:var(--sans);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background .3s}
+.cbtn:hover{background:#3b7bff}
+.cnote{font-size:.86rem;color:var(--bone-dim);margin-top:.4rem}
+/* footer */
+footer{border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) clamp(1.3rem,5vw,3.5rem) 2.4rem;background:#f7f9fc}
+.f-cols{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem 1.4rem}
+@media(max-width:600px){.f-cols{grid-template-columns:1fr 1fr;gap:2.2rem 1.2rem}}
+.f-col h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.9rem}
+body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.1em}
+.f-col a,.f-col span{display:block;font-size:.85rem;color:var(--bone-dim);margin:.55rem 0;line-height:1.4}
+body.jp .f-col a,body.jp .f-col span{font-family:var(--mincho)}
+.f-col a:hover{color:var(--bone)}
+.f-company{max-width:1100px;margin:2.6rem auto 0;padding-top:2rem;border-top:1px solid var(--line);
+display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.6rem;font-size:.8rem;color:var(--bone-dim)}
+.f-company dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding-top:.15rem}
+body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
+.f-company dd{color:#3a4a60;margin:0}
+.f-bottom{max-width:1100px;margin:1.8rem auto 0;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--bone-dim)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html"><span class="mono"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="50" cy="23" r="2.6" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg></span>MASTRY</a>
+  <div class="nav-right">
+    <a class="nav-home" href="index.html"><span class="lang-en">← Home</span><span class="lang-jp">← ホーム</span></a>
+    <div class="lang"><button id="enBtn">EN</button><span class="sep">/</span><button id="jpBtn">日本</button></div>
+  </div>
+</nav>
+<main class="doc">
+<div class="lang lang-en">
+  <h1 class="doc-title">Notation Based on the Act on Specified Commercial Transactions</h1>
+  <p class="doc-lede">
+    MASTRY is currently in its founding-member pre-launch phase. Online sales are not yet open.
+    The business operator information below is provided now in accordance with Japanese law;
+    full pricing, shipping, and returns terms will be published in full at the time of sales launch.
+  </p>
+
+  <section class="doc-sec">
+    <h2>Business Operator Information</h2>
+    <dl>
+      <dt>Seller</dt>
+      <dd>MASTRY合同会社 (MASTRY LLC)</dd>
+
+      <dt>Representative</dt>
+      <dd>Taisei Tomita (冨田大世)</dd>
+
+      <dt>Address</dt>
+      <dd>
+        2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan<br>
+        〒227-0036 神奈川県横浜市青葉区奈良町2762-121
+      </dd>
+
+      <dt>Email</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+
+      <dt>Telephone</dt>
+      <dd>
+        Not published on this page. In accordance with the Act on Specified Commercial
+        Transactions, our telephone number will be disclosed without undue delay upon
+        written or email request from a consumer. Please send your request to
+        <a href="mailto:hello@mastry.jp">hello@mastry.jp</a>.
+      </dd>
+
+      <dt>Website</dt>
+      <dd><a href="https://mastry.jp">https://mastry.jp</a></dd>
+    </dl>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Product Pricing</h2>
+    <p>
+      MASTRY is not yet available for purchase. Prices (inclusive of Japanese consumption tax)
+      will be clearly displayed on each product page at the time of sales launch.
+      To be notified at launch, please join our founding-member list via the sign-up form on our website.
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Additional Costs</h2>
+    <p>
+      The following costs may apply in addition to the product price and will be
+      disclosed in full at launch:
+    </p>
+    <ul>
+      <li>Domestic and international shipping fees (calculated at checkout based on destination and quantity)</li>
+      <li>Consumption tax (currently 10%) — included in all displayed prices</li>
+      <li>Any payment-processing or bank-transfer fees charged by the customer's financial institution</li>
+    </ul>
+    <p>No catalog or membership fees are charged.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Payment Method</h2>
+    <p>
+      Accepted payment methods will be confirmed and displayed at launch.
+      We expect to support major credit cards and other common online payment options.
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Payment Timing</h2>
+    <p>
+      Payment timing will be confirmed at launch and displayed clearly before
+      the customer completes checkout. For card payments, the charge is
+      generally processed at the time of order confirmation.
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Delivery Timing</h2>
+    <p>
+      Estimated delivery lead times will be published at launch. MASTRY ships
+      from Japan; international delivery timeframes will be shown per destination country
+      at checkout. Domestic (Japan) delivery is expected within a few business days
+      after order confirmation.
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Returns and Exchanges</h2>
+    <p>
+      Full return and exchange terms (including the statutory right to cancel under
+      relevant consumer protection law) will be published at the time of sales launch.
+      In principle, we accept returns in the following circumstances:
+    </p>
+    <ul>
+      <li>The product is defective, damaged in transit, or materially different from what was ordered.</li>
+      <li>An incorrect item was delivered.</li>
+    </ul>
+    <p>
+      Customer-initiated returns for reasons of personal preference or ordering error
+      may be subject to conditions and restocking or return-shipping costs.
+      We will finalize and publish all terms before accepting any orders.
+    </p>
+    <p>
+      For any pre-launch enquiries about future terms, please contact us at
+      <a href="mailto:hello@mastry.jp">hello@mastry.jp</a>.
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>Press, Wholesale &amp; Partnerships</h2>
+    <p>
+      Media and press enquiries, wholesale or distribution enquiries, and partnership
+      requests should be submitted via the relevant category on our
+      <a href="https://mastry.jp/contact">contact form</a>.
+    </p>
+  </section>
+</div>
+
+<div class="lang lang-jp">
+  <h1 class="doc-title">特定商取引法に基づく表記</h1>
+  <p class="doc-lede">
+    MASTRYは現在、創設メンバー向けのプレローンチ段階にあり、オンライン販売は準備中です。
+    法令の規定に基づき、事業者情報を下記のとおり開示いたします。
+    販売価格・送料・返品に関する詳細な条件は、販売開始時に本ページにて正式に表示いたします。
+  </p>
+
+  <section class="doc-sec">
+    <h2>事業者情報</h2>
+    <dl>
+      <dt>販売事業者</dt>
+      <dd>MASTRY合同会社</dd>
+
+      <dt>運営統括責任者</dt>
+      <dd>冨田大世</dd>
+
+      <dt>所在地</dt>
+      <dd>〒227-0036 神奈川県横浜市青葉区奈良町2762-121</dd>
+
+      <dt>メールアドレス</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+
+      <dt>電話番号</dt>
+      <dd>
+        本ページへの掲載は省略しております。特定商取引法の規定に基づき、
+        消費者の方から請求があった場合には遅滞なく開示いたします。
+        ご請求は <a href="mailto:hello@mastry.jp">hello@mastry.jp</a> 宛てにメールにてお送りください。
+      </dd>
+
+      <dt>ウェブサイト</dt>
+      <dd><a href="https://mastry.jp">https://mastry.jp</a></dd>
+    </dl>
+  </section>
+
+  <section class="doc-sec">
+    <h2>販売価格</h2>
+    <p>
+      現在、MASTRYの販売は開始しておりません。販売開始後は、消費税を含む価格を
+      各商品ページに明示いたします。
+      販売開始のご案内を希望される方は、サイト上の創設メンバー登録フォームよりメールアドレスをご登録ください。
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>商品代金以外の必要料金</h2>
+    <p>商品代金のほか、以下の費用が発生する場合があります。詳細は販売開始時に表示いたします。</p>
+    <ul>
+      <li>送料（国内・海外いずれも、お届け先・数量に応じてご注文時に表示）</li>
+      <li>消費税（現行10%）— 表示価格はすべて税込みです</li>
+      <li>お客様のご利用金融機関が定める振込手数料等（クレジットカード以外の決済手段を選択された場合）</li>
+    </ul>
+    <p>カタログ代や会員費は一切いただいておりません。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>支払方法</h2>
+    <p>
+      利用可能な決済手段は販売開始時に確定・表示いたします。
+      主要クレジットカード等、一般的なオンライン決済への対応を予定しております。
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>支払時期</h2>
+    <p>
+      支払時期は販売開始時にご注文確定画面にて明示いたします。
+      クレジットカード決済の場合は、原則としてご注文確定時にお支払いが確定します。
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>引渡時期</h2>
+    <p>
+      商品のお届け目安は販売開始時に表示いたします。
+      国内へのお届けは、ご注文確定後、数営業日以内を予定しております。
+      海外へのお届けについては、お届け先の国・地域ごとの目安をご注文時にご案内いたします。
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>返品・交換について（返品特約）</h2>
+    <p>
+      返品・交換に関する詳細な条件（消費者保護法令上のキャンセル権を含む）は、
+      販売開始時に正式に定めて表示いたします。
+      原則として、以下の場合に返品・交換をお受けいたします。
+    </p>
+    <ul>
+      <li>商品に欠陥または配送中の破損が認められる場合</li>
+      <li>ご注文内容と異なる商品が届いた場合</li>
+    </ul>
+    <p>
+      お客様のご都合（お好みや注文誤りなど）による返品については、
+      条件・費用負担（返送料等）が生じる場合があります。
+      いずれの場合も、受注開始前に全条件を確定し、ご注文前に明示いたします。
+    </p>
+    <p>
+      販売開始前のお問い合わせは <a href="mailto:hello@mastry.jp">hello@mastry.jp</a> までご連絡ください。
+    </p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>取材・卸売・パートナーシップについて</h2>
+    <p>
+      メディア・取材に関するお問い合わせ、卸売・流通に関するご相談、
+      その他パートナーシップのご提案は、サイト内の
+      <a href="https://mastry.jp/contact">お問い合わせフォーム</a>より
+      該当の種別をお選びのうえご送信ください。
+    </p>
+  </section>
+</div>
+</main>
+<footer>
+  <div class="f-cols">
+    <div class="f-col"><h4><span class="lang-en">Explore</span><span class="lang-jp">探る</span></h4>
+      <a href="index.html#ritual" data-en="Stillness" data-jp="静寂"><span class="lang-en">Stillness</span><span class="lang-jp">静寂</span></a><a href="index.html#origin" data-en="Origin" data-jp="起源"><span class="lang-en">Origin</span><span class="lang-jp">起源</span></a><a href="index.html#expressions" data-en="Pure" data-jp="ピュア"><span class="lang-en">Pure</span><span class="lang-jp">ピュア</span></a><a href="index.html#craft" data-en="Craft" data-jp="製法"><span class="lang-en">Craft</span><span class="lang-jp">製法</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Company</span><span class="lang-jp">会社</span></h4>
+      <a href="about.html" data-en="About us" data-jp="私たちについて"><span class="lang-en">About us</span><span class="lang-jp">私たちについて</span></a><a href="sustainability.html" data-en="Sustainability" data-jp="サステナビリティ"><span class="lang-en">Sustainability</span><span class="lang-jp">サステナビリティ</span></a><a href="press.html" data-en="Press &amp; media" data-jp="プレス"><span class="lang-en">Press &amp; media</span><span class="lang-jp">プレス</span></a><span><span class="lang-en">Stockists (soon)</span><span class="lang-jp">取扱店（準備中）</span></span></div>
+    <div class="f-col"><h4><span class="lang-en">Support</span><span class="lang-jp">サポート</span></h4>
+      <a href="contact.html" data-en="Contact" data-jp="お問い合わせ"><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></a><a href="faq.html" data-en="FAQ" data-jp="よくある質問"><span class="lang-en">FAQ</span><span class="lang-jp">よくある質問</span></a><a href="contact.html#wholesale" data-en="Wholesale" data-jp="業務用・卸"><span class="lang-en">Wholesale</span><span class="lang-jp">業務用・卸</span></a><a href="shipping.html" data-en="Shipping &amp; returns" data-jp="配送・返品"><span class="lang-en">Shipping &amp; returns</span><span class="lang-jp">配送・返品</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Legal</span><span class="lang-jp">法務</span></h4>
+      <a href="privacy.html" data-en="Privacy policy" data-jp="プライバシーポリシー"><span class="lang-en">Privacy policy</span><span class="lang-jp">プライバシーポリシー</span></a><a href="terms.html" data-en="Terms of service" data-jp="利用規約"><span class="lang-en">Terms of service</span><span class="lang-jp">利用規約</span></a><a href="tokushoho.html" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記"><span class="lang-en">Commercial transactions</span><span class="lang-jp">特定商取引法に基づく表記</span></a><a href="cookies.html" data-en="Cookie policy" data-jp="Cookieポリシー"><span class="lang-en">Cookie policy</span><span class="lang-jp">Cookieポリシー</span></a></div>
+  </div>
+  <dl class="f-company">
+    <dt><span class="lang-en">Operated by</span><span class="lang-jp">運営会社</span></dt><dd>MASTRY合同会社 — MASTRY LLC</dd>
+    <dt><span class="lang-en">Representative</span><span class="lang-jp">代表者</span></dt><dd>冨田大世</dd>
+    <dt><span class="lang-en">Address</span><span class="lang-jp">所在地</span></dt><dd><span class="lang-en">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</span><span class="lang-jp">〒227-0036 神奈川県横浜市青葉区奈良町2762-121</span></dd>
+    <dt><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></dt><dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+  </dl>
+  <div class="f-bottom">© MMXXVI MASTRY合同会社 · TEARS OF THE TREE · μαστίχα × 湧水</div>
+</footer>
+<script>
+(function(){
+  var EN=document.getElementById('enBtn'),JP=document.getElementById('jpBtn');
+  function set(l,save){document.documentElement.lang=(l==='jp')?'ja':'en';document.body.classList.toggle('jp',l==='jp');
+    if(EN)EN.classList.toggle('active',l!=='jp');if(JP)JP.classList.toggle('active',l==='jp');
+    if(save){try{localStorage.setItem('mastry-lang',l)}catch(e){}}}
+  if(EN)EN.onclick=function(){set('en',true)};if(JP)JP.onclick=function(){set('jp',true)};
+  var s=null;try{s=localStorage.getItem('mastry-lang')}catch(e){}
+  if(s){set(s,false);return;}
+  set((navigator.language||'').toLowerCase().indexOf('ja')===0?'jp':'en',false);
+  fetch('https://ipapi.co/country/').then(function(r){return r.text()}).then(function(cc){
+    try{if(localStorage.getItem('mastry-lang'))return;}catch(e){}
+    set((cc||'').trim().toUpperCase()==='JP'?'jp':'en',false);
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>

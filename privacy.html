@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy / プライバシーポリシー · MASTRY</title>
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
+<style>
+:root{--ink:#fff;--bone:#0c1a2b;--bone-dim:#5a6b80;--resin:#2563eb;--resin-deep:#174394;--line:rgba(37,99,235,.16);
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;--mono:'Space Mono',monospace;--mincho:'Zen Old Mincho',serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(115% 80% at 50% -10%,rgba(37,99,235,.06),transparent 60%)}
+a{color:var(--resin);text-decoration:none}a:hover{text-decoration:underline}
+.lang-jp{display:none}body.jp .lang-en{display:none}body.jp .lang-jp{display:block}
+body.jp .doc-title,body.jp .doc-lede,body.jp h2,body.jp .doc-body,body.jp .doc dd,body.jp .doc dt{font-family:var(--mincho)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+padding:1.1rem clamp(1.2rem,5vw,3.5rem);background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:.32em;padding-left:.32em;color:var(--bone)}
+.logo .mono{width:26px;height:26px;color:var(--resin)}.logo .mono svg{display:block;width:100%;height:100%}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-home{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.lang{display:flex;gap:.4rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.lang button{background:none;border:none;cursor:pointer;color:var(--bone-dim);font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:.2rem}
+.lang button.active{color:var(--resin)}.lang .sep{color:var(--bone-dim);opacity:.4}
+/* doc */
+.doc{max-width:760px;margin:0 auto;padding:clamp(3rem,7vw,6rem) clamp(1.3rem,5vw,2rem) 4rem}
+.doc-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.05;letter-spacing:.01em;margin-bottom:1.1rem}
+.doc-lede{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--bone-dim);line-height:1.5;margin-bottom:2.6rem;font-weight:300}
+.doc-sec{margin:2.2rem 0;border-top:1px solid var(--line);padding-top:1.8rem}
+.doc-sec h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:.8rem;letter-spacing:.01em}
+.doc-sec p,.doc-body p{color:#26354a;font-size:1rem;line-height:1.85;margin:.6rem 0}
+.doc-sec ul,.doc-sec ol{margin:.6rem 0 .6rem 1.2rem;color:#26354a}.doc-sec li{margin:.4rem 0;line-height:1.7}
+.doc-sec dl{display:grid;grid-template-columns:max-content 1fr;gap:.7rem 1.6rem;margin:.6rem 0}
+.doc-sec dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);padding-top:.2rem}
+body.jp .doc-sec dt{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.82rem}
+.doc-sec dd{color:#26354a;font-size:.96rem;line-height:1.7}
+.faq-q{font-weight:500;color:var(--bone)}
+/* contact form */
+.cform{display:flex;flex-direction:column;gap:1.1rem;margin-top:1rem;max-width:620px}
+.cform label{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:.4rem;display:block}
+body.jp .cform label{font-family:var(--mincho);text-transform:none;letter-spacing:.04em;font-size:.8rem}
+.cform select,.cform input,.cform textarea{width:100%;font-family:var(--sans);font-size:1rem;color:var(--bone);
+background:#fff;border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;outline:none;transition:border-color .3s}
+.cform select:focus,.cform input:focus,.cform textarea:focus{border-color:var(--resin)}
+.cform textarea{min-height:150px;resize:vertical}
+.cbtn{align-self:flex-start;background:var(--resin);color:#fff;border:none;border-radius:40px;padding:.95rem 2.4rem;
+font-family:var(--sans);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background .3s}
+.cbtn:hover{background:#3b7bff}
+.cnote{font-size:.86rem;color:var(--bone-dim);margin-top:.4rem}
+/* footer */
+footer{border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) clamp(1.3rem,5vw,3.5rem) 2.4rem;background:#f7f9fc}
+.f-cols{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem 1.4rem}
+@media(max-width:600px){.f-cols{grid-template-columns:1fr 1fr;gap:2.2rem 1.2rem}}
+.f-col h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.9rem}
+body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.1em}
+.f-col a,.f-col span{display:block;font-size:.85rem;color:var(--bone-dim);margin:.55rem 0;line-height:1.4}
+body.jp .f-col a,body.jp .f-col span{font-family:var(--mincho)}
+.f-col a:hover{color:var(--bone)}
+.f-company{max-width:1100px;margin:2.6rem auto 0;padding-top:2rem;border-top:1px solid var(--line);
+display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.6rem;font-size:.8rem;color:var(--bone-dim)}
+.f-company dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding-top:.15rem}
+body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
+.f-company dd{color:#3a4a60;margin:0}
+.f-bottom{max-width:1100px;margin:1.8rem auto 0;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--bone-dim)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html"><span class="mono"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="50" cy="23" r="2.6" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg></span>MASTRY</a>
+  <div class="nav-right">
+    <a class="nav-home" href="index.html"><span class="lang-en">← Home</span><span class="lang-jp">← ホーム</span></a>
+    <div class="lang"><button id="enBtn">EN</button><span class="sep">/</span><button id="jpBtn">日本</button></div>
+  </div>
+</nav>
+<main class="doc">
+<div class="lang lang-en">
+  <h1 class="doc-title">Privacy Policy</h1>
+  <p class="doc-lede">MASTRY LLC ("MASTRY," "we," "our") respects the privacy of every person who visits mastry.jp or contacts us. This policy explains what personal information we collect, how we use it, and your rights under Japan's Act on the Protection of Personal Information (個人情報保護法, "APPI").</p>
+
+  <section class="doc-sec">
+    <h2>1. Business Operator Information</h2>
+    <dl>
+      <dt>Company</dt>
+      <dd>MASTRY LLC (MASTRY合同会社)</dd>
+      <dt>Representative</dt>
+      <dd>Taisei Tomita (冨田大世)</dd>
+      <dt>Address</dt>
+      <dd>2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</dd>
+      <dt>Contact</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+      <dt>Website</dt>
+      <dd>https://mastry.jp</dd>
+    </dl>
+  </section>
+
+  <section class="doc-sec">
+    <h2>2. Personal Information We Collect</h2>
+    <p>We collect personal information only to the extent necessary for the purposes described below. The information we may collect includes:</p>
+    <ul>
+      <li><strong>Founding-member email signup:</strong> email address, and optionally your name.</li>
+      <li><strong>Contact / inquiry form:</strong> name, email address, inquiry type, and the content of your message.</li>
+      <li><strong>Access logs:</strong> browser type, IP address, pages visited, and date/time of access, collected automatically by our web server and analytics tools.</li>
+      <li><strong>Cookies and similar technologies:</strong> see Section 8 below.</li>
+    </ul>
+    <p>We do not collect payment card numbers, government-issued ID numbers, or other sensitive categories of personal information on this website.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>3. Purposes of Use</h2>
+    <p>We use the personal information we collect for the following specific purposes:</p>
+    <ul>
+      <li>To send founding-member updates, product launch announcements, and exclusive pre-order information to subscribers who opt in.</li>
+      <li>To respond to inquiries submitted through our contact form.</li>
+      <li>To improve the content, usability, and performance of mastry.jp.</li>
+      <li>To detect and prevent unauthorised access, fraud, or abuse of our services.</li>
+      <li>To comply with applicable laws and regulations.</li>
+    </ul>
+    <p>We will not use your personal information beyond the stated purposes without your prior consent, except as permitted by applicable law.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>4. Provision to Third Parties</h2>
+    <p>MASTRY does not sell, rent, or otherwise provide your personal information to third parties, except in the following circumstances:</p>
+    <ul>
+      <li>You have given your explicit prior consent.</li>
+      <li>Provision is required by law or a valid order from a governmental authority.</li>
+      <li>It is necessary to protect a person's life, health, or property and obtaining consent is impracticable.</li>
+      <li>It is necessary for improving public health or promoting the sound growth of children and obtaining consent is impracticable.</li>
+      <li>A national agency, local government body, or their contractor requires the information to perform public duties prescribed by law, and obtaining your consent would impede that performance.</li>
+    </ul>
+  </section>
+
+  <section class="doc-sec">
+    <h2>5. Outsourcing (Entrustment)</h2>
+    <p>We may engage third-party service providers (such as email delivery platforms, web hosting providers, and analytics services) and share personal information with them to the extent necessary to perform those services on our behalf. We select providers carefully and require, by contract, that they handle personal information with equivalent security standards to our own and do not use it for any purpose other than the services contracted.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>6. Safety Management Measures</h2>
+    <p>We implement appropriate technical and organisational measures to protect personal information against unauthorised access, loss, destruction, falsification, and leakage. These measures include:</p>
+    <ul>
+      <li>Encryption of data in transit via TLS/HTTPS.</li>
+      <li>Access controls that restrict data to personnel with a legitimate need to process it.</li>
+      <li>Regular review of security practices and vendor assessments.</li>
+    </ul>
+    <p>In the event of a personal data breach that is likely to result in harm to data subjects, we will take prompt remedial action and make the required notifications under APPI.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>7. Disclosure, Correction, and Deletion Requests</h2>
+    <p>Under the APPI, you have the right to request:</p>
+    <ul>
+      <li><strong>Notification of purpose of use</strong> — to be informed of the specific purposes for which we hold your personal information.</li>
+      <li><strong>Disclosure</strong> — to receive a copy of the personal information we hold about you.</li>
+      <li><strong>Correction / addition / deletion</strong> — if any information is factually incorrect or no longer needed.</li>
+      <li><strong>Suspension of use or erasure</strong> — where the information is being processed in violation of APPI.</li>
+      <li><strong>Suspension of third-party provision</strong> — where third-party provision violates APPI.</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at <a href="mailto:hello@mastry.jp">hello@mastry.jp</a> with sufficient information to verify your identity. We will respond within a reasonable period and, in any case, within the timeframe required by law. Please note that in certain circumstances defined by APPI we may be unable to fulfil a request, in which case we will explain the reason.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>8. Cookies and Analytics</h2>
+    <p>mastry.jp uses cookies and similar browser-based technologies to operate the site and understand how visitors use it. We may use Google Analytics or equivalent tools to collect aggregated, anonymised data (such as pages visited, session duration, and referral source). This data is processed in accordance with the analytics provider's own privacy policy and does not, by itself, identify you personally.</p>
+    <p>You can disable cookies through your browser settings. Doing so may limit some functionality of the site. You may also opt out of Google Analytics data collection by installing the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer" target="_blank">Google Analytics Opt-out Browser Add-on</a>.</p>
+    <p>We do not use cookies to serve targeted advertising on mastry.jp.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>9. Contact (Inquiries and Complaints)</h2>
+    <p>For any questions, concerns, or complaints regarding our handling of personal information, please contact us at:</p>
+    <dl>
+      <dt>Email</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+      <dt>Postal address</dt>
+      <dd>MASTRY合同会社 個人情報担当<br>〒227-0036 神奈川県横浜市青葉区奈良町2762-121</dd>
+    </dl>
+    <p>We aim to acknowledge your inquiry within 5 business days and to resolve it as promptly as practicable.</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>10. Revision of This Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, the services we offer, or applicable law. When we make a material change, we will post the revised policy on mastry.jp with the updated effective date. We encourage you to review this page periodically. Your continued use of this website after a revision constitutes your acceptance of the updated policy.</p>
+    <p><strong>Effective date:</strong> June 2026</p>
+  </section>
+</div>
+
+<div class="lang lang-jp">
+  <h1 class="doc-title">プライバシーポリシー</h1>
+  <p class="doc-lede">MASTRY合同会社（以下「当社」）は、mastry.jp をご覧いただくすべての方のプライバシーを大切にします。本ポリシーでは、当社が収集する個人情報の種類・利用目的・管理方法、ならびに個人情報保護法（以下「法」）に基づく皆さまの権利について説明します。</p>
+
+  <section class="doc-sec">
+    <h2>1. 事業者情報</h2>
+    <dl>
+      <dt>販売事業者</dt>
+      <dd>MASTRY合同会社</dd>
+      <dt>代表者</dt>
+      <dd>冨田大世</dd>
+      <dt>所在地</dt>
+      <dd>〒227-0036 神奈川県横浜市青葉区奈良町2762-121</dd>
+      <dt>連絡先</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+      <dt>ウェブサイト</dt>
+      <dd>https://mastry.jp</dd>
+    </dl>
+  </section>
+
+  <section class="doc-sec">
+    <h2>2. 取得する個人情報</h2>
+    <p>当社は、以下に定める利用目的の範囲内で、必要最小限の個人情報のみを取得します。</p>
+    <ul>
+      <li><strong>創設メンバー登録（メールアドレス登録）：</strong>メールアドレス、および任意でお名前。</li>
+      <li><strong>お問い合わせフォーム：</strong>お名前、メールアドレス、お問い合わせ種別、お問い合わせ内容。</li>
+      <li><strong>アクセスログ：</strong>ブラウザ種別、IPアドレス、閲覧ページ、アクセス日時。サーバーおよびアクセス解析ツールにより自動的に収集されます。</li>
+      <li><strong>Cookie等：</strong>詳細は第8条をご参照ください。</li>
+    </ul>
+    <p>当社は、クレジットカード番号・マイナンバーその他の要配慮個人情報を本ウェブサイト上では収集していません。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>3. 利用目的</h2>
+    <p>取得した個人情報は、以下の目的に限り利用します。</p>
+    <ul>
+      <li>ご登録いただいた創設メンバーへの、製品発売情報・先行予約案内・限定情報のメール配信。</li>
+      <li>お問い合わせへの回答および対応。</li>
+      <li>mastry.jp のコンテンツ改善・利便性向上・障害対応。</li>
+      <li>不正アクセス・不正利用の検知および防止。</li>
+      <li>法令または行政機関の指示に基づく対応。</li>
+    </ul>
+    <p>上記の利用目的の範囲を超えて個人情報を利用する場合は、事前にご本人の同意を得ます。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>4. 第三者への提供</h2>
+    <p>当社は、以下の場合を除き、取得した個人情報を第三者に提供・販売・貸与しません。</p>
+    <ul>
+      <li>ご本人の事前の同意がある場合。</li>
+      <li>法令に基づく場合、または行政機関・裁判所等からの適法な要請がある場合。</li>
+      <li>人の生命・身体または財産の保護のために必要であり、ご本人の同意取得が困難な場合。</li>
+      <li>公衆衛生の向上または児童の健全育成のために必要であり、ご本人の同意取得が困難な場合。</li>
+      <li>国または地方公共団体が法令所定の事務を遂行するために必要で、同意取得がその遂行を妨げるおそれがある場合。</li>
+    </ul>
+  </section>
+
+  <section class="doc-sec">
+    <h2>5. 業務委託</h2>
+    <p>当社は、メール配信・ウェブホスティング・アクセス解析等の業務を外部事業者に委託する場合があります。委託にあたっては、必要な範囲でのみ個人情報を提供し、当社と同等水準の安全管理措置を講じることを委託契約で義務付け、適切に監督します。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>6. 安全管理措置</h2>
+    <p>当社は、個人情報への不正アクセス・紛失・破壊・改ざん・漏えい等を防止するため、以下の技術的・組織的安全管理措置を講じます。</p>
+    <ul>
+      <li>TLS/HTTPS による通信の暗号化。</li>
+      <li>業務上必要な担当者に限定したアクセス権限の設定。</li>
+      <li>安全管理措置・委託先の定期的な見直し。</li>
+    </ul>
+    <p>個人データ漏えい等の事態が発生した場合は、速やかに被害の拡大防止措置を講じるとともに、法令が定める報告・通知を行います。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>7. 開示・訂正・削除等のご請求</h2>
+    <p>法に基づき、ご本人は当社が保有する個人情報について以下の請求ができます。</p>
+    <ul>
+      <li><strong>利用目的の通知</strong> — 当社が保有する個人情報の利用目的の通知。</li>
+      <li><strong>開示</strong> — 当社が保有する個人情報の開示（電磁的記録による提供を含む）。</li>
+      <li><strong>訂正・追加・削除</strong> — 内容が事実でない場合または保有が不要となった場合。</li>
+      <li><strong>利用停止・消去</strong> — 法に違反した取扱いが行われている場合。</li>
+      <li><strong>第三者提供の停止</strong> — 法に違反した第三者提供が行われている場合。</li>
+    </ul>
+    <p>ご請求は、<a href="mailto:hello@mastry.jp">hello@mastry.jp</a> まで、ご本人確認に必要な情報を添えてご連絡ください。当社は、本人確認後、法令に定める期間内に対応します。なお、法令の定める除外事由に該当する場合はご要望に応じられないことがあり、その際は理由をご説明します。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>8. Cookie およびアクセス解析</h2>
+    <p>mastry.jp では、サイトの適切な運営とご利用状況の把握を目的として Cookie 等を使用しています。Google Analytics 等のアクセス解析ツールを利用する場合があり、ページ閲覧数・滞在時間・参照元等の統計情報が収集されます。これらの情報は、それ単体でご本人を特定するものではなく、解析ツール提供事業者のプライバシーポリシーに従って処理されます。</p>
+    <p>Cookie の受け入れはブラウザの設定で無効にできますが、一部機能が利用できなくなる場合があります。Google Analytics については、<a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer" target="_blank">Google アナリティクス オプトアウト アドオン</a>のインストールによってデータ収集を停止できます。</p>
+    <p>当社は、mastry.jp において行動ターゲティング広告を目的とした Cookie は使用していません。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>9. お問い合わせ窓口（苦情・相談を含む）</h2>
+    <p>個人情報の取扱いに関するご質問・ご要望・苦情等は、以下の窓口までお申し付けください。</p>
+    <dl>
+      <dt>メールアドレス</dt>
+      <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+      <dt>郵送先</dt>
+      <dd>MASTRY合同会社 個人情報担当<br>〒227-0036 神奈川県横浜市青葉区奈良町2762-121</dd>
+    </dl>
+    <p>お問い合わせは営業日5日以内に受付確認をご連絡し、できる限り迅速に対応します。</p>
+  </section>
+
+  <section class="doc-sec">
+    <h2>10. 本ポリシーの改定</h2>
+    <p>当社は、法令の改正・事業内容の変更・その他必要に応じて、本ポリシーを改定することがあります。重要な変更が生じた場合は、改定版を mastry.jp に掲載し、改定日を明記します。定期的なご確認をお勧めします。改定後も継続してサイトをご利用いただいた場合は、改定後のポリシーに同意いただいたものとみなします。</p>
+    <p><strong>制定日：</strong>2026年6月</p>
+  </section>
+</div>
+</main>
+<footer>
+  <div class="f-cols">
+    <div class="f-col"><h4><span class="lang-en">Explore</span><span class="lang-jp">探る</span></h4>
+      <a href="index.html#ritual" data-en="Stillness" data-jp="静寂"><span class="lang-en">Stillness</span><span class="lang-jp">静寂</span></a><a href="index.html#origin" data-en="Origin" data-jp="起源"><span class="lang-en">Origin</span><span class="lang-jp">起源</span></a><a href="index.html#expressions" data-en="Pure" data-jp="ピュア"><span class="lang-en">Pure</span><span class="lang-jp">ピュア</span></a><a href="index.html#craft" data-en="Craft" data-jp="製法"><span class="lang-en">Craft</span><span class="lang-jp">製法</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Company</span><span class="lang-jp">会社</span></h4>
+      <a href="about.html" data-en="About us" data-jp="私たちについて"><span class="lang-en">About us</span><span class="lang-jp">私たちについて</span></a><a href="sustainability.html" data-en="Sustainability" data-jp="サステナビリティ"><span class="lang-en">Sustainability</span><span class="lang-jp">サステナビリティ</span></a><a href="press.html" data-en="Press &amp; media" data-jp="プレス"><span class="lang-en">Press &amp; media</span><span class="lang-jp">プレス</span></a><span><span class="lang-en">Stockists (soon)</span><span class="lang-jp">取扱店（準備中）</span></span></div>
+    <div class="f-col"><h4><span class="lang-en">Support</span><span class="lang-jp">サポート</span></h4>
+      <a href="contact.html" data-en="Contact" data-jp="お問い合わせ"><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></a><a href="faq.html" data-en="FAQ" data-jp="よくある質問"><span class="lang-en">FAQ</span><span class="lang-jp">よくある質問</span></a><a href="contact.html#wholesale" data-en="Wholesale" data-jp="業務用・卸"><span class="lang-en">Wholesale</span><span class="lang-jp">業務用・卸</span></a><a href="shipping.html" data-en="Shipping &amp; returns" data-jp="配送・返品"><span class="lang-en">Shipping &amp; returns</span><span class="lang-jp">配送・返品</span></a></div>
+    <div class="f-col"><h4><span class="lang-en">Legal</span><span class="lang-jp">法務</span></h4>
+      <a href="privacy.html" data-en="Privacy policy" data-jp="プライバシーポリシー"><span class="lang-en">Privacy policy</span><span class="lang-jp">プライバシーポリシー</span></a><a href="terms.html" data-en="Terms of service" data-jp="利用規約"><span class="lang-en">Terms of service</span><span class="lang-jp">利用規約</span></a><a href="tokushoho.html" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記"><span class="lang-en">Commercial transactions</span><span class="lang-jp">特定商取引法に基づく表記</span></a><a href="cookies.html" data-en="Cookie policy" data-jp="Cookieポリシー"><span class="lang-en">Cookie policy</span><span class="lang-jp">Cookieポリシー</span></a></div>
+  </div>
+  <dl class="f-company">
+    <dt><span class="lang-en">Operated by</span><span class="lang-jp">運営会社</span></dt><dd>MASTRY合同会社 — MASTRY LLC</dd>
+    <dt><span class="lang-en">Representative</span><span class="lang-jp">代表者</span></dt><dd>冨田大世</dd>
+    <dt><span class="lang-en">Address</span><span class="lang-jp">所在地</span></dt><dd><span class="lang-en">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</span><span class="lang-jp">〒227-0036 神奈川県横浜市青葉区奈良町2762-121</span></dd>
+    <dt><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></dt><dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
+  </dl>
+  <div class="f-bottom">© MMXXVI MASTRY合同会社 · TEARS OF THE TREE · μαστίχα × 湧水</div>
+</footer>
+<script>
+(function(){
+  var EN=document.getElementById('enBtn'),JP=document.getElementById('jpBtn');
+  function set(l,save){document.documentElement.lang=(l==='jp')?'ja':'en';document.body.classList.toggle('jp',l==='jp');
+    if(EN)EN.classList.toggle('active',l!=='jp');if(JP)JP.classList.toggle('active',l==='jp');
+    if(save){try{localStorage.setItem('mastry-lang',l)}catch(e){}}}
+  if(EN)EN.onclick=function(){set('en',true)};if(JP)JP.onclick=function(){set('jp',true)};
+  var s=null;try{s=localStorage.getItem('mastry-lang')}catch(e){}
+  if(s){set(s,false);return;}
+  set((navigator.language||'').toLowerCase().indexOf('ja')===0?'jp':'en',false);
+  fetch('https://ipapi.co/country/').then(function(r){return r.text()}).then(function(cc){
+    try{if(localStorage.getItem('mastry-lang'))return;}catch(e){}
+    set((cc||'').trim().toUpperCase()==='JP'?'jp':'en',false);
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>

@@ -977,24 +977,24 @@ body.jp .feat span{font-family:var(--mincho)}
       </div>
       <div class="f-col">
         <h4 data-en="Company" data-jp="企業情報">Company</h4>
-        <a href="#" data-en="About us" data-jp="私たちについて">About us</a>
-        <a href="#" data-en="Sustainability" data-jp="サステナビリティ">Sustainability</a>
-        <a href="#" data-en="Press &amp; media" data-jp="プレス">Press &amp; media</a>
-        <a href="#" data-en="Stockists" data-jp="取扱店">Stockists</a>
+        <a href="about.html" data-en="About us" data-jp="私たちについて">About us</a>
+        <a href="sustainability.html" data-en="Sustainability" data-jp="サステナビリティ">Sustainability</a>
+        <a href="press.html" data-en="Press &amp; media" data-jp="プレス">Press &amp; media</a>
+        <a href="#" data-en="Stockists (soon)" data-jp="取扱店（準備中）">Stockists</a>
       </div>
       <div class="f-col">
         <h4 data-en="Support" data-jp="サポート">Support</h4>
-        <a href="#" data-en="Contact" data-jp="お問い合わせ">Contact</a>
-        <a href="#" data-en="FAQ" data-jp="よくある質問">FAQ</a>
-        <a href="#" data-en="Wholesale" data-jp="業務用・卸">Wholesale</a>
-        <a href="#" data-en="Shipping &amp; returns" data-jp="配送・返品">Shipping &amp; returns</a>
+        <a href="contact.html" data-en="Contact" data-jp="お問い合わせ">Contact</a>
+        <a href="faq.html" data-en="FAQ" data-jp="よくある質問">FAQ</a>
+        <a href="contact.html#wholesale" data-en="Wholesale" data-jp="業務用・卸">Wholesale</a>
+        <a href="shipping.html" data-en="Shipping &amp; returns" data-jp="配送・返品">Shipping &amp; returns</a>
       </div>
       <div class="f-col">
         <h4 data-en="Legal" data-jp="法務">Legal</h4>
-        <a href="#" data-en="Privacy policy" data-jp="プライバシーポリシー">Privacy policy</a>
-        <a href="#" data-en="Terms of service" data-jp="利用規約">Terms of service</a>
-        <a href="#" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記">Commercial transactions</a>
-        <a href="#" data-en="Cookie settings" data-jp="Cookie設定">Cookie settings</a>
+        <a href="privacy.html" data-en="Privacy policy" data-jp="プライバシーポリシー">Privacy policy</a>
+        <a href="terms.html" data-en="Terms of service" data-jp="利用規約">Terms of service</a>
+        <a href="tokushoho.html" data-en="Commercial transactions" data-jp="特定商取引法に基づく表記">Commercial transactions</a>
+        <a href="cookies.html" data-en="Cookie settings" data-jp="Cookie設定">Cookie settings</a>
       </div>
     </nav>
   </div>
@@ -1002,7 +1002,7 @@ body.jp .feat span{font-family:var(--mincho)}
   <div class="f-company">
     <dl>
       <dt data-en="Operated by" data-jp="運営会社">Operated by</dt>
-      <dd>MASTRY株式会社 — MASTRY Inc.</dd>
+      <dd>MASTRY合同会社 — MASTRY LLC</dd>
       <dt data-en="Address" data-jp="所在地">Address</dt>
       <dd data-en="2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan"
           data-jp="〒227-0036 神奈川県横浜市青葉区奈良町2762-121">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</dd>
@@ -1024,7 +1024,7 @@ body.jp .feat span{font-family:var(--mincho)}
   </div>
 
   <div class="f-bottom">
-    <div>© MMXXVI MASTRY株式会社 · TEARS OF THE TREE</div>
+    <div>© MMXXVI MASTRY合同会社 · TEARS OF THE TREE</div>
     <div>μαστίχα × 湧水 · CHIOS 38.25°N 25.98°E · GREECE × JAPAN</div>
   </div>
 </footer>
@@ -1049,8 +1049,14 @@ body.jp .feat span{font-family:var(--mincho)}
   }
   const enBtn=document.getElementById('enBtn'),jpBtn=document.getElementById('jpBtn');
   enBtn.onclick=()=>setLang('en'); jpBtn.onclick=()=>setLang('jp');
-  let saved='en'; try{saved=localStorage.getItem('mastry-lang')||'en'}catch(e){}
-  if(saved==='jp') setLang('jp');
+  (function(){var s=null;try{s=localStorage.getItem('mastry-lang')}catch(e){}
+    if(s){if(s==='jp')setLang('jp');return;}
+    if((navigator.language||'').toLowerCase().indexOf('ja')===0)setLang('jp');
+    fetch('https://ipapi.co/country/').then(function(r){return r.text()}).then(function(cc){
+      try{if(localStorage.getItem('mastry-lang'))return;}catch(e){}
+      if((cc||'').trim().toUpperCase()==='JP')setLang('jp');else setLang('en');
+    }).catch(function(){});
+  })();
 
   /* ---- image graceful fallback ---- */
   document.querySelectorAll('.img-wrap > img').forEach(img=>{
