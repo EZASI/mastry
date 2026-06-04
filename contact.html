@@ -135,12 +135,16 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
     var t=document.getElementById('ctype'); var topic=t.options[t.selectedIndex].text;
     var name=document.getElementById('cname').value, email=document.getElementById('cemail').value,
         co=document.getElementById('ccompany').value, msg=document.getElementById('cmsg').value;
-    if(FORMSPREE){
-      fetch(FORMSPREE,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)});
+    var W3F='__WEB3FORMS_KEY__';
+    var subj='[MASTRY お問い合わせ] '+topic;
+    if(W3F.indexOf('__')<0){
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:W3F,subject:subj,from_name:'MASTRY contact',topic:topic,name:name,email:email,company:co,message:msg,botcheck:''})})
+        .then(function(){f.outerHTML='<p class="doc-lede"><span class="lang-en">Thank you — your message has been sent.</span><span class="lang-jp">送信しました。ありがとうございます。追ってご連絡いたします。</span></p>';})
+        .catch(function(){alert('送信に失敗しました。お手数ですが hello@mastry.jp までご連絡ください。');});
+    } else {
+      var body='種別/Topic: '+topic+'\n名前/Name: '+name+'\nEmail: '+email+'\n会社/Company: '+co+'\n\n'+msg;
+      window.location.href='mailto:hello@mastry.jp?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
     }
-    var subj='[MASTRY] '+topic;
-    var body='種別/Topic: '+topic+'\n名前/Name: '+name+'\nEmail: '+email+'\n会社/Company: '+co+'\n\n'+msg;
-    window.location.href='mailto:hello@mastry.jp?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
   });
 })();
 </script>

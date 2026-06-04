@@ -1143,6 +1143,8 @@ body.jp .feat span{font-family:var(--mincho)}
       e.preventDefault();
       const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sInput.value.trim());
       if(!ok){signupForm.classList.remove('shake');void signupForm.offsetWidth;signupForm.classList.add('shake');sInput.focus();return;}
+      var W3F='__WEB3FORMS_KEY__';
+      if(W3F.indexOf('__')<0){fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:W3F,subject:'【MASTRY】ファウンディング・メンバー登録',from_name:'MASTRY founding signup',email:sInput.value.trim(),botcheck:''})}).catch(function(){});}
       signupForm.style.display='none';
       sDone.hidden=false;
       requestAnimationFrame(()=>sDone.classList.add('show'));
