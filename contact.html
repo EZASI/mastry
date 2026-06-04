@@ -135,7 +135,7 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
     var t=document.getElementById('ctype'); var topic=t.options[t.selectedIndex].text;
     var name=document.getElementById('cname').value, email=document.getElementById('cemail').value,
         co=document.getElementById('ccompany').value, msg=document.getElementById('cmsg').value;
-    var W3F='__WEB3FORMS_KEY__';
+    var W3F='e4a2680b-2894-46e8-a87d-59ca6462aca9';
     var subj='[MASTRY お問い合わせ] '+topic;
     if(W3F.indexOf('__')<0){
       fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:W3F,subject:subj,from_name:'MASTRY contact',topic:topic,name:name,email:email,company:co,message:msg,botcheck:''})})
