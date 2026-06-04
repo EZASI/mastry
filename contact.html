@@ -125,6 +125,10 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
   var f=document.getElementById('cform');
   // preselect wholesale if arrived via #wholesale
   if(location.hash==='#wholesale'){var s=document.getElementById('ctype');for(var i=0;i<s.options.length;i++){if(s.options[i].value==='wholesale')s.selectedIndex=i;}}
+  // localize <option> labels with the page language (<option> can't contain lang spans)
+  function locOpts(){var jp=document.body.classList.contains('jp');
+    document.querySelectorAll('#ctype option').forEach(function(o){var v=o.getAttribute(jp?'data-jp':'data-en');if(v)o.textContent=v;});}
+  locOpts(); new MutationObserver(locOpts).observe(document.body,{attributes:true,attributeFilter:['class']});
   var FORMSPREE=''; // optional: set to 'https://formspree.io/f/xxxx' to deliver without a mailbox
   f.addEventListener('submit',function(e){
     e.preventDefault();
