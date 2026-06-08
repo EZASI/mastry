@@ -37,7 +37,10 @@
   "#mst-send{background:" + ACCENT + ";border:none;color:#fff;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:16px}" +
   ".mst-form input{width:100%;box-sizing:border-box;border:1px solid #d8e0ee;border-radius:10px;padding:9px 11px;margin:5px 0;font-size:13px}" +
   ".mst-form button{width:100%;background:" + ACCENT + ";color:#fff;border:none;border-radius:10px;padding:10px;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:4px}" +
-  ".mst-pow{font-size:10px;color:#9aa7b8;text-align:center;padding:4px}";
+  ".mst-pow{font-size:10px;color:#9aa7b8;text-align:center;padding:4px}" +
+  "#mst-panel,#mst-panel *{cursor:auto !important}" +
+  "#mst-in{cursor:text !important}" +
+  "#mst-bubble,#mst-bubble *,.mst-chip,#mst-send,#mst-x,.mst-form button,.mst-msg a{cursor:pointer !important}";
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   // ---------- DOM ----------
@@ -177,4 +180,11 @@
   }
   bubble.onclick=function(){ panel.classList.contains("open")?panel.classList.remove("open"):open(); };
   panel.querySelector("#mst-x").onclick=function(){panel.classList.remove("open");};
+
+  // チャット操作中はサイトのカスタムカーソル(リング/ドット)を隠す（カーソルのちらつき防止）
+  function mstHideCur(h){[".cursor",".cursor-dot"].forEach(function(s){var e=document.querySelector(s);if(e)e.style.opacity=h?"0":"";});}
+  [bubble,panel].forEach(function(el){
+    el.addEventListener("mouseenter",function(){mstHideCur(true);});
+    el.addEventListener("mouseleave",function(){mstHideCur(false);});
+  });
 })();
