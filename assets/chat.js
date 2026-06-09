@@ -157,6 +157,32 @@
     };
   }
 
+  // ---------- onboarding (super simple) ----------
+  function onboard(){
+    addMsg("こんにちは！MASTRY（マストライ）です🌿\n30秒だけご案内させてください。今日はどんなご用件ですか？","bot");
+    addChips([
+      {label:"個人で飲んでみたい",fn:function(){signupLite();}},
+      {label:"お店・業務用で扱いたい",fn:function(){leadForm("業務用・卸");}},
+      {label:"サンプルが欲しい",fn:function(){leadForm("サンプル希望");}},
+      {label:"取材・コラボ",fn:function(){leadForm("取材・協業");}},
+      {label:"まず質問したい",fn:function(){handle("よくある質問");}}
+    ]);
+  }
+  function signupLite(){
+    addMsg("ありがとうございます！発売・先行案内をいちばん早くお届けします。メールアドレスだけご登録ください👇","bot");
+    var f=document.createElement("div"); f.className="mst-msg mst-bot mst-form";
+    f.innerHTML='<input id="mst-em2" placeholder="メールアドレス" type="email"/><button id="mst-sub2">先行登録する</button>';
+    body.appendChild(f); scroll();
+    f.querySelector("#mst-sub2").onclick=function(){
+      var em=f.querySelector("#mst-em2").value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){addMsg("メールアドレスをご確認ください。","bot");return;}
+      this.disabled=true; this.textContent="送信中…";
+      fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:WEB3KEY,subject:"【サイトチャット】先行登録",from_name:"MASTRYサイトチャット","種別":"先行登録(個人)","メール":em,"ページ":location.href})})
+        .then(function(r){return r.json();}).then(function(d){if(d.success){addMsg("ご登録ありがとうございます！発売の際は、いちばんにご案内します🥂","bot");}else{throw new Error();}})
+        .catch(function(){addMsg("送信に失敗しました。お手数ですが問い合わせフォームをご利用ください：\n"+CONTACT_URL,"bot");});
+    };
+  }
+
   // ---------- send ----------
   function send(){
     var t=input.value.trim(); if(!t)return; input.value="";
@@ -171,10 +197,7 @@
   function open(){
     panel.classList.add("open");
     var bd=document.getElementById("mst-badge"); if(bd)bd.style.display="none";
-    if(!greeted){greeted=true;
-      addMsg("こんにちは！MASTRY（マストライ）です🌿\nギリシャ・ヒオス島のマスティハ × 日本の湧水、糖類ゼロのプレミアム・スパークリングウォーターです。ご質問・お取扱いのご相談、お気軽にどうぞ。","bot");
-      addChips(MAIN_CHIPS);
-    }
+    if(!greeted){greeted=true; onboard();}
   }
   bubble.onclick=function(){ panel.classList.contains("open")?panel.classList.remove("open"):open(); };
   panel.querySelector("#mst-x").onclick=function(){panel.classList.remove("open");};
