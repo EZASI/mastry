@@ -72,7 +72,14 @@
     var c = document.createElement("div"); c.className = "mst-chips";
     items.forEach(function (it) {
       var b = document.createElement("div"); b.className = "mst-chip"; b.textContent = it.label;
-      b.onclick = it.fn; c.appendChild(b);
+      b.onclick = function(){
+        if(c.dataset.used) return;          // 連打・二重発火を防ぐ
+        c.dataset.used = "1";
+        addMsg(it.label, "user");           // 選んだ内容を発言として表示
+        c.remove();                          // 選択肢を消す（増殖防止）
+        it.fn();
+      };
+      c.appendChild(b);
     });
     body.appendChild(c); scroll();
   }
