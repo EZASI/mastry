@@ -80,8 +80,7 @@
     {label:"商品について", fn:function(){handle("MASTRYとは");}},
     {label:"業務用・卸の相談", fn:function(){leadForm("業務用・卸");}},
     {label:"サンプルが欲しい", fn:function(){leadForm("サンプル希望");}},
-    {label:"よくある質問", fn:function(){handle("よくある質問");}},
-    {label:"LINEで相談", fn:function(){addMsg("LINEでもご相談いただけます。友だち追加はこちら：\n"+LINE_URL,"bot");}}
+    {label:"よくある質問", fn:function(){handle("よくある質問");}}
   ];
 
   // ---------- matching ----------
@@ -116,8 +115,7 @@
       if(hasIntent(text)){ setTimeout(function(){offerLead();},400); }
       else { setTimeout(function(){addChips([
         {label:"業務用・卸の相談",fn:function(){leadForm("業務用・卸");}},
-        {label:"サンプルが欲しい",fn:function(){leadForm("サンプル希望");}},
-        {label:"LINEで相談",fn:function(){addMsg("LINE友だち追加：\n"+LINE_URL,"bot");}}
+        {label:"サンプルが欲しい",fn:function(){leadForm("サンプル希望");}}
       ]);},400); }
     } else if(hasIntent(text)){
       offerLead();
@@ -128,7 +126,7 @@
   }
   function offerLead(){
     addMsg("ぜひ担当者よりご案内します。お差し支えなければ、ご連絡先を教えてください（後ほどご連絡します）。","bot");
-    addChips([{label:"連絡先を入力する",fn:function(){leadForm("お問い合わせ");}},{label:"LINEで相談",fn:function(){addMsg("LINE友だち追加：\n"+LINE_URL,"bot");}}]);
+    addChips([{label:"連絡先を入力する",fn:function(){leadForm("お問い合わせ");}}]);
   }
 
   // ---------- lead capture ----------
@@ -153,7 +151,7 @@
         種別:kind,店名_会社名:co,お名前:nm,メール:em,ご用件:ms,会話ログ:convo.slice(-12).join("\n"),ページ:location.href};
       fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)})
         .then(function(r){return r.json();}).then(function(d){
-          if(d.success){addMsg("ありがとうございます、"+nm+"様。内容を受け付けました。担当者より追ってご連絡いたします。お急ぎの場合はLINEでもご相談いただけます：\n"+LINE_URL,"bot");}
+          if(d.success){addMsg("ありがとうございます、"+nm+"様。内容を受け付けました。担当者より追ってご連絡いたします。","bot");}
           else{throw new Error();}
         }).catch(function(){addMsg("送信に失敗しました。お手数ですが問い合わせフォームをご利用ください：\n"+CONTACT_URL,"bot");});
     };
