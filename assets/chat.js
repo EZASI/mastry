@@ -69,6 +69,7 @@
     body.appendChild(m); convo.push((who==="user"?"客: ":"Bot: ")+text); scroll();
   }
   function addChips(items) {
+    [].forEach.call(body.querySelectorAll(".mst-chips"), function(e){ e.remove(); }); // 古い選択肢を消す（重複防止）
     var c = document.createElement("div"); c.className = "mst-chips";
     items.forEach(function (it) {
       var b = document.createElement("div"); b.className = "mst-chip"; b.textContent = it.label;
@@ -193,6 +194,7 @@
   // ---------- send ----------
   function send(){
     var t=input.value.trim(); if(!t)return; input.value="";
+    [].forEach.call(body.querySelectorAll(".mst-chips"), function(e){ e.remove(); }); // 入力時も古い選択肢を消す
     addMsg(t,"user");
     setTimeout(function(){handle(t);},250);
   }
