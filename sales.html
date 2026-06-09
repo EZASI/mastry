@@ -5820,6 +5820,10 @@ body.jp .sv span{font-family:var(--mincho)}
   /* ---- reveal ---- */
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  function mstReveal(){var vh=innerHeight||document.documentElement.clientHeight;document.querySelectorAll('.reveal:not(.in)').forEach(function(el){if(el.getBoundingClientRect().top < vh*0.9)el.classList.add('in');});}
+  addEventListener('scroll',mstReveal,{passive:true});
+  addEventListener('load',mstReveal);
+  mstReveal();
 
   /* ---- hero parallax ---- */
   if(!reduce){const hero=document.querySelector('.hero');
