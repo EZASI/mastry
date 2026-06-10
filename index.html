@@ -4520,6 +4520,15 @@ body.menu-open{overflow:hidden}
 .loaded .hero-sub{animation:fadeUp 1.4s var(--ease) 1.25s forwards}
 .hero-actions{display:flex;gap:1.4rem;margin-top:2rem;opacity:0;flex-wrap:wrap;justify-content:center}
 .loaded .hero-actions{animation:fadeUp 1.4s var(--ease) 1.5s forwards}
+.btn-dive{display:inline-flex;align-items:center;gap:.65rem;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--resin);text-decoration:none;padding:1.05rem 0;
+  transition:opacity .35s,letter-spacing .35s}
+.btn-dive:hover{opacity:.72;letter-spacing:.36em}
+.btn-dive .bub{width:9px;height:9px;border:1.5px solid var(--resin);border-radius:50%;display:inline-block;
+  animation:diveBub 2.4s var(--ease) infinite}
+@keyframes diveBub{0%{transform:translateY(7px);opacity:0}45%{opacity:1}100%{transform:translateY(-9px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.btn-dive .bub{animation:none}}
+body.jp .btn-dive{font-family:var(--mincho);letter-spacing:.22em}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .btn{font-family:var(--sans);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
   padding:1rem 2.2rem;border-radius:44px;text-decoration:none;transition:all .45s var(--ease);position:relative;overflow:hidden}
@@ -5461,6 +5470,7 @@ body.jp .sv span{font-family:var(--mincho)}
     <div class="shero-cta">
       <a href="#offer" class="btn btn-primary" data-cursor="" data-en="Reserve the first lot" data-jp="初回ロットを予約する">Reserve the first lot</a>
       <a href="#taste" class="btn btn-ghost" data-cursor="" data-en="See the taste →" data-jp="味わいを見る →">See the taste →</a>
+      <a href="dive.html" class="btn-dive" data-cursor="" aria-label="THE DIVE — immersive experience"><i class="bub" aria-hidden="true"></i><span data-en="The Dive — submerge" data-jp="THE DIVE — 潜る体験">The Dive — submerge</span></a>
     </div>
     <div class="chips">
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg><span data-en="PDO ingredient" data-jp="PDO認証原料">PDO ingredient</span></span>
