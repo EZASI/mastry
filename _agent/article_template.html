@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>{{TITLE}} · MASTRY ジャーナル</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://mastry.jp/journal/{{SLUG}}.html">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:image" content="https://mastry.jp/assets/og.jpg">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{TITLE}}","description":"{{DESCRIPTION}}","datePublished":"{{DATE}}","author":{"@type":"Organization","name":"MASTRY合同会社"},"publisher":{"@type":"Organization","name":"MASTRY合同会社","logo":{"@type":"ImageObject","url":"https://mastry.jp/assets/og.jpg"}},"mainEntityOfPage":"https://mastry.jp/journal/{{SLUG}}.html"}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E">
+<style>
+  :root{--ink:#0e1b2c;--dim:#5a6b80;--line:#dbe3ee;--accent:#2563eb}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Hiragino Mincho ProN','Yu Mincho',serif;color:var(--ink);background:linear-gradient(170deg,#f8fafd,#eef3f9)}
+  header{padding:26px clamp(20px,5vw,60px);display:flex;justify-content:space-between;align-items:center}
+  .logo{letter-spacing:.5em;text-indent:.5em;font-size:1.05rem;text-decoration:none;color:var(--ink)}
+  .back{font-size:.85rem;color:var(--accent);text-decoration:none}
+  article{max-width:720px;margin:0 auto;padding:26px 22px 80px}
+  time{display:block;text-align:center;font-size:.8rem;color:var(--dim);letter-spacing:.18em;margin-bottom:14px}
+  h1{font-size:clamp(1.7rem,4.6vw,2.4rem);font-weight:600;line-height:1.8;text-align:center;margin-bottom:38px}
+  article h2{font-size:1.25rem;font-weight:600;margin:44px 0 16px;line-height:1.8;border-left:3px solid var(--accent);padding-left:14px}
+  article p{font-size:.98rem;line-height:2.2;margin-bottom:20px}
+  article ul{margin:0 0 20px 1.4em}
+  article li{font-size:.95rem;line-height:2.1}
+  .cta{margin-top:54px;padding:30px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center}
+  .cta p{font-size:.92rem;color:var(--dim);margin-bottom:16px}
+  .cta a{display:inline-block;padding:12px 34px;background:var(--accent);color:#fff;text-decoration:none;border-radius:999px;font-size:.9rem;letter-spacing:.12em}
+  footer{text-align:center;font-size:.78rem;color:var(--dim);padding:40px 20px;letter-spacing:.1em}
+  footer a{color:var(--dim)}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">MASTRY</a><a class="back" href="/journal/">← ジャーナル一覧</a></header>
+<article>
+  <time datetime="{{DATE}}">{{DATE_DISPLAY}}</time>
+  <h1>{{TITLE}}</h1>
+  {{BODY}}
+  <div class="cta">
+    <p>MASTRY — ギリシャ・ヒオス島のマスティハ × 日本の湧水。<br>数量限定の初回ロットを先行販売中です。</p>
+    <a href="/#offer">先行販売に登録する →</a>
+  </div>
+</article>
+<footer>© MMXXVI MASTRY合同会社 · <a href="/">mastry.jp</a></footer>
+</body>
+</html>
