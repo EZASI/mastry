@@ -144,23 +144,24 @@
 
   /* ----- particle wordmark ----- */
   var pUniforms={uAssemble:{value:reduce?1:0},uScatter:{value:0},uTime:{value:0},
-                 uPix:{value:dpr},uMouse:{value:new THREE.Vector3(9999,9999,0)},uME:{value:0}};
+                 uPix:{value:dpr},uMouse:{value:new THREE.Vector3(9999,9999,0)},uME:{value:0},uFit:{value:1}};
   (function buildParticles(){
     function build(){
       var W=1100,H=260;
       var c=document.createElement('canvas');c.width=W;c.height=H;
       var x=c.getContext('2d');
       x.fillStyle='#fff';
-      x.font='500 200px "Cormorant Garamond", serif';
+      x.font='600 200px "Cormorant Garamond", serif';
       x.textAlign='center';x.textBaseline='middle';
       x.fillText('MASTRY',W/2,H/2+8);
       var data=x.getImageData(0,0,W,H).data;
-      var step=(window.innerWidth<700)?4:3;
+      var step=3;
       /* fit the wordmark to the viewport so it never overflows on portrait phones */
       var halfH=Math.tan(55*Math.PI/360)*90;
       var halfW=halfH*(window.innerWidth/Math.max(window.innerHeight,1));
       var fit=Math.min(1,(halfW*1.72)/150);
       var SPAN=150*fit, TXH=35.5*fit, OFFY=30*fit;
+      pUniforms.uFit.value=fit;
       var targets=[],i,j;
       for(j=0;j<H;j+=step){for(i=0;i<W;i+=step){
         if(data[(j*W+i)*4+3]>128){
@@ -185,18 +186,19 @@
         uniforms:pUniforms,transparent:true,depthWrite:false,blending:THREE.NormalBlending,
         vertexShader:[
           'attribute vec3 aTarget;attribute vec3 aOut;attribute float aRand;',
-          'uniform float uAssemble,uScatter,uTime,uPix,uME;uniform vec3 uMouse;',
+          'uniform float uAssemble,uScatter,uTime,uPix,uME,uFit;uniform vec3 uMouse;',
           'varying float vA;',
           'void main(){',
           ' vec3 pos=mix(aOut*1.5+vec3(0.,150.,0.),aTarget,uAssemble);',
           ' pos=mix(pos,aOut+vec3(0.,200.,50.),uScatter);',
-          ' pos.x+=sin(uTime*0.7+aRand*6.28)*(0.8+aRand);',
-          ' pos.y+=cos(uTime*0.55+aRand*9.4)*(0.6+aRand)*0.8;',
+          ' float wob=mix(0.25,1.0,uFit)*(1.0-0.75*uAssemble*(1.0-uScatter));',
+          ' pos.x+=sin(uTime*0.7+aRand*6.28)*(0.8+aRand)*wob;',
+          ' pos.y+=cos(uTime*0.55+aRand*9.4)*(0.6+aRand)*0.8*wob;',
           ' vec2 dm=pos.xy-uMouse.xy;',
           ' float dl=max(length(dm),0.0001);',
-          ' pos.xy+=(dm/dl)*smoothstep(24.0,0.0,dl)*20.0*uME;',
+          ' pos.xy+=(dm/dl)*smoothstep(24.0,0.0,dl)*20.0*uME*uFit;',
           ' vec4 mv=modelViewMatrix*vec4(pos,1.0);',
-          ' gl_PointSize=uPix*(1.6+aRand*2.0)*(150.0/-mv.z);',
+          ' gl_PointSize=uPix*(1.6+aRand*2.0)*(150.0/-mv.z)*mix(0.42,1.0,uFit);',
           ' gl_Position=projectionMatrix*mv;',
           ' vA=0.45+0.55*aRand;',
           '}'
