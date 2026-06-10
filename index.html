@@ -5827,6 +5827,12 @@ body.jp .sv span{font-family:var(--mincho)}
   }
   setLang(saved);
 
+  /* ---- hash anchor correction (intro/reveal後に確実に着地) ---- */
+  if(location.hash){
+    const jumpToHash=()=>{const t=document.querySelector(location.hash); if(t) t.scrollIntoView({behavior:'instant',block:'start'});};
+    window.addEventListener('load',()=>{setTimeout(jumpToHash,150); setTimeout(jumpToHash,900);});
+  }
+
   /* ---- image graceful fallback ---- */
   document.querySelectorAll('.img-wrap > img').forEach(img=>{
     const done=()=>img.classList.add('ready');
