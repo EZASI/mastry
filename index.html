@@ -5545,6 +5545,29 @@ body.jp .sv span{font-family:var(--mincho)}
   </figure>
 </section>
 
+
+<!-- scenes -->
+<style>
+  .scenes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,24px);margin-top:34px}
+  @media(max-width:760px){.scenes-grid{grid-template-columns:1fr}}
+  .scene{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:18px;border:1px solid rgba(127,127,127,.18)}
+  .scene img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.2s var(--ease)}
+  .scene:hover img{transform:scale(1.07)}
+  .scene figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 18px 14px;color:#fff;font-size:.92rem;letter-spacing:.14em;
+    background:linear-gradient(to top,rgba(10,18,32,.62),rgba(10,18,32,0));text-shadow:0 1px 8px rgba(0,0,0,.45)}
+</style>
+<section id="scenes" class="narrow">
+  <div class="tag reveal" style="justify-content:center" data-en="Scenes" data-jp="シーン">Scenes</div>
+  <h2 class="h2 reveal" data-d="1" data-en="Where the
+&lt;em&gt;glass belongs.&lt;/em&gt;" data-jp="その一杯が、
+&lt;em&gt;ある場所。&lt;/em&gt;">Where the<br><em>glass belongs.</em></h2>
+  <div class="scenes-grid">
+    <figure class="scene reveal" data-d="1"><img src="assets/venue-lounge.jpg" alt="夜のホテルバーに置かれたMASTRYとクーペグラス — MASTRY at a hotel bar at night" loading="lazy"><figcaption data-en="At the bar, late" data-jp="夜のバーで">At the bar, late</figcaption></figure>
+    <figure class="scene reveal" data-d="2"><img src="assets/venue-sauna.jpg" alt="サウナの休憩スペースに置かれたMASTRY — MASTRY in a sauna rest area" loading="lazy"><figcaption data-en="After the sauna" data-jp="ととのいの後に">After the sauna</figcaption></figure>
+    <figure class="scene reveal" data-d="3"><img src="assets/photos/pour.jpg" alt="ワイングラスに注がれるMASTRY — MASTRY being poured into a wine glass" loading="lazy"><figcaption data-en="The pour" data-jp="注がれる一杯">The pour</figcaption></figure>
+  </div>
+</section>
+
 <!-- offer -->
 <section id="offer" class="cta">
   <div class="tag reveal" style="justify-content:center" data-en="Reserve" data-jp="先行販売">Reserve</div>
