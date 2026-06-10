@@ -186,9 +186,25 @@
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){addMsg("メールアドレスをご確認ください。","bot");return;}
       this.disabled=true; this.textContent="送信中…";
       fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:WEB3KEY,subject:"【サイトチャット】先行登録",from_name:"MASTRYサイトチャット","種別":"先行登録(個人)","メール":em,"ページ":location.href})})
-        .then(function(r){return r.json();}).then(function(d){if(d.success){addMsg("ご登録ありがとうございます！発売の際は、いちばんにご案内します🥂","bot");}else{throw new Error();}})
+        .then(function(r){return r.json();}).then(function(d){if(d.success){addMsg("ご登録ありがとうございます！発売の際は、いちばんにご案内します🥂","bot");setTimeout(function(){askWhy(em);},500);}else{throw new Error();}})
         .catch(function(){addMsg("送信に失敗しました。お手数ですが問い合わせフォームをご利用ください：\n"+CONTACT_URL,"bot");});
     };
+  }
+
+  // PMF質問: 登録後ワンタップ(任意)
+  function askWhy(em){
+    addMsg("最後にひとつだけ——何に一番惹かれましたか？（タップでOK）","bot");
+    function sendWhy(v){
+      fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:WEB3KEY,subject:"【サイトチャット】惹かれた点",from_name:"MASTRYサイトチャット","メール":em,"惹かれた点":v,"ページ":location.href})}).catch(function(){});
+      addMsg("ありがとうございます——とても参考になります🌿","bot");
+    }
+    addChips([
+      {label:"マスティハの希少性",fn:function(){sendWhy("マスティハの希少性");}},
+      {label:"ノンアル0.00%",fn:function(){sendWhy("ノンアル0.00%");}},
+      {label:"糖類ゼロ・無添加",fn:function(){sendWhy("糖類ゼロ・無添加");}},
+      {label:"デザイン・ギフト",fn:function(){sendWhy("デザイン・ギフト");}},
+      {label:"その他",fn:function(){sendWhy("その他");}}
+    ]);
   }
 
   // ---------- send ----------

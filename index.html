@@ -5564,6 +5564,25 @@ body.jp .sv span{font-family:var(--mincho)}
     <svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
     <span data-en="Thank you — you're on the list. We'll guide you to the first lot." data-jp="ご登録ありがとうございます。初回ロットの際にご案内いたします。">Thank you — you're on the list. We'll guide you to the first lot.</span>
   </div>
+  <style>
+    .why-ask{margin-top:22px;text-align:center}
+    .why-ask p{font-size:.95rem;opacity:.8;margin:0 0 12px}
+    .why-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+    .why-chips button{padding:9px 16px;border:1px solid rgba(127,127,127,.45);background:transparent;border-radius:999px;font-size:.9rem;cursor:pointer;color:inherit;transition:border-color .25s,transform .25s}
+    .why-chips button:hover{border-color:currentColor;transform:translateY(-1px)}
+    .why-thanks{margin-top:12px;font-size:.95rem;opacity:.9}
+  </style>
+  <div class="why-ask" id="whyAsk" hidden="">
+    <p data-en="One last thing — what drew you in? (one tap)" data-jp="最後にひとつだけ——何に一番惹かれましたか？（タップでOK）">One last thing — what drew you in? (one tap)</p>
+    <div class="why-chips">
+      <button type="button" data-v="マスティハの希少性" data-cursor="" data-en="The rare mastiha" data-jp="マスティハの希少性">The rare mastiha</button>
+      <button type="button" data-v="ノンアル0.00%" data-cursor="" data-en="0.00% alcohol" data-jp="ノンアル0.00%">0.00% alcohol</button>
+      <button type="button" data-v="糖類ゼロ・無添加" data-cursor="" data-en="Zero sugar, no additives" data-jp="糖類ゼロ・無添加">Zero sugar, no additives</button>
+      <button type="button" data-v="デザイン・ギフト" data-cursor="" data-en="Design &amp; gifting" data-jp="デザイン・ギフト">Design &amp; gifting</button>
+      <button type="button" data-v="その他" data-cursor="" data-en="Something else" data-jp="その他">Something else</button>
+    </div>
+    <div class="why-thanks" id="whyThanks" hidden="" data-en="Thank you — this really helps. 🌿" data-jp="ありがとうございます——とても参考になります🌿">Thank you — this really helps. 🌿</div>
+  </div>
 </section>
 
 <!-- authority / honest proof -->
@@ -5850,14 +5869,25 @@ body.jp .sv span{font-family:var(--mincho)}
   const signupForm=document.getElementById('signupForm');
   if(signupForm){
     const sInput=signupForm.querySelector('input'),sDone=document.getElementById('signupDone');
+    const whyAsk=document.getElementById('whyAsk');let regEmail='';
     signupForm.addEventListener('submit',e=>{
       e.preventDefault();
       const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sInput.value.trim());
       if(!ok){signupForm.classList.remove('shake');void signupForm.offsetWidth;signupForm.classList.add('shake');sInput.focus();return;}
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e4a2680b-2894-46e8-a87d-59ca6462aca9',subject:'【先行予約】Founding Member 登録',from_name:'MASTRY 先行予約','メール':sInput.value.trim(),'ページ':location.href})}).catch(function(){});
+      regEmail=sInput.value.trim();
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e4a2680b-2894-46e8-a87d-59ca6462aca9',subject:'【先行予約】Founding Member 登録',from_name:'MASTRY 先行予約','メール':regEmail,'ページ':location.href})}).catch(function(){});
       signupForm.style.display='none';
       sDone.hidden=false;
+      if(whyAsk)whyAsk.hidden=false;
       requestAnimationFrame(()=>sDone.classList.add('show'));
+    });
+    /* PMF質問: 登録後ワンタップ(任意) */
+    if(whyAsk)whyAsk.querySelectorAll('.why-chips button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'e4a2680b-2894-46e8-a87d-59ca6462aca9',subject:'【先行予約】惹かれた点',from_name:'MASTRY 先行予約','メール':regEmail,'惹かれた点':b.dataset.v,'ページ':location.href})}).catch(function(){});
+        whyAsk.querySelector('.why-chips').style.display='none';
+        const wt=document.getElementById('whyThanks');if(wt)wt.hidden=false;
+      });
     });
   }
 
@@ -5898,6 +5928,6 @@ body.jp .sv span{font-family:var(--mincho)}
 </script>
 
 
-<script defer src="/assets/chat-qa.js?v=4"></script>
-<script defer src="/assets/chat.js?v=4"></script>
+<script defer src="/assets/chat-qa.js?v=5"></script>
+<script defer src="/assets/chat.js?v=5"></script>
 </body></html>
