@@ -4357,7 +4357,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;
-  overflow-x:clip;cursor:none;-webkit-font-smoothing:antialiased;line-height:1.6}
+  overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;line-height:1.6}
 @media(max-width:768px){body{cursor:auto}}
 
 /* JP typography overrides */
@@ -5852,6 +5852,16 @@ body.jp .sv span{font-family:var(--mincho)}
     saved=(tz==='Asia/Tokyo'||nav.slice(0,2)==='ja')?'jp':'en';
   }
   setLang(saved);
+
+  /* ---- in-page anchor clicks: scroller非依存(scrollIntoView)で確実にスクロール ---- */
+  document.addEventListener('click',function(e){
+    const a=e.target.closest('a[href^="#"]'); if(!a) return;
+    const id=a.getAttribute('href'); if(!id||id==='#') return;
+    const t=document.querySelector(id); if(!t) return;
+    e.preventDefault();
+    t.scrollIntoView({behavior:'smooth',block:'start'});
+    history.pushState(null,'',id);
+  });
 
   /* ---- hash anchor correction (intro/reveal後に確実に着地) ---- */
   if(location.hash){
