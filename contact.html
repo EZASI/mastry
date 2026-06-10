@@ -143,7 +143,6 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
   function locOpts(){var jp=document.body.classList.contains('jp');
     document.querySelectorAll('#ctype option').forEach(function(o){var v=o.getAttribute(jp?'data-jp':'data-en');if(v)o.textContent=v;});}
   locOpts(); new MutationObserver(locOpts).observe(document.body,{attributes:true,attributeFilter:['class']});
-  var FORMSPREE=''; // optional: set to 'https://formspree.io/f/xxxx' to deliver without a mailbox
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var t=document.getElementById('ctype'); var topic=t.options[t.selectedIndex].text;
