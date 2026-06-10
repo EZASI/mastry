@@ -5815,12 +5815,17 @@ body.jp .sv span{font-family:var(--mincho)}
     });
     enBtn.classList.toggle('active',lang==='en');
     jpBtn.classList.toggle('active',lang==='jp');
-    try{localStorage.setItem('mastry-lang',lang)}catch(e){}
+    try{localStorage.setItem('mastry-lang-v2',lang)}catch(e){}
   }
   const enBtn=document.getElementById('enBtn'),jpBtn=document.getElementById('jpBtn');
   enBtn.onclick=()=>setLang('en'); jpBtn.onclick=()=>setLang('jp');
-  let saved='en'; try{saved=localStorage.getItem('mastry-lang')||((navigator.language||'').toLowerCase().slice(0,2)==='ja'?'jp':'en')}catch(e){}
-  if(saved==='jp') setLang('jp');
+  let saved=null; try{saved=localStorage.getItem('mastry-lang-v2')}catch(e){}
+  if(saved!=='en'&&saved!=='jp'){
+    let tz=''; try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+    const nav=(navigator.language||'').toLowerCase();
+    saved=(tz==='Asia/Tokyo'||nav.slice(0,2)==='ja')?'jp':'en';
+  }
+  setLang(saved);
 
   /* ---- image graceful fallback ---- */
   document.querySelectorAll('.img-wrap > img').forEach(img=>{

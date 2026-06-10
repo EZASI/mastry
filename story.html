@@ -1102,17 +1102,14 @@ body.jp .lc-qr span{font-family:var(--mincho);letter-spacing:.06em;text-transfor
     });
     enBtn.classList.toggle('active',lang==='en');
     jpBtn.classList.toggle('active',lang==='jp');
-    try{localStorage.setItem('mastry-lang',lang)}catch(e){}
+    try{localStorage.setItem('mastry-lang-v2',lang)}catch(e){}
   }
   const enBtn=document.getElementById('enBtn'),jpBtn=document.getElementById('jpBtn');
   enBtn.onclick=()=>setLang('en'); jpBtn.onclick=()=>setLang('jp');
-  (function(){var s=null;try{s=localStorage.getItem('mastry-lang')}catch(e){}
-    if(s){if(s==='jp')setLang('jp');return;}
-    if((navigator.language||'').toLowerCase().indexOf('ja')===0)setLang('jp');
-    fetch('https://ipapi.co/country/').then(function(r){return r.text()}).then(function(cc){
-      try{if(localStorage.getItem('mastry-lang'))return;}catch(e){}
-      if((cc||'').trim().toUpperCase()==='JP')setLang('jp');else setLang('en');
-    }).catch(function(){});
+  (function(){var s=null;try{s=localStorage.getItem('mastry-lang-v2')}catch(e){}
+    if(s==='jp'||s==='en'){if(s==='jp')setLang('jp');return;}
+    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+    if(tz==='Asia/Tokyo'||(navigator.language||'').toLowerCase().indexOf('ja')===0)setLang('jp');
   })();
 
   /* ---- image graceful fallback ---- */
