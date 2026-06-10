@@ -23,6 +23,11 @@
   ];
   var cue=document.getElementById('heroCue');
   function clamp01(x){return x<0?0:(x>1?1:x);}
+  var depthLabel=depthEl?depthEl.querySelector('span'):null;
+  var dCk=[[0,0],[0.10,0],[0.21,600],[0.40,1200],[0.58,1900],[0.77,2600],[0.93,3000]];
+  function depthAt(p){for(var k=1;k<dCk.length;k++){if(p<=dCk[k][0]){var a=dCk[k-1],b=dCk[k];var f=(p-a[0])/Math.max(b[0]-a[0],1e-4);return Math.round((a[1]+(b[1]-a[1])*f)/10)*10;}}return 3000;}
+  var dLab=[[0.14,'水面 — Surface'],[0.31,'潜行 — Descent'],[0.50,'ヒオス島 · 38.25°N'],[0.67,'日本の湧水 · Spring'],[1.01,'静けさ — Stillness']];
+  function labelAt(p){for(var k=0;k<dLab.length;k++){if(p<dLab[k][0])return dLab[k][1];}return '深度 — THE DIVE';}
   function setP(p){
     P=p;
     for(var i=0;i<bands.length;i++){
@@ -33,9 +38,12 @@
     }
     if(cue){var co=clamp01(Math.min(p+0.05,0.07-p)/0.02);cue.style.opacity=co;}
     if(depthEl){
-      var on=p>0.13&&p<0.92;
+      var on=p>0.06&&p<0.95;
       depthEl.classList.toggle('on',on);
-      if(on)depthNum.innerHTML=Math.round(p*3000)+'<small>m</small>';
+      if(on){
+        depthNum.innerHTML=depthAt(p)+'<small>m</small>';
+        if(depthLabel)depthLabel.textContent=labelAt(p);
+      }
     }
   }
   function spaceEnd(){
@@ -148,10 +156,15 @@
       x.fillText('MASTRY',W/2,H/2+8);
       var data=x.getImageData(0,0,W,H).data;
       var step=(window.innerWidth<700)?4:3;
+      /* fit the wordmark to the viewport so it never overflows on portrait phones */
+      var halfH=Math.tan(55*Math.PI/360)*90;
+      var halfW=halfH*(window.innerWidth/Math.max(window.innerHeight,1));
+      var fit=Math.min(1,(halfW*1.72)/150);
+      var SPAN=150*fit, TXH=35.5*fit, OFFY=30*fit;
       var targets=[],i,j;
       for(j=0;j<H;j+=step){for(i=0;i<W;i+=step){
         if(data[(j*W+i)*4+3]>128){
-          targets.push((i/W-0.5)*150,(0.5-j/H)*35.5+30,(Math.random()-0.5)*3);
+          targets.push((i/W-0.5)*SPAN,(0.5-j/H)*TXH+OFFY,(Math.random()-0.5)*3*fit);
         }
       }}
       var n=targets.length/3;
