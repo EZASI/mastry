@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
+<script>/* THE DIVE first-visit gate */(function(){try{
+  if(location.hash||/[?&]nodive/.test(location.search))return;
+  if(/bot|crawl|spider|lighthouse|preview/i.test(navigator.userAgent))return;
+  if(navigator.webdriver)return;
+  if(localStorage.getItem('mastry-dived'))return;
+  localStorage.setItem('mastry-dived','1');
+  location.replace('dive.html');
+}catch(e){}})();</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MASTRY — 静けさを飲むプレミアム・スパークリングウォーター</title>
