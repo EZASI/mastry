@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MASTRY — The Dive</title>
+<meta name="description" content="MASTRY The Dive — scroll to submerge. A WebGL journey from the surface to the tears of the tree." />
+<link rel="canonical" href="https://mastry.jp/dive.html" />
+<meta property="og:title" content="MASTRY — The Dive ｜ 潜って味わうブランド体験" />
+<meta property="og:description" content="スクロールで海へ。ヒオス島の木の涙が、日本の湧水に沈むまで。" />
+<meta property="og:image" content="https://mastry.jp/assets/og.jpg" />
+<meta property="og:url" content="https://mastry.jp/dive.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Jost:wght@300;400;500&amp;family=Zen+Old+Mincho:wght@400;600&amp;display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#02060d;
+  --bone:#eef4fb;
+  --bone-dim:#8fa3bd;
+  --resin:#4f8df9;
+  --gold:#d9b36a;
+  --line:rgba(143,163,189,.18);
+  --serif:"Cormorant Garamond",serif;
+  --mincho:"Zen Old Mincho",serif;
+  --mono:"Jost",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--bone);font-family:var(--mincho);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased}
+::selection{background:var(--resin);color:#fff}
+
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:1;display:block}
+.gl-fallback{position:fixed;inset:0;z-index:0;
+  background:linear-gradient(#9db8d6 0%,#28507e 30%,#06121f 70%,#02060d 100%)}
+
+/* veil */
+.veil{position:fixed;inset:0;z-index:200;background:var(--ink);display:grid;place-items:center;
+  transition:opacity 1.2s var(--ease),visibility 1.2s}
+.veil.off{opacity:0;visibility:hidden}
+.veil .v-mark{font-family:var(--mono);letter-spacing:.5em;padding-left:.5em;font-size:.7rem;
+  text-transform:uppercase;color:var(--bone-dim);animation:vpulse 2s ease-in-out infinite}
+@keyframes vpulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* corners */
+.corner{position:fixed;z-index:120;font-family:var(--mono);font-size:.6rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--bone-dim)}
+.corner.tl{top:1.6rem;left:1.8rem;letter-spacing:.5em;color:var(--bone)}
+.corner.tr{top:1.6rem;right:1.8rem}
+.corner.tr a{color:var(--bone-dim);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:2px;transition:color .3s}
+.corner.tr a:hover{color:var(--resin)}
+
+/* depth meter */
+.depth{position:fixed;right:1.8rem;top:50%;transform:translateY(-50%);z-index:120;text-align:right;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--bone-dim);opacity:0;transition:opacity .6s}
+.depth.on{opacity:1}
+.depth b{display:block;font-family:var(--serif);font-weight:400;font-size:1.7rem;letter-spacing:.05em;color:var(--bone)}
+.depth span{display:block;margin-top:.4rem}
+@media(max-width:700px){.depth{right:1rem}}
+
+/* overlays */
+.ov{position:fixed;inset:0;z-index:5;display:grid;place-items:center;text-align:center;
+  opacity:0;pointer-events:none;padding:2rem;will-change:opacity,transform}
+.ov .kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--resin);margin-bottom:1.6rem}
+.ov .big{font-family:var(--mincho);font-weight:600;font-size:clamp(1.8rem,5.4vw,3.6rem);line-height:1.7;
+  letter-spacing:.12em;text-shadow:0 2px 40px rgba(2,6,13,.8)}
+.ov .big em{font-style:normal;color:var(--resin)}
+.ov .big .gold{color:var(--gold)}
+.ov .small{margin-top:1.6rem;font-size:.92rem;line-height:2.1;color:var(--bone-dim)}
+.ov.hero-ov .sub{font-size:.95rem;line-height:2.1;color:var(--bone-dim);max-width:430px;margin:1.6rem auto 0}
+.ov.hero-ov{padding-top:38vh}
+.hero-cue{position:fixed;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:6;display:flex;
+  flex-direction:column;align-items:center;gap:.8rem;font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--bone-dim);opacity:0;pointer-events:none}
+.hero-cue i{width:1px;height:44px;background:linear-gradient(var(--resin),transparent);display:block;
+  animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(prefers-reduced-motion:reduce){.hero-cue i{animation:none}}
+
+/* scroll runway */
+.scroll-space{height:760vh}
+
+/* final */
+.final{position:relative;z-index:10;min-height:100vh;min-height:100svh;display:grid;place-items:center;
+  text-align:center;padding:7rem 1.5rem;
+  background:linear-gradient(180deg,rgba(2,6,13,0) 0%,#04101f 14%,#071c33 55%,#0a2440 100%)}
+.final-inner{display:flex;flex-direction:column;align-items:center;gap:2.2rem}
+.final .kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--resin)}
+.final .line{font-family:var(--serif);font-style:italic;font-size:clamp(1.7rem,4.6vw,3.2rem);color:var(--bone);line-height:1.5}
+.final .line b{font-weight:400;font-style:normal;font-family:var(--mincho);color:var(--resin)}
+.btn-mag{position:relative;display:inline-flex;align-items:center;gap:.9rem;border:1px solid rgba(79,141,249,.4);
+  border-radius:60px;padding:1.4rem 3rem;color:var(--bone);text-decoration:none;font-family:var(--mincho);
+  font-size:1rem;letter-spacing:.2em;background:rgba(79,141,249,.08);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .4s,border-color .4s;will-change:transform}
+.btn-mag:hover{background:rgba(79,141,249,.18);border-color:var(--resin)}
+.btn-mag .arr{transition:transform .35s var(--ease)}
+.btn-mag:hover .arr{transform:translateX(6px)}
+.final .foot{position:absolute;bottom:2rem;left:0;width:100%;display:flex;justify-content:center;gap:2.4rem;
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim)}
+
+/* a11y real heading */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="gl-fallback" aria-hidden="true"></div>
+
+<div class="veil" id="veil"><div class="v-mark">Hold your breath</div></div>
+
+<div class="corner tl">MASTRY</div>
+<div class="corner tr"><a href="/">Back to site →</a></div>
+
+<div class="depth" id="depth"><b id="depthNum">0<small>m</small></b><span>深度 — THE DIVE</span></div>
+
+<h1 class="sr">MASTRY — The Dive</h1>
+
+<!-- overlays -->
+<div class="ov hero-ov" id="ovHero" data-screen-label="Dive — Surface">
+  <div>
+    <div class="kicker">Scroll to submerge — 潜る</div>
+    <p class="sub">世界で唯一の島の樹脂と、日本の湧水。<br />その出会いの深さまで、潜ってみてください。</p>
+  </div>
+</div>
+<div class="hero-cue" id="heroCue"><span>Dive</span><i></i></div>
+
+<div class="ov" id="ovDive" data-screen-label="Dive — Plunge">
+  <div class="big">息を止めて、<em>潜る。</em></div>
+</div>
+
+<div class="ov" id="ovDeep1" data-screen-label="Dive — Resin">
+  <div>
+    <div class="kicker">Chios, Greece — 38.25°N</div>
+    <div class="big">夏、ヒオス島の木は<br /><span class="gold">涙</span>を流す。</div>
+    <p class="small">五千年、世界がただひとつの島に求めつづけた香り。</p>
+  </div>
+</div>
+
+<div class="ov" id="ovDeep2" data-screen-label="Dive — Marriage">
+  <div class="big">その涙が、<br /><em>日本の湧水に沈む。</em></div>
+</div>
+
+<div class="ov" id="ovBottle" data-screen-label="Dive — Bottle">
+  <div>
+    <div class="kicker">Sparkling water with mastiha</div>
+    <div class="big">静けさを、<em>飲む。</em></div>
+    <p class="small">砂糖不使用 ・ アルコール0.00% ・ ガラスボトル</p>
+  </div>
+</div>
+
+<!-- scroll runway -->
+<div class="scroll-space" aria-hidden="true"></div>
+
+<!-- surfacing -->
+<section class="final" data-screen-label="Dive — Resurface CTA">
+  <div class="final-inner">
+    <div class="kicker">Resurface — 浮上</div>
+    <p class="line">深さを知った者だけが、<br /><b>静けさの味を知っている。</b></p>
+    <a class="btn-mag" id="magBtn" href="/#offer"><span>先行販売に登録する</span><span class="arr">→</span></a>
+  </div>
+  <div class="foot"><span>Chios, Greece × Japan</span><span>© MMXXVI MASTRY</span></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="/assets/dive.js?v=1"></script>
+</body>
+</html>
