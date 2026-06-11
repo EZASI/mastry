@@ -160,7 +160,7 @@
       var halfH=Math.tan(55*Math.PI/360)*90;
       var halfW=halfH*(window.innerWidth/Math.max(window.innerHeight,1));
       var fit=Math.min(1,(halfW*1.72)/150);
-      var SPAN=150*fit, TXH=35.5*fit, OFFY=30*fit;
+      var SPAN=150*fit, TXH=35.5*fit, OFFY=25*fit;
       pUniforms.uFit.value=fit;
       var targets=[],i,j;
       for(j=0;j<H;j+=step){for(i=0;i<W;i+=step){
