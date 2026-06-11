@@ -5,6 +5,7 @@
   if(location.hash||/[?&]nodive/.test(location.search))return;        /* アンカー/明示スキップ */
   if(/bot|crawl|spider|lighthouse|preview/i.test(navigator.userAgent))return; /* 検索エンジン除外 */
   if(navigator.webdriver)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   if(sessionStorage.getItem('mastry-dived'))return;                    /* このセッションで潜った後はホーム */
   sessionStorage.setItem('mastry-dived','1');
   location.replace('dive.html');
@@ -12,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MASTRY — 静けさを飲むプレミアム・スパークリングウォーター</title>
-<meta name="description" content="酒は要らない。でも、炭酸水では物足りない。キオス島産PDOマスティハと日本の軟水で仕立てた、砂糖・添加物不使用、アルコール0.00%のプレミアムスパークリングウォーター。先行販売に登録。">
+<meta name="description" content="お酒を飲まない夜にも、妥協しない一杯を。ヒオス島産PDOマスティハと日本の湧水で仕立てた、砂糖不使用・アルコール0.00%のプレミアム・スパークリングウォーター。先行販売受付中。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <style>/* cyrillic-ext */
@@ -4356,6 +4357,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto}
+section[id]{scroll-margin-top:clamp(100px,16vw,130px)}
 body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;
   overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;line-height:1.6}
 @media(max-width:768px){body{cursor:auto}}
@@ -4741,6 +4743,8 @@ body.jp .f-desc{font-family:var(--mincho)}
 body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.12em}
 .f-col a{font-family:var(--sans);font-size:.85rem;letter-spacing:.03em;color:var(--bone-dim);text-decoration:none;transition:color .35s}
 body.jp .f-col a{font-family:var(--mincho)}
+body.jp .lede{font-style:normal}
+body.jp .scene figcaption{font-family:var(--mincho);letter-spacing:.06em}
 .f-col a:hover{color:var(--bone)}
 .f-company{display:flex;justify-content:space-between;align-items:flex-start;gap:2.4rem;flex-wrap:wrap;padding:3rem 0}
 .f-company dl{display:grid;grid-template-columns:auto 1fr;gap:.85rem 1.8rem;max-width:580px;margin:0}
@@ -5477,13 +5481,13 @@ body.jp .sv span{font-family:var(--mincho)}
   <div class="shero-copy">
     <div class="eyebrow">
       <span class="dot"></span>
-      <span data-en="PDO MASTIHA OF CHIOS × JAPANESE SOFT WATER" data-jp="ギリシャ・キオス島産PDOマスティハ × 日本の軟水">PDO MASTIHA OF CHIOS × JAPANESE SOFT WATER</span>
+      <span data-en="PDO MASTIHA OF CHIOS × JAPANESE SOFT WATER" data-jp="ギリシャ・ヒオス島産PDOマスティハ × 日本の軟水">PDO MASTIHA OF CHIOS × JAPANESE SOFT WATER</span>
     </div>
     <div class="shero-mark" hidden="">MASTRY</div>
     <h1 class="shead" data-en="For the nights without a drink —
 &lt;em&gt;a glass that won't compromise.&lt;/em&gt;" data-jp="お酒を飲まない夜にも、
 &lt;em&gt;妥協しない一杯を。&lt;/em&gt;">For the nights without a drink —<br><em>a glass that won't compromise.</em></h1>
-    <p class="shero-sub" data-en="A premium sparkling water — the rare aroma of mastiha, folded into the soft spring water of Japan. No sugar, no additives, 0.00% alcohol." data-jp="希少なマスティハの香りを、日本のやわらかな湧き水で仕立てたプレミアム・スパークリングウォーター。砂糖不使用、添加物不使用、アルコール0.00%。">A premium sparkling water — the rare aroma of mastiha, folded into the soft spring water of Japan. No sugar, no additives, 0.00% alcohol.</p>
+    <p class="shero-sub" data-en="A premium sparkling water — the rare aroma of mastiha, folded into the soft spring water of Japan. No sugar, no additives, 0.00% alcohol." data-jp="希少なマスティハの香りを、日本のやわらかな湧水で仕立てたプレミアム・スパークリングウォーター。砂糖不使用、添加物不使用、アルコール0.00%。">A premium sparkling water — the rare aroma of mastiha, folded into the soft spring water of Japan. No sugar, no additives, 0.00% alcohol.</p>
     <div class="shero-cta">
       <a href="#offer" class="btn btn-primary" data-cursor="" data-en="Reserve the first lot" data-jp="初回ロットを予約する">Reserve the first lot</a>
       <a href="#taste" class="btn btn-ghost" data-cursor="" data-en="See the taste →" data-jp="味わいを見る →">See the taste →</a>
@@ -5518,8 +5522,8 @@ body.jp .sv span{font-family:var(--mincho)}
   <div class="mech-grid">
     <div class="mech reveal" data-d="1">
       <div class="mi">01</div>
-      <h3 data-en="Chios mastiha" data-jp="キオス島マスティハ">Chios mastiha</h3>
-      <p data-en="A rare resin from the only island on earth where it grows — the source of MASTRY's singular aroma." data-jp="世界で唯一育つ島の、希少な樹脂。MASTRYの唯一無二の香りの源です。">A rare resin from the only island on earth where it grows — the source of MASTRY's singular aroma.</p>
+      <h3 data-en="Chios mastiha" data-jp="ヒオス島マスティハ">Chios mastiha</h3>
+      <p data-en="A rare resin from the only island on earth where it grows — the source of MASTRY's singular aroma." data-jp="この樹脂が採れるのは、世界でただひとつの島。MASTRYの唯一無二の香りの源です。">A rare resin from the only island on earth where it grows — the source of MASTRY's singular aroma.</p>
     </div>
     <div class="mech reveal" data-d="2">
       <div class="mi">02</div>
@@ -5612,7 +5616,7 @@ body.jp .sv span{font-family:var(--mincho)}
   </form>
   <div class="signup-done" id="signupDone" hidden="">
     <svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    <span data-en="Thank you — you're on the list. We'll guide you to the first lot." data-jp="ご登録ありがとうございます。初回ロットの際にご案内いたします。">Thank you — you're on the list. We'll guide you to the first lot.</span>
+    <span data-en="Thank you — you're on the list. We'll be in touch when the first lot is ready." data-jp="ご登録ありがとうございます。初回ロットの際にご案内いたします。">Thank you — you're on the list. We'll be in touch when the first lot is ready.</span>
   </div>
   <style>
     .why-ask{margin-top:22px;text-align:center}
@@ -5626,12 +5630,12 @@ body.jp .sv span{font-family:var(--mincho)}
     <p data-en="One last thing — what drew you in? (one tap)" data-jp="最後にひとつだけ——何に一番惹かれましたか？（タップでOK）">One last thing — what drew you in? (one tap)</p>
     <div class="why-chips">
       <button type="button" data-v="マスティハの希少性" data-cursor="" data-en="The rare mastiha" data-jp="マスティハの希少性">The rare mastiha</button>
-      <button type="button" data-v="ノンアル0.00%" data-cursor="" data-en="0.00% alcohol" data-jp="ノンアル0.00%">0.00% alcohol</button>
+      <button type="button" data-v="アルコール0.00%" data-cursor="" data-en="0.00% alcohol" data-jp="アルコール0.00%">0.00% alcohol</button>
       <button type="button" data-v="糖類ゼロ・無添加" data-cursor="" data-en="Zero sugar, no additives" data-jp="糖類ゼロ・無添加">Zero sugar, no additives</button>
       <button type="button" data-v="デザイン・ギフト" data-cursor="" data-en="Design &amp; gifting" data-jp="デザイン・ギフト">Design &amp; gifting</button>
       <button type="button" data-v="その他" data-cursor="" data-en="Something else" data-jp="その他">Something else</button>
     </div>
-    <div class="why-thanks" id="whyThanks" hidden="" data-en="Thank you — this really helps. 🌿" data-jp="ありがとうございます——とても参考になります🌿">Thank you — this really helps. 🌿</div>
+    <div class="why-thanks" id="whyThanks" hidden="" data-en="Thank you — this really helps." data-jp="ありがとうございます。とても参考になります。">Thank you — this really helps.</div>
   </div>
 </section>
 
@@ -5645,7 +5649,7 @@ body.jp .sv span{font-family:var(--mincho)}
     <div class="auth reveal" data-d="1">
       <div class="al">PDO</div>
       <h3 data-en="Protected Designation of Origin" data-jp="原産地名称保護（PDO）">Protected Designation of Origin</h3>
-      <p data-en="Chios mastiha is an EU PDO product — its origin on the island is legally protected and guaranteed." data-jp="キオス島産マスティハは、EUの原産地名称保護（PDO）認証産品。その産地は法的に保証されています。">Chios mastiha is an EU PDO product — its origin on the island is legally protected and guaranteed.</p>
+      <p data-en="Chios mastiha is an EU PDO product — its origin on the island is legally protected and guaranteed." data-jp="ヒオス島産マスティハは、EUの原産地名称保護（PDO）認証産品。その産地は法的に保証されています。">Chios mastiha is an EU PDO product — its origin on the island is legally protected and guaranteed.</p>
     </div>
     <div class="auth reveal" data-d="2">
       <div class="al">UNESCO</div>
@@ -5756,7 +5760,7 @@ body.jp .sv span{font-family:var(--mincho)}
   <div class="f-top">
     <div class="f-brand-col">
       <div class="f-logo"><span class="mono"><svg viewBox="0 0 100 100"><use href="#mono"></use></svg></span>MASTRY</div>
-      <p class="f-desc" data-en="A premium non-alcoholic sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan." data-jp="ギリシャ・ヒオス島の稀少なマスティハ樹脂と、日本のやわらかな湧水から生まれた、プレミアム・ノンアルコール炭酸水。">A premium non-alcoholic sparkling water drawn from the rare mastiha resin of Chios, Greece, and the soft spring water of Japan.</p>
+      <p class="f-desc" data-en="A premium sparkling water born of the rare mastiha resin of Chios, Greece, and the soft spring water of Japan. No sugar, 0.00% alcohol." data-jp="ギリシャ・ヒオス島の希少なマスティハ樹脂と、日本のやわらかな湧水から生まれた、プレミアム・スパークリングウォーター。砂糖不使用、アルコール0.00%。">A premium sparkling water born of the rare mastiha resin of Chios, Greece, and the soft spring water of Japan. No sugar, 0.00% alcohol.</p>
       <div class="f-social">
         <a href="https://line.me/R/ti/p/@469dufhi" target="_blank" rel="noopener" data-cursor="" data-en="LINE" data-jp="LINE">LINE <span class="arr">↗</span></a>
         <a href="mailto:hello@mastry.jp" data-cursor="">Email <span class="arr">↗</span></a>
@@ -5833,7 +5837,7 @@ body.jp .sv span{font-family:var(--mincho)}
 
   /* ---- bilingual ---- */
   function setLang(lang){
-    document.documentElement.lang=lang;
+    document.documentElement.lang=(lang==='jp'?'ja':'en');
     document.body.classList.toggle('jp',lang==='jp');
     document.querySelectorAll('[data-en]').forEach(el=>{
       const v=el.getAttribute('data-'+lang); if(v==null) return;
@@ -5967,7 +5971,7 @@ body.jp .sv span{font-family:var(--mincho)}
   /* ---- CTA: placeholder links -> toast ---- */
   const toast=document.getElementById('toast');let toastT;
   function showToast(){
-    toast.textContent=(document.documentElement.lang==='jp')?'近日公開予定':'Coming soon';
+    toast.textContent=(document.body.classList.contains('jp'))?'近日公開予定':'Coming soon';
     toast.classList.add('show');
     clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove('show'),2200);
   }
@@ -6003,7 +6007,7 @@ body.jp .sv span{font-family:var(--mincho)}
 
 <a class="dive-badge" href="dive.html" aria-label="THE DIVE — 潜る体験へ">
   <svg class="ring" viewBox="0 0 96 96" aria-hidden="true"><defs><path id="divecirc" d="M48,48 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
-    <text><textPath href="#divecirc">THE DIVE · 潜る · THE DIVE · 潜る ·</textPath></text></svg>
+    <text textLength="226" lengthAdjust="spacingAndGlyphs"><textPath href="#divecirc">THE DIVE · 潜る · THE DIVE · 潜る ·</textPath></text></svg>
   <span class="core"><i aria-hidden="true"></i><b>潜る</b></span>
 </a>
 <script defer src="/assets/chat-qa.js?v=5"></script>

@@ -26,7 +26,7 @@
   var depthLabel=depthEl?depthEl.querySelector('span'):null;
   var dCk=[[0,0],[0.10,0],[0.21,600],[0.40,1200],[0.58,1900],[0.77,2600],[0.93,3000]];
   function depthAt(p){for(var k=1;k<dCk.length;k++){if(p<=dCk[k][0]){var a=dCk[k-1],b=dCk[k];var f=(p-a[0])/Math.max(b[0]-a[0],1e-4);return Math.round((a[1]+(b[1]-a[1])*f)/10)*10;}}return 3000;}
-  var dLab=[[0.14,'水面 — Surface'],[0.31,'潜行 — Descent'],[0.50,'ヒオス島 · 38.25°N'],[0.67,'日本の湧水 · Spring'],[1.01,'静けさ — Stillness']];
+  var dLab=[[0.14,'水面 — Surface'],[0.31,'潜降 — Descent'],[0.50,'ヒオス島 — 38.25°N'],[0.67,'日本の湧水 — Spring Water'],[1.01,'静けさ — Stillness']];
   function labelAt(p){for(var k=0;k<dLab.length;k++){if(p<dLab[k][0])return dLab[k][1];}return '深度 — THE DIVE';}
   function setP(p){
     P=p;
@@ -131,7 +131,7 @@
       ' float below=smoothstep(yline+0.012,yline-0.012,uv.y);',
       ' vec3 col=mix(sky,water,max(below,uw));',
       ' float lineGlow=exp(-abs(uv.y-yline)*60.0)*(1.0-uw);',
-      ' col+=vec3(0.8,0.9,1.0)*lineGlow*0.5;',
+      ' col+=vec3(0.8,0.9,1.0)*lineGlow*0.35;',
       ' float d=length((uv-uM)*vec2(uRes.x/uRes.y,1.0));',
       ' col+=vec3(0.3,0.5,0.9)*sin(d*40.0-t*3.0)*exp(-d*5.0)*0.10*uME;',
       ' float rs=smoothstep(0.86,0.99,uP);',
@@ -339,8 +339,9 @@
   (function loop(){
     requestAnimationFrame(loop);
     if(!running)return;
-    var t=clock.getElapsedTime();
     var dt=Math.min(clock.getDelta()||0.016,0.05);
+    var t=clock.elapsedTime;
+    if(reduce){dt=0;t=0;}
     mNdc.x+=(mTarget.x-mNdc.x)*0.07;mNdc.y+=(mTarget.y-mNdc.y)*0.07;
     tEnergy*=0.985;energy+=(tEnergy-energy)*0.05;
 
