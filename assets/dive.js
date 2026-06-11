@@ -83,9 +83,12 @@
   /* ---------- WebGL ---------- */
   if(typeof THREE==='undefined')return;
   var canvas=document.getElementById('gl'),renderer;
-  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:false});}
+  var isMob=window.innerWidth<700;
+  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:false,powerPreference:'low-power'});}
   catch(e){canvas.style.display='none';return;}
-  var dpr=Math.min(window.devicePixelRatio||1,1.5);
+  /* GPUコンテキスト喪失時はフォールバック背景に切替(クラッシュ連鎖防止) */
+  canvas.addEventListener('webglcontextlost',function(e){e.preventDefault();canvas.style.display='none';},false);
+  var dpr=Math.min(window.devicePixelRatio||1,isMob?1.1:1.5);
   renderer.setPixelRatio(dpr);
   renderer.autoClear=false;
 
@@ -98,7 +101,7 @@
   var bgScene=new THREE.Scene();
   var bgCam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
   var bgU={uTime:{value:0},uRes:{value:new THREE.Vector2(1,1)},uP:{value:0},
-           uM:{value:new THREE.Vector2(0.5,0.5)},uME:{value:0}};
+           uM:{value:new THREE.Vector2(0.5,0.5)},uME:{value:0},uMob:{value:(window.innerWidth<700)?1:0}};
   bgScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({
     uniforms:bgU,depthWrite:false,depthTest:false,
     vertexShader:'void main(){gl_Position=vec4(position,1.0);}',
@@ -108,6 +111,7 @@
       'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);}',
       'float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);',
       ' return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+      'uniform float uMob;',
       'float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<4;i++){v+=a*noise(p);p*=2.03;a*=0.5;}return v;}',
       'void main(){',
       ' vec2 uv=gl_FragCoord.xy/uRes;',
@@ -126,8 +130,10 @@
       ' float ang=atan(uv.x-0.5,1.4-uv.y);',
       ' float rays=max(0.0,sin(ang*30.0+t*0.35))*max(0.0,sin(ang*14.0-t*0.22));',
       ' water+=vec3(0.20,0.38,0.66)*rays*uw*(1.0-depthMix*0.85)*uv.y*0.35;',
-      ' float caus=fbm(uv*vec2(8.0,5.0)+vec2(t*0.22,t*0.15));',
-      ' water+=vec3(0.18,0.32,0.55)*smoothstep(0.62,0.95,caus)*uw*(1.0-depthMix)*0.30;',
+      ' if(uMob<0.5){',
+      '  float caus=fbm(uv*vec2(8.0,5.0)+vec2(t*0.22,t*0.15));',
+      '  water+=vec3(0.18,0.32,0.55)*smoothstep(0.62,0.95,caus)*uw*(1.0-depthMix)*0.30;',
+      ' }',
       ' float below=smoothstep(yline+0.012,yline-0.012,uv.y);',
       ' vec3 col=mix(sky,water,max(below,uw));',
       ' float lineGlow=exp(-abs(uv.y-yline)*60.0)*(1.0-uw);',
@@ -155,7 +161,7 @@
       x.textAlign='center';x.textBaseline='middle';
       x.fillText('MASTRY',W/2,H/2+8);
       var data=x.getImageData(0,0,W,H).data;
-      var step=3;
+      var step=isMob?4:3;
       /* fit the wordmark to the viewport so it never overflows on portrait phones */
       var halfH=Math.tan(55*Math.PI/360)*90;
       var halfW=halfH*(window.innerWidth/Math.max(window.innerHeight,1));
@@ -336,9 +342,11 @@
     var halfW=halfH*camera.aspect;
     return {x:(mNdc.x*2-1)*halfW,y:(mNdc.y*2-1)*halfH-world.position.y};
   }
+  var lastF=0;
   (function loop(){
     requestAnimationFrame(loop);
     if(!running)return;
+    if(isTouch){var nowF=performance.now();if(nowF-lastF<30)return;lastF=nowF;}
     var dt=Math.min(clock.getDelta()||0.016,0.05);
     var t=clock.elapsedTime;
     if(reduce){dt=0;t=0;}
