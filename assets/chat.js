@@ -186,9 +186,22 @@
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){addMsg("メールアドレスをご確認ください。","bot");return;}
       this.disabled=true; this.textContent="送信中…";
       fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:WEB3KEY,subject:"【サイトチャット】先行登録",from_name:"MASTRYサイトチャット","種別":"先行登録(個人)","メール":em,"ページ":location.href})})
-        .then(function(r){return r.json();}).then(function(d){if(d.success){addMsg("ご登録ありがとうございます！発売の際は、いちばんにご案内します🥂","bot");setTimeout(function(){askWhy(em);},500);}else{throw new Error();}})
+        .then(function(r){return r.json();}).then(function(d){if(d.success){addMsg("ご登録ありがとうございます！発売の際は、いちばんにご案内します🥂","bot");fmNumber(em);setTimeout(function(){askWhy(em);},500);}else{throw new Error();}})
         .catch(function(){addMsg("送信に失敗しました。お手数ですが問い合わせフォームをご利用ください：\n"+CONTACT_URL,"bot");});
     };
+  }
+
+  // Founding Member 番号: 台帳(Registrants_v1)へ即時採番して通知
+  var FM_API="https://script.google.com/macros/s/AKfycbwBEWufURy4YB8Y2wdKk9oAkA0eXkWyEGODhhqToEXKpxMriam5NuEcfYCvD7fatkRvJg/exec";
+  function fmNumber(em){
+    fetch(FM_API+"?action=reg&email="+encodeURIComponent(em))
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(j&&j.ok&&j.no){
+          var num="No."+String(j.no).padStart(3,"0");
+          addMsg("あなたは Founding Member "+num+" です🌊 この番号順に、初回ロットをご案内します。","bot");
+        }
+      }).catch(function(){});
   }
 
   // PMF質問: 登録後ワンタップ(任意)
