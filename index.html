@@ -5231,6 +5231,56 @@ body.jp .tnote p{font-family:var(--mincho)}
 body.jp .sv b{font-family:var(--mincho)}
 .sv span{font-size:.82rem;color:var(--bone-dim)}
 body.jp .sv span{font-family:var(--mincho)}
+
+/* matcha trading — a distinct B2B service within MASTRY LLC */
+.matcha-trade{padding-top:clamp(5.5rem,10vw,9rem);padding-bottom:clamp(5.5rem,10vw,9rem)}
+.matcha-shell{max-width:1040px;margin:0 auto;border:1px solid rgba(48,92,63,.2);border-radius:24px;
+  overflow:hidden;background:linear-gradient(135deg,#f6faf5 0%,#edf5ef 52%,#f8fbff 100%);
+  box-shadow:0 28px 80px rgba(31,65,45,.09)}
+.matcha-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:stretch}
+.matcha-copy{padding:clamp(2.2rem,5vw,4.5rem)}
+.matcha-trade .tag{color:#3f6d4d;margin-bottom:1.4rem}
+.matcha-trade .tag::before{background:#3f6d4d}
+.matcha-trade .h2{max-width:650px;color:#173122;font-size:clamp(2.5rem,5.5vw,4.6rem)}
+.matcha-trade .h2 em{color:#3f6d4d}
+body.jp .matcha-trade .h2{font-size:clamp(1.9rem,4.2vw,3.2rem)}
+.matcha-intro{max-width:650px;margin-top:1.6rem;color:#53665a;font-size:1rem;line-height:1.9}
+body.jp .matcha-intro{font-family:var(--mincho)}
+.matcha-points{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:2.4rem;
+  border-top:1px solid rgba(48,92,63,.16);border-bottom:1px solid rgba(48,92,63,.16);
+  background:rgba(48,92,63,.16)}
+.matcha-point{background:rgba(248,251,248,.92);padding:1.25rem 1.1rem}
+.matcha-point b{display:block;color:#274c34;font-family:var(--mono);font-size:.61rem;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:.45rem}
+.matcha-point span{display:block;color:#617066;font-size:.82rem;line-height:1.55}
+body.jp .matcha-point b,body.jp .matcha-point span{font-family:var(--mincho);letter-spacing:.03em;text-transform:none}
+.matcha-desk{display:flex;flex-direction:column;justify-content:center;padding:clamp(2.2rem,4vw,3.5rem);
+  background:#183927;color:#fff;position:relative;overflow:hidden}
+.matcha-desk::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-130px;top:-110px;
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 0 0 38px rgba(255,255,255,.025),0 0 0 76px rgba(255,255,255,.02)}
+.matcha-desk>*{position:relative;z-index:1}
+.desk-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#a8cbb2}
+body.jp .desk-label{font-family:var(--mincho);letter-spacing:.08em;text-transform:none}
+.matcha-desk h3{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);font-weight:400;line-height:1.1;margin:.9rem 0 .7rem}
+body.jp .matcha-desk h3{font-family:var(--mincho)}
+.matcha-desk .role{color:rgba(255,255,255,.66);font-size:.85rem;line-height:1.6}
+body.jp .matcha-desk .role{font-family:var(--mincho)}
+.desk-list{list-style:none;margin:2rem 0 2.2rem;border-top:1px solid rgba(255,255,255,.16)}
+.desk-list li{display:flex;align-items:center;gap:.75rem;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.16);
+  color:rgba(255,255,255,.82);font-size:.86rem}
+.desk-list li::before{content:"";width:5px;height:5px;border-radius:50%;background:#a8cbb2;flex:none}
+body.jp .desk-list li{font-family:var(--mincho)}
+.matcha-actions{display:flex;flex-wrap:wrap;gap:.7rem}
+.matcha-actions a{display:inline-flex;align-items:center;justify-content:center;border-radius:40px;padding:.82rem 1.15rem;
+  font-family:var(--mono);font-size:.61rem;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;transition:all .35s var(--ease)}
+.matcha-actions .email{background:#fff;color:#183927}
+.matcha-actions .email:hover{background:#dfeee3;transform:translateY(-2px)}
+.matcha-actions .whatsapp{border:1px solid rgba(255,255,255,.3);color:#fff}
+.matcha-actions .whatsapp:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-2px)}
+body.jp .matcha-actions a{font-family:var(--mincho);letter-spacing:.04em;text-transform:none;font-size:.75rem}
+.matcha-contact{margin-top:1.2rem;color:rgba(255,255,255,.5);font-family:var(--mono);font-size:.6rem;letter-spacing:.05em;line-height:1.7}
+@media(max-width:860px){.matcha-grid{grid-template-columns:1fr}.matcha-points{grid-template-columns:1fr}.matcha-desk{min-height:390px}}
+@media(max-width:520px){.matcha-shell{border-radius:18px}.matcha-actions{flex-direction:column}.matcha-actions a{width:100%}}
 </style>
 <link rel="canonical" href="https://mastry.jp/" />
 <meta property="og:title" content="MASTRY — 静けさを飲むプレミアム・スパークリングウォーター" />
@@ -5439,6 +5489,7 @@ body.jp .sv span{font-family:var(--mincho)}
     <div class="nav-links">
       <a href="#mechanism" data-en="Why MASTRY" data-jp="特長">Why MASTRY</a>
       <a href="#taste" data-en="Taste" data-jp="味わい">Taste</a>
+      <a href="#matcha-trading" data-en="Matcha trade" data-jp="抹茶事業">Matcha trade</a>
       <a href="#compare" data-en="Compare" data-jp="比較">Compare</a>
       <a href="#faq" data-en="FAQ" data-jp="FAQ">FAQ</a>
       <a href="#offer" class="nav-cta" data-en="Reserve" data-jp="予約する">Reserve</a>
@@ -5454,6 +5505,7 @@ body.jp .sv span{font-family:var(--mincho)}
   <nav class="mm-links" aria-label="Mobile">
     <a href="#mechanism" data-en="Why MASTRY" data-jp="特長">Why MASTRY</a>
     <a href="#taste" data-en="Taste" data-jp="味わい">Taste</a>
+    <a href="#matcha-trading" data-en="Matcha trade" data-jp="抹茶事業">Matcha trade</a>
     <a href="#compare" data-en="Compare" data-jp="比較">Compare</a>
     <a href="#faq" data-en="FAQ" data-jp="FAQ">FAQ</a>
   </nav>
@@ -5595,6 +5647,50 @@ body.jp .sv span{font-family:var(--mincho)}
     <figure class="scene reveal" data-d="1"><img src="assets/venue-lounge.jpg" alt="夜のホテルバーに置かれたMASTRYとクーペグラス — MASTRY at a hotel bar at night" loading="lazy"><figcaption data-en="At the bar, late" data-jp="夜のバーで">At the bar, late</figcaption></figure>
     <figure class="scene reveal" data-d="2"><img src="assets/venue-sauna.jpg" alt="サウナの休憩スペースに置かれたMASTRY — MASTRY in a sauna rest area" loading="lazy"><figcaption data-en="After the sauna" data-jp="ととのいの後に">After the sauna</figcaption></figure>
     <figure class="scene reveal" data-d="3"><img src="assets/photos/pour.jpg" alt="ワイングラスに注がれるMASTRY — MASTRY being poured into a wine glass" loading="lazy"><figcaption data-en="The pour" data-jp="注がれる一杯">The pour</figcaption></figure>
+  </div>
+</section>
+
+<!-- Japanese matcha trading -->
+<section id="matcha-trading" class="matcha-trade">
+  <div class="matcha-shell reveal">
+    <div class="matcha-grid">
+      <div class="matcha-copy">
+        <div class="tag" data-en="B2B · Japanese matcha" data-jp="法人向け・日本産抹茶">B2B · Japanese matcha</div>
+        <h2 class="h2" data-en="Japanese matcha,
+&lt;em&gt;sourced with context.&lt;/em&gt;" data-jp="用途から考える、
+&lt;em&gt;日本産抹茶の調達。&lt;/em&gt;">Japanese matcha,<br><em>sourced with context.</em></h2>
+        <p class="matcha-intro" data-en="MASTRY LLC is a Japan-based beverage company and matcha trading partner. We work with a network of tea producers and farm owners in Japan, connecting overseas buyers with matcha suited to their product, service style and commercial requirements." data-jp="MASTRY合同会社は、日本を拠点とする飲料会社であり、抹茶のトレーディングパートナーです。日本各地の茶生産者・農園とのネットワークを生かし、海外のバイヤーへ、商品用途や提供方法、取引条件に合った日本産抹茶をご提案します。">MASTRY LLC is a Japan-based beverage company and matcha trading partner. We work with a network of tea producers and farm owners in Japan, connecting overseas buyers with matcha suited to their product, service style and commercial requirements.</p>
+        <div class="matcha-points">
+          <div class="matcha-point">
+            <b data-en="Requirements first" data-jp="要件から選定">Requirements first</b>
+            <span data-en="Use, grade, origin and volume" data-jp="用途・グレード・産地・数量">Use, grade, origin and volume</span>
+          </div>
+          <div class="matcha-point">
+            <b data-en="Japan network" data-jp="国内ネットワーク">Japan network</b>
+            <span data-en="Tea producers and farm owners" data-jp="茶生産者・農園との連携">Tea producers and farm owners</span>
+          </div>
+          <div class="matcha-point">
+            <b data-en="Buyer support" data-jp="海外バイヤー対応">Buyer support</b>
+            <span data-en="Samples and supplier details on request" data-jp="サンプル・供給者情報をご案内">Samples and supplier details on request</span>
+          </div>
+        </div>
+      </div>
+      <aside class="matcha-desk" aria-label="Matcha sourcing contact">
+        <div class="desk-label" data-en="Matcha sourcing desk" data-jp="抹茶調達窓口">Matcha sourcing desk</div>
+        <h3>Eiji Tomita</h3>
+        <p class="role" data-en="MASTRY LLC · Japan<br>For cafés, tea brands, retailers and foodservice partners." data-jp="MASTRY合同会社・日本<br>カフェ、茶専門ブランド、小売、外食事業者の皆さまへ。">MASTRY LLC · Japan<br>For cafés, tea brands, retailers and foodservice partners.</p>
+        <ul class="desk-list">
+          <li data-en="Matcha selection aligned to your use" data-jp="用途に応じた抹茶の選定">Matcha selection aligned to your use</li>
+          <li data-en="Supplier profile and sample discussion" data-jp="供給者情報・サンプルのご相談">Supplier profile and sample discussion</li>
+          <li data-en="English and Japanese communication" data-jp="日本語・英語での対応">English and Japanese communication</li>
+        </ul>
+        <div class="matcha-actions">
+          <a class="email" href="mailto:etomita@mastry.jp?subject=Japanese%20matcha%20sourcing%20inquiry" data-en="Email Eiji →" data-jp="メールで相談 →">Email Eiji →</a>
+          <a class="whatsapp" href="https://wa.me/817015440341?text=Hello%20Eiji%2C%20I%27d%20like%20to%20discuss%20Japanese%20matcha%20sourcing." target="_blank" rel="noopener" data-en="WhatsApp ↗" data-jp="WhatsApp ↗">WhatsApp ↗</a>
+        </div>
+        <p class="matcha-contact">etomita@mastry.jp · +81 70-1544-0341</p>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -5789,6 +5885,7 @@ body.jp .sv span{font-family:var(--mincho)}
         <h4 data-en="Explore" data-jp="知る">Explore</h4>
         <a href="#mechanism" data-en="Why MASTRY" data-jp="特長">Why MASTRY</a>
         <a href="#taste" data-en="Taste" data-jp="味わい">Taste</a>
+        <a href="#matcha-trading" data-en="Matcha trade" data-jp="抹茶事業">Matcha trade</a>
         <a href="#compare" data-en="Compare" data-jp="比較">Compare</a>
         <a href="#faq" data-en="FAQ" data-jp="よくある質問">FAQ</a>
         <a href="journal/" data-en="Journal" data-jp="ジャーナル">Journal</a>
@@ -5829,7 +5926,7 @@ body.jp .sv span{font-family:var(--mincho)}
       <dt data-en="Founded" data-jp="設立">Founded</dt>
       <dd>2026</dd>
       <dt data-en="Business" data-jp="事業内容">Business</dt>
-      <dd data-en="Development, production &amp; sale of premium beverages" data-jp="清涼飲料水の企画・製造・販売">Development, production &amp; sale of premium beverages</dd>
+      <dd data-en="Premium beverage development and Japanese matcha trading" data-jp="飲料商品の企画・製造・販売、日本産抹茶のトレーディング">Premium beverage development and Japanese matcha trading</dd>
       <dt data-en="Contact" data-jp="お問い合わせ">Contact</dt>
       <dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
     </dl>
