@@ -113,7 +113,7 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
 <form class="cform" id="cform">
   <div>
     <label><span class="lang-en">Topic</span><span class="lang-jp">お問い合わせ種別</span></label>
-    <select id="ctype" required><option value="general" data-en="General inquiry" data-jp="一般のお問い合わせ">General inquiry</option><option value="wholesale" data-en="Wholesale & on-premise (bars, hotels, restaurants)" data-jp="業務用・卸（バー/ホテル/レストラン等）">Wholesale & on-premise (bars, hotels, restaurants)</option><option value="stockist" data-en="Stockist / retail" data-jp="取扱い希望（小売店）">Stockist / retail</option><option value="press" data-en="Press & media" data-jp="取材・メディア">Press & media</option><option value="partnership" data-en="Partnership" data-jp="協業・パートナーシップ">Partnership</option><option value="other" data-en="Other" data-jp="その他">Other</option></select>
+    <select id="ctype" required><option value="general" data-en="General inquiry" data-jp="一般のお問い合わせ">General inquiry</option><option value="matcha" data-en="Japanese matcha sourcing" data-jp="日本産抹茶の調達相談">Japanese matcha sourcing</option><option value="wholesale" data-en="Wholesale & on-premise (bars, hotels, restaurants)" data-jp="業務用・卸（バー/ホテル/レストラン等）">Wholesale & on-premise (bars, hotels, restaurants)</option><option value="stockist" data-en="Stockist / retail" data-jp="取扱い希望（小売店）">Stockist / retail</option><option value="press" data-en="Press & media" data-jp="取材・メディア">Press & media</option><option value="partnership" data-en="Partnership" data-jp="協業・パートナーシップ">Partnership</option><option value="other" data-en="Other" data-jp="その他">Other</option></select>
   </div>
   <div>
     <label><span class="lang-en">Name</span><span class="lang-jp">お名前</span></label>
@@ -137,8 +137,8 @@ body.jp .f-company dt{font-family:var(--mincho);text-transform:none}
 <script>
 (function(){
   var f=document.getElementById('cform');
-  // preselect wholesale if arrived via #wholesale
-  if(location.hash==='#wholesale'){var s=document.getElementById('ctype');for(var i=0;i<s.options.length;i++){if(s.options[i].value==='wholesale')s.selectedIndex=i;}}
+  // preselect the relevant business topic from an inbound page
+  if(location.hash==='#wholesale'||location.hash==='#matcha'){var s=document.getElementById('ctype');var wanted=location.hash==='#matcha'?'matcha':'wholesale';for(var i=0;i<s.options.length;i++){if(s.options[i].value===wanted)s.selectedIndex=i;}}
   // localize <option> labels with the page language (<option> can't contain lang spans)
   function locOpts(){var jp=document.body.classList.contains('jp');
     document.querySelectorAll('#ctype option').forEach(function(o){var v=o.getAttribute(jp?'data-jp':'data-en');if(v)o.textContent=v;});}
