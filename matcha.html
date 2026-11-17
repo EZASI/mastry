@@ -7,6 +7,7 @@
   <meta name="description" content="MASTRY LLC is a Japan-based beverage company and matcha trading partner connecting overseas buyers with a network of Japanese tea producers and farm owners.">
   <meta name="theme-color" content="#173628">
   <link rel="canonical" href="https://mastry.jp/matcha.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MASTRY">
   <meta property="og:title" content="Japanese Matcha Trading · MASTRY LLC">
@@ -35,7 +36,7 @@
     .lang-jp{display:none}body.jp .lang-en{display:none}body.jp .lang-jp{display:inline}
     .block.lang-jp{display:none}body.jp .block.lang-en{display:none}body.jp .block.lang-jp{display:block}
     .nav{position:fixed;inset:0 0 auto;z-index:50;height:72px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 clamp(1.2rem,5vw,4rem);border-bottom:1px solid var(--line);background:rgba(245,242,233,.88);
+      padding:0 clamp(1.2rem,5vw,4rem);border-bottom:1px solid var(--line);background:rgba(245,242,233,.94);
       -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
     .logo{font-family:var(--serif);font-size:1.45rem;font-weight:500;letter-spacing:.3em;padding-left:.3em}
     .nav-side{display:flex;align-items:center;gap:clamp(.8rem,3vw,2rem)}
@@ -53,7 +54,10 @@
     body.jp .eyebrow{font-family:var(--jp);letter-spacing:.08em;text-transform:none}
     h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,8vw,7.2rem);line-height:.92;letter-spacing:-.02em;max-width:760px}
     h1 em{display:block;color:var(--green-2);font-weight:400}
-    body.jp h1{font-family:var(--jp);font-size:clamp(2.4rem,6.5vw,5.2rem);line-height:1.28;letter-spacing:.02em}
+    body.jp h1{font-family:var(--jp);font-size:clamp(2.4rem,6.5vw,5.2rem);line-height:1.28;letter-spacing:.02em;word-break:keep-all}
+    body.jp h1 em{white-space:nowrap}
+    body.jp em{font-style:normal}
+    @media(max-width:700px){body.jp h1{font-size:min(2.6rem,8.6vw)}}
     .hero-lede{max-width:650px;margin-top:2rem;color:var(--muted);font-size:clamp(1rem,1.7vw,1.2rem);line-height:1.95}
     .hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
     .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:1rem 1.7rem;
@@ -84,7 +88,10 @@
     .section{padding:clamp(5rem,10vw,9rem) clamp(1.3rem,6vw,6rem)}
     .inner{max-width:1160px;margin:0 auto}.section-head{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,8vw,7rem);align-items:start}
     h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.7rem,5vw,4.6rem);line-height:1.02}
-    h2 em{color:var(--green-2);font-weight:400}body.jp h2{font-family:var(--jp);font-size:clamp(2rem,4vw,3.4rem);line-height:1.38}
+    h2 em{color:var(--green-2);font-weight:400}body.jp h2{font-family:var(--jp);font-size:clamp(2rem,4vw,3.4rem);line-height:1.38;word-break:keep-all}
+    body.jp h2 em{white-space:nowrap}
+    @media(max-width:700px){body.jp h2{font-size:min(2rem,7.4vw)}}
+    p,li,figcaption{line-break:strict;text-wrap:pretty}
     .section-copy{color:var(--muted);font-size:1rem;line-height:1.95;max-width:590px}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:4rem}
     .card{background:rgba(255,255,255,.52);border:1px solid var(--line);border-radius:18px;padding:2rem;min-height:250px}
@@ -167,7 +174,7 @@
           <div>
             <div class="eyebrow"><span class="lang-en">What we align</span><span class="lang-jp">選定の基準</span></div>
             <h2 class="block lang-en">The right matcha starts with<em>the right brief.</em></h2>
-            <h2 class="block lang-jp">抹茶選びは、<em>要件整理から。</em></h2>
+            <h2 class="block lang-jp">抹茶選びは、<wbr><em>要件整理から。</em></h2>
           </div>
           <p class="section-copy block lang-en">We begin with how the matcha will be used and what matters commercially. That allows us to discuss relevant producers and options without making assumptions about certifications, pricing or capacity.</p>
           <p class="section-copy block lang-jp">まず、抹茶の用途と商流上の条件を整理します。認証、価格、供給量を一方的に決めつけず、要件に応じて関連する生産者や選択肢をご相談します。</p>
@@ -186,7 +193,7 @@
           <div>
             <div class="eyebrow"><span class="lang-en">Our approach</span><span class="lang-jp">取引の進め方</span></div>
             <h2 class="block lang-en">A clear path from<em>requirement to review.</em></h2>
-            <h2 class="block lang-jp">要件確認から、<em>評価まで。</em></h2>
+            <h2 class="block lang-jp">要件確認から、<wbr><em>評価まで。</em></h2>
           </div>
           <p class="section-copy block lang-en" style="color:rgba(255,255,255,.68)">We coordinate each discussion around the buyer's actual needs. Samples and supplier details are discussed where relevant to the inquiry.</p>
           <p class="section-copy block lang-jp" style="color:rgba(255,255,255,.68)">バイヤーの実際の要件に沿って、各段階を調整します。サンプルや供給者情報は、お問い合わせ内容に応じてご相談します。</p>
@@ -203,7 +210,7 @@
       <div class="inner">
         <div class="eyebrow" style="justify-content:center"><span class="lang-en">Business inquiry</span><span class="lang-jp">法人お問い合わせ</span></div>
         <h2 class="block lang-en">Tell us what your<em>matcha needs to do.</em></h2>
-        <h2 class="block lang-jp">必要な抹茶を、<em>教えてください。</em></h2>
+        <h2 class="block lang-jp">必要な抹茶を、<wbr><em>教えてください。</em></h2>
         <p class="block lang-en">For cafés, specialty tea brands, retailers, foodservice partners and product developers seeking Japanese matcha.</p>
         <p class="block lang-jp">日本産抹茶をお探しのカフェ、茶専門ブランド、小売、外食事業者、商品開発担当者の皆さまへ。</p>
         <div class="hero-actions"><a class="btn btn-primary" href="contact.html#matcha"><span class="lang-en">Open inquiry form →</span><span class="lang-jp">問い合わせフォームを開く →</span></a></div>
@@ -224,7 +231,7 @@
         if(save){try{localStorage.setItem('mastry-lang-v2',lang)}catch(e){}}}
       en.onclick=function(){setLang('en',true)};jp.onclick=function(){setLang('jp',true)};
       var saved=null;try{saved=localStorage.getItem('mastry-lang-v2')}catch(e){}
-      if(saved!=='en'&&saved!=='jp'){saved=(navigator.language||'').toLowerCase().slice(0,2)==='ja'?'jp':'en'}
+      if(saved!=='en'&&saved!=='jp'){var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}saved=(tz==='Asia/Tokyo'||(navigator.language||'').toLowerCase().slice(0,2)==='ja')?'jp':'en'}
       setLang(saved,false);
     })();
   </script>

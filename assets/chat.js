@@ -38,6 +38,7 @@
   ".mst-form input{width:100%;box-sizing:border-box;border:1px solid #d8e0ee;border-radius:10px;padding:9px 11px;margin:5px 0;font-size:13px}" +
   ".mst-form button{width:100%;background:" + ACCENT + ";color:#fff;border:none;border-radius:10px;padding:10px;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:4px}" +
   ".mst-pow{font-size:10px;color:#9aa7b8;text-align:center;padding:4px}" +
+  "@media(max-width:560px){#mst-bubble{width:52px;height:52px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom))}#mst-bubble svg{width:24px;height:24px}#mst-panel{right:12px;bottom:calc(78px + env(safe-area-inset-bottom))}}" +
   "#mst-panel,#mst-panel *{cursor:auto !important}" +
   "#mst-in{cursor:text !important}" +
   "#mst-bubble,#mst-bubble *,.mst-chip,#mst-send,#mst-x,.mst-form button,.mst-msg a{cursor:pointer !important}";
@@ -45,7 +46,8 @@
 
   // ---------- DOM ----------
   var bubble = document.createElement("div"); bubble.id = "mst-bubble";
-  bubble.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.4 4.7 3.6 6.1L5 21l4.2-2.1c.9.2 1.8.3 2.8.3 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg><span id="mst-badge">1</span>';
+  bubble.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.4 4.7 3.6 6.1L5 21l4.2-2.1c.9.2 1.8.3 2.8.3 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>';
+  bubble.setAttribute("role", "button"); bubble.setAttribute("tabindex", "0"); bubble.setAttribute("aria-label", "チャットで質問する / Chat with MASTRY");
   document.body.appendChild(bubble);
 
   var panel = document.createElement("div"); panel.id = "mst-panel";
@@ -238,6 +240,7 @@
     if(!greeted){greeted=true; onboard();}
   }
   bubble.onclick=function(){ panel.classList.contains("open")?panel.classList.remove("open"):open(); };
+  bubble.onkeydown=function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); bubble.onclick(); } };
   panel.querySelector("#mst-x").onclick=function(){panel.classList.remove("open");};
 
   // チャット操作中はサイトのカスタムカーソル(リング/ドット)を隠す（カーソルのちらつき防止）
