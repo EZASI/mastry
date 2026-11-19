@@ -28,9 +28,9 @@
 <meta name="twitter:title" content="プレス｜MASTRY" />
 <meta name="twitter:description" content="MASTRYのプレス・メディア向け情報とブランド概要。取材のお問い合わせはこちら。" />
 <meta name="twitter:image" content="https://mastry.jp/assets/og.jpg" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap&subset=greek,latin,japanese"></noscript>
 <style>
 :root{--ink:#fff;--bone:#0c1a2b;--bone-dim:#5a6b80;--resin:#2563eb;--resin-deep:#174394;--line:rgba(37,99,235,.16);
 --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;--mono:'Space Mono',monospace;--mincho:'Zen Old Mincho',serif;--ease:cubic-bezier(.16,1,.3,1)}
@@ -49,8 +49,8 @@ padding:0 clamp(1.2rem,4vw,3.5rem);background:rgba(255,255,255,.96);-webkit-back
 .nav-right{display:flex;align-items:center;gap:1.4rem}
 .nav-home{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#3b4a5e;padding:.7rem 0;white-space:nowrap}
 body.jp .nav-home{font-family:var(--mincho);font-size:.88rem;letter-spacing:.1em;text-transform:none}
-.langsw{display:flex;gap:.3rem;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
-.langsw button{background:none;border:none;cursor:pointer;color:var(--bone-dim);font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:.7rem .25rem}
+.langsw{display:flex;gap:0;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.langsw button{background:none;border:none;cursor:pointer;color:var(--bone-dim);font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:0 .5rem;min-height:44px}
 .langsw button.active{color:var(--resin)}.langsw .sep{color:var(--bone-dim);opacity:.4}
 @media(max-width:560px){.nav{padding-left:1.2rem;padding-right:.9rem}.logo{font-size:1.2rem;letter-spacing:.28em}.logo .mono{width:24px;height:24px}.nav-right{gap:.9rem}}
 @media(max-width:350px){.nav-home{display:none}}
@@ -83,9 +83,9 @@ font-family:var(--sans);font-size:.8rem;letter-spacing:.18em;text-transform:uppe
 footer{border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) clamp(1.3rem,5vw,3.5rem) 6.5rem;background:#f7f9fc}
 .f-cols{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem 1.4rem}
 @media(max-width:600px){.f-cols{grid-template-columns:1fr 1fr;gap:2.2rem 1.2rem}}
-.f-col h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.9rem}
-body.jp .f-col h4{font-family:var(--mincho);letter-spacing:.12em;font-size:.72rem}
-.f-col a{display:block;font-size:.85rem;color:var(--bone-dim);margin:.55rem 0;line-height:1.4}
+.f-col h2{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--resin);font-weight:400;margin-bottom:.9rem}
+body.jp .f-col h2{font-family:var(--mincho);letter-spacing:.12em;font-size:.72rem}
+.f-col a{display:block;font-size:.85rem;color:var(--bone-dim);margin:0;padding:.275rem 0;line-height:1.4}
 body.jp .f-col a{font-family:var(--mincho)}
 .f-col a:hover{color:var(--bone);text-decoration:none}
 .f-company{max-width:1100px;margin:2.6rem auto 0;padding-top:2rem;border-top:1px solid var(--line);
@@ -109,19 +109,30 @@ p,li{text-wrap:pretty}
 .doc p a,.doc li a,.doc dd a{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px}
 .doc-sec dl{grid-template-columns:minmax(5.5rem,max-content) 1fr}
 .doc-sec dd{overflow-wrap:anywhere}
+@media(max-width:560px){.doc-sec dt{max-width:8rem}}
+/* shared frame (fix pass 2026-11-19) */
+:focus-visible{outline:2px solid var(--resin);outline-offset:3px}
+.nav-cta{font-family:var(--sans);font-size:.72rem;line-height:1.6;letter-spacing:.22em;text-transform:uppercase;font-weight:400;white-space:nowrap;color:var(--bone);border:1px solid rgba(37,99,235,.4);padding:.55rem 1.2rem;border-radius:40px;transition:border-color .3s,background-color .3s}
+.nav-cta:hover{border-color:var(--resin);background:rgba(37,99,235,.08);text-decoration:none}
+body.jp .nav-cta{font-family:var(--mincho);font-size:.88rem;letter-spacing:.12em;text-transform:none}
+@media(max-width:560px){.nav-cta{display:none}}
+@media(hover:hover){.langsw button:not(.active):hover{color:var(--bone)}}
+.f-col a .lang-jp,.f-company dd .lang-jp{word-break:keep-all;overflow-wrap:anywhere}
+@media (min-width:821px){body:not(.jp) .doc{max-width:656px}body:not(.jp) .doc-sec p,body:not(.jp) .doc-body p,body:not(.jp) .doc-sec li{font-size:1.0625rem}}
 </style>
 </head>
 <body>
 <script>/* language: the visitor's saved choice; otherwise Japan time or a Japanese browser means Japanese. Set before anything is drawn. */
 (function(){var l=null;try{l=localStorage.getItem('mastry-lang-v2')}catch(e){}
 if(l!=='en'&&l!=='jp'){var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
-l=(tz==='Asia/Tokyo'||(navigator.language||'').toLowerCase().slice(0,2)==='ja')?'jp':'en';}
+l=(tz==='Asia/Tokyo'||(navigator.language||'').toLowerCase().slice(0,2)==='ja'||/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))?'jp':'en';}
 document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.classList.add('jp');})();</script>
-<nav class="nav" aria-label="Primary">
+<nav class="nav" aria-label="Primary" data-label-en="Primary" data-label-jp="メインメニュー">
   <a class="logo" href="index.html"><span class="mono"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="50" cy="23" r="1.9" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg></span>MASTRY</a>
   <div class="nav-right">
-    <a class="nav-home" href="index.html"><span class="lang-en">← Home</span><span class="lang-jp">← ホーム</span></a>
-    <div class="langsw" role="group" aria-label="Language"><button id="enBtn" type="button">EN</button><span class="sep" aria-hidden="true">/</span><button id="jpBtn" type="button">JP</button></div>
+    <a class="nav-home" href="index.html"><span class="lang-en"><span aria-hidden="true">←</span> Home</span><span class="lang-jp"><span aria-hidden="true">←</span> ホーム</span></a>
+    <a class="nav-cta" href="index.html#offer"><span class="lang-en">Reserve</span><span class="lang-jp">先行登録</span></a>
+    <div class="langsw" role="group" aria-label="Language" data-label-en="Language" data-label-jp="言語"><button id="enBtn" type="button">EN</button><span class="sep" aria-hidden="true">/</span><button id="jpBtn" type="button">JP</button></div>
   </div>
 </nav>
 <main class="doc">
@@ -131,19 +142,19 @@ document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.cla
 
   <section class="doc-sec">
     <h2>About MASTRY</h2>
-    <p>MASTRY is a premium non-alcoholic sparkling water crafted from two extraordinary ingredients: Protected Designation of Origin (PDO) mastiha resin from Chios, Greece — one of the world's rarest and most storied botanicals — and pure spring water sourced in Japan. The result is a zero-sugar, zero-additive sparkling water with a clean, subtly aromatic character that stands apart from conventional waters and wellness drinks alike.</p>
-    <p>Founded in Yokohama, Japan, MASTRY is built for those who seek depth in what they drink — without compromise. The brand is currently in pre-launch, accepting founding members ahead of its inaugural release.</p>
+    <p>MASTRY is a premium non-alcoholic sparkling water built on two extraordinary ingredients: Protected Designation of Origin (PDO) mastiha resin from Chios, Greece — a rare botanical with a long history — and pure spring water sourced in Japan. The result is a sparkling water with no sugar, sweeteners or preservatives and a clean, subtly aromatic character that stands apart from conventional waters and wellness drinks alike.</p>
+    <p>Founded in Yokohama, Japan, MASTRY is built for those who seek depth in what they drink — without compromise. The brand is currently in pre-launch, accepting Founding Members ahead of its inaugural release.</p>
   </section>
 
   <section class="doc-sec">
     <h2>Brand at a Glance</h2>
     <ul>
       <li><strong>Category:</strong> Premium non-alcoholic sparkling water</li>
-      <li><strong>Key ingredient:</strong> Chios mastiha resin (PDO, Greece) — a rare botanical with 2,500+ years of documented use</li>
+      <li><strong>Key ingredient:</strong> Chios mastiha resin (PDO, Greece) — a rare botanical with 2,500 years of documented use</li>
       <li><strong>Water source:</strong> Japanese natural spring water</li>
-      <li><strong>Additives / sugar / alcohol:</strong> None</li>
-      <li><strong>Origin:</strong> Japan-founded; globally inspired</li>
-      <li><strong>Stage:</strong> Pre-launch — founding members registration open</li>
+      <li><strong>Sugar / sweeteners / preservatives:</strong> None&nbsp;· <strong>Alcohol:</strong> 0.00%</li>
+      <li><strong>Based in:</strong> Yokohama, Japan</li>
+      <li><strong>Stage:</strong> Pre-launch — Founding Member registration open</li>
       <li><strong>Website:</strong> <a href="https://mastry.jp">mastry.jp</a></li>
       <li><strong>General contact:</strong> <a href="mailto:hello@mastry.jp">hello@mastry.jp</a></li>
     </ul>
@@ -167,13 +178,12 @@ document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.cla
 
   <section class="doc-sec">
     <h2>Press Kit</h2>
-    <p>A full press kit — including high-resolution product photography, brand logos, usage guidelines, and founder biography — is available on request ahead of publication. To receive assets, please contact us via the <strong>Press / Media inquiry type</strong> on our contact form, or email <a href="mailto:hello@mastry.jp">hello@mastry.jp</a> with your publication name and deadline.</p>
-    <p>A downloadable press kit will be made available on this page at launch.</p>
+    <p>A full press kit — including high-resolution product photography, brand logos, usage guidelines, and founder biography — is available on request ahead of publication. To receive assets, please contact us via the <strong>“Press &amp; media” topic</strong> on our contact form, or email <a href="mailto:hello@mastry.jp">hello@mastry.jp</a> with your publication name and deadline.</p>
   </section>
 
   <section class="doc-sec">
-    <h2>Media Inquiries</h2>
-    <p>For interview requests, product samples, photography access, or editorial questions, please use the <strong>"Press / Media"</strong> category on our <a href="contact.html">contact form</a>. We aim to respond to all media enquiries within two business days.</p>
+    <h2>Media Enquiries</h2>
+    <p>For interview requests, product samples, photography access, or editorial questions, please use the <strong>“Press &amp; media”</strong> category on our <a href="contact.html">contact form</a>. We aim to respond to all media enquiries within two business days.</p>
     <ul>
       <li>Feature articles &amp; brand profiles</li>
       <li>Product reviews &amp; tasting events</li>
@@ -185,29 +195,29 @@ document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.cla
 
   <section class="doc-sec">
     <h2>Boilerplate — About MASTRY</h2>
-    <p>MASTRY (MASTRY合同会社) is a Yokohama-based premium non-alcoholic sparkling water brand founded on a belief that the finest drinks need nothing added — only the right ingredients. MASTRY combines PDO-certified Chios mastiha, one of the Mediterranean's most prized and ancient botanicals, with Japanese spring water to create a zero-sugar, zero-additive sparkling water of rare character. The brand is currently in pre-launch, with a founding-membership programme open at <a href="https://mastry.jp">mastry.jp</a>.</p>
+    <p>MASTRY (MASTRY合同会社) is a Yokohama-based premium non-alcoholic sparkling water brand founded on a belief that the finest drinks need nothing more than the right ingredients. MASTRY combines PDO-certified Chios mastiha, one of the Mediterranean's most prized and ancient botanicals, with Japanese spring water to create a sparkling water of rare character, with no sugar, sweeteners or preservatives. The brand is currently in pre-launch, with Founding Member registration open at <a href="https://mastry.jp/#offer">mastry.jp</a>.</p>
   </section>
 </div>
 
 <div class="lang-jp">
   <h1 class="doc-title">プレス・メディアの方へ</h1>
-  <p class="doc-lede">MASTRYは、ギリシャ・ヒオス島産の希少なマスティハ（PDO認証）と日本の天然水から生まれたプレミアムノンアルコールスパークリングウォーターです。この唯一無二のストーリーをお伝えいただけるメディアの方からのご連絡をお待ちしています。</p>
+  <p class="doc-lede">MASTRYは、ギリシャ・ヒオス島産の希少なマスティハ（PDO認証）と日本の湧水から生まれたプレミアムノンアルコールスパークリングウォーターです。この唯一無二のストーリーをお伝えいただけるメディアの方からのご連絡をお待ちしています。</p>
 
   <section class="doc-sec">
     <h2>MASTRYについて</h2>
-    <p>MASTRYは、二つの特別な素材から生まれています。ひとつは、2,500年以上の歴史を持つギリシャ・ヒオス島産のマスティハ樹脂（原産地名称保護制度／PDO認証取得）。もうひとつは、日本の自然が育んだ清澄な天然水。この二つを組み合わせ、砂糖不使用・無添加のスパークリングウォーターを作り上げました。</p>
-    <p>神奈川県横浜市に拠点を置くMASTRYは、「妥協なく、深みのある一杯」を求める方のために生まれたブランドです。現在はプレローンチ段階として、創業メンバー（ファウンディングメンバー）の登録を受け付けています。</p>
+    <p>MASTRYは、二つの特別な素材から生まれています。ひとつは、<span style="white-space:nowrap">2,500年</span>の歴史を持つギリシャ・ヒオス島産のマスティハ（原産地名称保護制度／PDO認証取得）。もうひとつは、日本の自然が育んだ清らかな湧水。この二つを組み合わせ、砂糖・甘味料不使用のスパークリングウォーターを作り上げました。</p>
+    <p>神奈川県横浜市に拠点を置くMASTRYは、「妥協なく、深みのある一杯」を求める方のために生まれたブランドです。現在はプレローンチ段階として、先行販売の登録を受け付けています。</p>
   </section>
 
   <section class="doc-sec">
     <h2>ブランド概要</h2>
     <ul>
       <li><strong>カテゴリー：</strong>プレミアムノンアルコールスパークリングウォーター</li>
-      <li><strong>主原料：</strong>ヒオス産マスティハ樹脂（ギリシャ・PDO認証）— 2,500年以上の歴史をもつ希少植物由来</li>
-      <li><strong>水源：</strong>日本の天然水</li>
-      <li><strong>添加物・砂糖・アルコール：</strong>不使用</li>
-      <li><strong>設立地：</strong>神奈川県横浜市（グローバルインスパイア）</li>
-      <li><strong>現在のステータス：</strong>プレローンチ（ファウンディングメンバー登録受付中）</li>
+      <li><strong>主原料：</strong>ヒオス島産マスティハ（ギリシャ・PDO認証）— <span style="white-space:nowrap">2,500年</span>の歴史をもつ希少植物由来</li>
+      <li><strong>水源：</strong>日本の湧水（軟水）</li>
+      <li><strong>砂糖・甘味料・保存料：</strong>不使用／<strong>アルコール：</strong>0.00%</li>
+      <li><strong>拠点：</strong>神奈川県横浜市</li>
+      <li><strong>現在のステータス：</strong>プレローンチ（先行販売の登録受付中）</li>
       <li><strong>ウェブサイト：</strong><a href="https://mastry.jp">mastry.jp</a></li>
       <li><strong>一般お問い合わせ：</strong><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></li>
     </ul>
@@ -232,7 +242,6 @@ document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.cla
   <section class="doc-sec">
     <h2>プレスキット</h2>
     <p>高解像度の商品写真、ブランドロゴ、ロゴ使用ガイドライン、代表者プロフィールなどをまとめたプレスキットは、掲載・放映前のメディア関係者の方へご提供しています。ご希望の方は、<a href="contact.html">お問い合わせフォーム</a>の種別「<strong>取材・メディア</strong>」よりご連絡ください。その際、媒体名・掲載予定日をお知らせいただけますと、スムーズにご対応できます。</p>
-    <p>プレスキットのダウンロードページは、ローンチ時に公開予定です（準備中）。</p>
   </section>
 
   <section class="doc-sec">
@@ -249,54 +258,85 @@ document.documentElement.lang=(l==='jp')?'ja':'en';if(l==='jp')document.body.cla
 
   <section class="doc-sec">
     <h2>ボイラープレート（媒体掲載用）</h2>
-    <p>MASTRY（MASTRY合同会社）は、神奈川県横浜市に拠点を置くプレミアムノンアルコールスパークリングウォーターブランドです。ギリシャ・ヒオス島産のPDO認証マスティハ樹脂と日本の天然水のみを使用し、砂糖・添加物不使用の唯一無二のスパークリングウォーターを提供します。現在プレローンチ中。ファウンディングメンバー登録は <a href="https://mastry.jp">mastry.jp</a> にて受付中。</p>
+    <p>MASTRY（MASTRY合同会社）は、神奈川県横浜市に拠点を置くプレミアムノンアルコールスパークリングウォーターブランドです。ギリシャ・ヒオス島産のPDO認証マスティハと日本の湧水、炭酸だけでつくる、砂糖・甘味料不使用のスパークリングウォーターを提供します。現在プレローンチ中。先行販売の登録は <a href="https://mastry.jp/#offer">mastry.jp</a> にて受付中。</p>
   </section>
 </div>
 </main>
 <footer>
-  <div class="f-cols">
-    <div class="f-col"><h4><span class="lang-en">Explore</span><span class="lang-jp">知る</span></h4>
+  <nav class="f-cols" aria-label="Footer" data-label-en="Footer" data-label-jp="フッター">
+    <div class="f-col"><h2><span class="lang-en">Explore</span><span class="lang-jp">知る</span></h2>
       <a href="index.html#mechanism"><span class="lang-en">Why MASTRY</span><span class="lang-jp">特長</span></a>
       <a href="index.html#taste"><span class="lang-en">Taste</span><span class="lang-jp">味わい</span></a>
       <a href="index.html#compare"><span class="lang-en">Compare</span><span class="lang-jp">比較</span></a>
-      <a href="story.html"><span class="lang-en">Brand story</span><span class="lang-jp">ブランドストーリー</span></a>
-      <a href="journal/"><span class="lang-en">Journal</span><span class="lang-jp">ジャーナル</span></a>
+      <a href="story.html"><span class="lang-en">Brand story</span><span class="lang-jp">ブランド<wbr>ストーリー</span></a>
+      <a href="journal/"><span class="lang-en">Journal (Japanese)</span><span class="lang-jp">ジャーナル</span></a>
       <a href="dive.html"><span class="lang-en">The Dive</span><span class="lang-jp">THE DIVE — 潜る</span></a></div>
-    <div class="f-col"><h4><span class="lang-en">Company</span><span class="lang-jp">企業情報</span></h4>
+    <div class="f-col"><h2><span class="lang-en">Company</span><span class="lang-jp">企業情報</span></h2>
       <a href="about.html"><span class="lang-en">About us</span><span class="lang-jp">私たちについて</span></a>
       <a href="sustainability.html"><span class="lang-en">Sustainability</span><span class="lang-jp">サステナビリティ</span></a>
       <a href="press.html"><span class="lang-en">Press &amp; media</span><span class="lang-jp">プレス</span></a>
       <a href="matcha.html"><span class="lang-en">Matcha trade</span><span class="lang-jp">抹茶事業</span></a></div>
-    <div class="f-col"><h4><span class="lang-en">Support</span><span class="lang-jp">サポート</span></h4>
+    <div class="f-col"><h2><span class="lang-en">Support</span><span class="lang-jp">サポート</span></h2>
       <a href="contact.html"><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></a>
       <a href="faq.html"><span class="lang-en">FAQ</span><span class="lang-jp">よくある質問</span></a>
       <a href="contact.html#wholesale"><span class="lang-en">Wholesale</span><span class="lang-jp">業務用・卸</span></a>
       <a href="shipping.html"><span class="lang-en">Shipping &amp; returns</span><span class="lang-jp">配送・返品</span></a></div>
-    <div class="f-col"><h4><span class="lang-en">Legal</span><span class="lang-jp">法務</span></h4>
-      <a href="privacy.html"><span class="lang-en">Privacy policy</span><span class="lang-jp">プライバシーポリシー</span></a>
+    <div class="f-col"><h2><span class="lang-en">Legal</span><span class="lang-jp">法務</span></h2>
+      <a href="privacy.html"><span class="lang-en">Privacy policy</span><span class="lang-jp">プライバシー<wbr>ポリシー</span></a>
       <a href="terms.html"><span class="lang-en">Terms of service</span><span class="lang-jp">利用規約</span></a>
-      <a href="tokushoho.html"><span class="lang-en">Commercial transactions</span><span class="lang-jp">特定商取引法に基づく表記</span></a>
+      <a href="tokushoho.html"><span class="lang-en">Commercial transactions</span><span class="lang-jp">特定商取引法に<wbr>基づく表記</span></a>
       <a href="cookies.html"><span class="lang-en">Cookie policy</span><span class="lang-jp">Cookieポリシー</span></a></div>
-  </div>
+  </nav>
   <dl class="f-company">
     <dt><span class="lang-en">Operated by</span><span class="lang-jp">運営会社</span></dt><dd>MASTRY合同会社 — MASTRY LLC</dd>
+    <dt><span class="lang-en">Address</span><span class="lang-jp">所在地</span></dt><dd><span class="lang-en">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</span><span class="lang-jp">〒227-0036 神奈川県横浜市青葉区<wbr>奈良町2762-121</span></dd>
     <dt><span class="lang-en">Representative</span><span class="lang-jp">代表者</span></dt><dd>Alison Tong</dd>
-    <dt><span class="lang-en">Address</span><span class="lang-jp">所在地</span></dt><dd><span class="lang-en">2762-121 Narachō, Aoba-ku, Yokohama, Kanagawa 227-0036, Japan</span><span class="lang-jp">〒227-0036 神奈川県横浜市青葉区奈良町2762-121</span></dd>
+    <dt><span class="lang-en">Founded</span><span class="lang-jp">設立</span></dt><dd>2026</dd>
+    <dt><span class="lang-en">Business</span><span class="lang-jp">事業内容</span></dt><dd><span class="lang-en">Premium beverage development and Japanese matcha trading</span><span class="lang-jp">飲料商品の企画・製造・販売、<wbr>日本産抹茶の<wbr>トレーディング</span></dd>
     <dt><span class="lang-en">Contact</span><span class="lang-jp">お問い合わせ</span></dt><dd><a href="mailto:hello@mastry.jp">hello@mastry.jp</a></dd>
   </dl>
-  <div class="f-bottom">© MMXXVI MASTRY合同会社 · TEARS OF THE TREE · μαστίχα × 湧水</div>
+  <div class="f-bottom">© MMXXVI MASTRY合同会社 · TEARS OF THE TREE · <span lang="el">μαστίχα</span> × 湧水</div>
 </footer>
+<script src="assets/ja-lastline.js?v=1"></script>
 <script>
 (function(){
   var EN=document.getElementById('enBtn'),JP=document.getElementById('jpBtn');
   function show(){var jp=document.body.classList.contains('jp');EN.classList.toggle('active',!jp);JP.classList.toggle('active',jp);
-    EN.setAttribute('aria-pressed',!jp);JP.setAttribute('aria-pressed',jp);}
+    EN.setAttribute('aria-pressed',!jp);JP.setAttribute('aria-pressed',jp);
+    var l=jp?'jp':'en';document.querySelectorAll('[data-label-'+l+']').forEach(function(el){el.setAttribute('aria-label',el.getAttribute('data-label-'+l));});
+    if(jp&&window.mastryLastLine)mastryLastLine('.lang-jp');}
   function set(l){document.documentElement.lang=(l==='jp')?'ja':'en';document.body.classList.toggle('jp',l==='jp');
     try{localStorage.setItem('mastry-lang-v2',l)}catch(e){}show();}
   EN.onclick=function(){set('en')};JP.onclick=function(){set('jp')};show();
 })();
 </script>
-<script defer src="/assets/chat-qa.js?v=7"></script>
-<script defer src="/assets/chat.js?v=7"></script>
+<script>/* Japanese document headings break between phrases, never inside a word: the journal's rules, plus kanji compounds, katakana+kanji compounds, どの+word and short bracketed groups stay attached */
+(function(){if(!window.Intl||!Intl.Segmenter)return;var seg=new Intl.Segmenter('ja',{granularity:'word'});
+function glue(p,w,last){if(!p)return true;
+if(/[\u2014\u2015]$/.test(p)&&!/^[\u3001\u3002\u300D\u300F\uFF09)\]\u3011\u2026\u2014\u2015]/.test(w))return false;
+if(/^[\u3001\u3002\uFF0C\uFF0E\u30FB\uFF1A\uFF1B\uFF01\uFF1F!?\u300D\u300F\uFF09)\]\u3011\u3009\u300B\u2026\u2014\u2015\u30FC\uFF5E\s%\uFF05]/.test(w))return true;
+if(/[\u300C\u300E\uFF08(\[\u3010\u3008\u300A\s]$/.test(p))return true;
+if(/^[\u3053\u305D\u3042\u3069]\u306E$/.test(w))return false;
+if(/^[\u3041-\u309F]{1,2}$/.test(w))return true;
+if(/^[\u3041\u3043\u3045\u3047\u3049\u3063\u3083\u3085\u3087\u308E]/.test(w))return true;
+if(/[\u30A0-\u30FF]$/.test(p)&&/^[\u30A0-\u30FF]/.test(w))return true;
+if(/^[\u304A\u3054]$/.test(p))return true;
+if(/^[\u4E00-\u9FFF]$/.test(w)&&/[\u4E00-\u9FFF\u30A0-\u30FF]$/.test(p))return true;
+if(/^[\u4E00-\u9FFF]/.test(w)&&/[\u4E00-\u9FFF\u30A0-\u30FF]$/.test(p))return true;
+if(/^[\u3053\u305D\u3042\u3069]\u306E$/.test(p))return true;
+if(/^[\u4E00-\u9FFF]$/.test(p)&&/^[\u3041-\u309F]/.test(w))return true;
+if(/[0-9A-Za-z.]$/.test(p)&&/^[0-9A-Za-z.]/.test(w))return true;
+if(/[0-9]$/.test(p))return true;
+return last&&w.length<=2;}
+document.querySelectorAll('.lang-jp .doc-title,.lang-jp .doc-sec h2').forEach(function(el){
+if(el.children.length){if(!el.querySelector(':not(wbr)')){el.style.wordBreak='keep-all';el.style.overflowWrap='anywhere';}return;}
+var t=el.textContent,ws=Array.from(seg.segment(t)).map(function(s){return s.segment;}),li=ws.length-1,inb=[],m,re=/[\u300C\u300E\uFF08(][^\u300C\u300E\uFF08(\u300D\u300F\uFF09)]{1,12}[\u300D\u300F\uFF09)]/g,off=0;
+while(m=re.exec(t))inb.push([m.index,m.index+m[0].length]);
+function inside(o){for(var k=0;k<inb.length;k++)if(o>inb[k][0]&&o<inb[k][1])return true;return false;}
+while(li>0&&/^[\u3001\u3002\uFF01\uFF1F!?\u300D\u300F\uFF09)\s]+$/.test(ws[li]))li--;
+var out='';ws.forEach(function(w,i){out+=(inside(off)||glue(ws[i-1],w,i>=li)?'':'<wbr>')+w.replace(/&/g,'&amp;').replace(/</g,'&lt;');off+=w.length;});
+el.innerHTML=out.split('<wbr>').map(function(c){return /^[\u300C\u300E\uFF08(]/.test(c)?'<span style="white-space:nowrap">'+c+'</span>':c;}).join('<wbr>').replace(/\u2014\u2014/g,'<span style="white-space:nowrap">\u2014\u2014</span>');el.style.wordBreak='keep-all';el.style.overflowWrap='anywhere';});})();</script>
+<script defer src="/assets/chat-qa.js?v=8"></script>
+<script defer src="/assets/chat.js?v=8"></script>
 </body>
 </html>

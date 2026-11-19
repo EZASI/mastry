@@ -20,7 +20,7 @@ if(!lang){try{var sv=localStorage.getItem('mastry-lang-v2');if(sv==='en'||sv==='
 if(!lang){
   var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';}catch(e){}
   var nv=(navigator.language||'').toLowerCase();
-  lang=(tz==='Asia/Tokyo'||nv.slice(0,2)==='ja')?'jp':'en';
+  lang=(tz==='Asia/Tokyo'||nv.slice(0,2)==='ja'||/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))?'jp':'en';
 }
 if(lang==='en'){
   root.lang='en';

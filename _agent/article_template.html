@@ -10,10 +10,13 @@
 <meta property="og:description" content="{{DESCRIPTION}}">
 <meta property="og:image" content="https://mastry.jp/assets/og.jpg">
 <meta property="og:type" content="article">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{TITLE}}","description":"{{DESCRIPTION}}","datePublished":"{{DATE}}","author":{"@type":"Organization","name":"MASTRY合同会社"},"publisher":{"@type":"Organization","name":"MASTRY合同会社","logo":{"@type":"ImageObject","url":"https://mastry.jp/assets/og.jpg"}},"mainEntityOfPage":"https://mastry.jp/journal/{{SLUG}}.html"}</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E">
+<meta property="og:url" content="https://mastry.jp/journal/{{SLUG}}.html">
+<meta property="og:site_name" content="MASTRY">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"{{TITLE}}","description":"{{DESCRIPTION}}","datePublished":"{{DATE}}","author":{"@type":"Organization","name":"MASTRY合同会社"},"publisher":{"@type":"Organization","name":"MASTRY合同会社","logo":{"@type":"ImageObject","url":"https://mastry.jp/assets/logo-512.png"}},"image":"https://mastry.jp/assets/og.jpg","mainEntityOfPage":"https://mastry.jp/journal/{{SLUG}}.html"}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Old+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Old+Mincho:wght@400;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Old+Mincho:wght@400;600&display=swap"></noscript>
 <style>
   :root{--ink:#0e1b2c;--dim:#5a6b80;--line:#dbe3ee;--accent:#2563eb}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -36,25 +39,32 @@
   .cta{margin-top:54px;padding:30px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center}
   .cta p{font-size:.92rem;color:var(--dim);margin-bottom:16px}
   .cta a{display:inline-block;padding:12px 34px;background:var(--accent);color:#fff;text-decoration:none;border-radius:999px;font-size:.9rem;letter-spacing:.12em}
+  .cta a{white-space:nowrap} .cta p{word-break:keep-all;overflow-wrap:anywhere} @media(max-width:380px){.cta{padding:26px 16px}.cta a{padding:12px 22px;letter-spacing:.08em}}
+  article p a,article li a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.3em;text-decoration-color:rgba(37,99,235,.35)} article p a:visited,article li a:visited{color:var(--accent)}
   footer{text-align:center;font-size:.78rem;color:var(--dim);padding:40px 20px 6rem;letter-spacing:.1em;line-height:2.2}
-  footer a{color:var(--dim)}
+  footer a{color:var(--dim);white-space:nowrap}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media(hover:hover){.back:hover{color:var(--accent)} footer a:hover{color:var(--ink)}}
 </style>
 </head>
 <body>
-<header><a class="logo" href="/" aria-label="MASTRY ホーム"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="50" cy="23" r="1.9" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg>MASTRY</a><a class="back" href="/journal/">← ジャーナル一覧</a></header>
+<header><a class="logo" href="/" aria-label="MASTRY ホーム"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="50" cy="23" r="1.9" fill="currentColor"/><path d="M31 71 L31 33 L50 53 L69 33 L69 71" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z" fill="currentColor"/></svg>MASTRY</a><a class="back" href="/journal/"><span aria-hidden="true">←</span> ジャーナル一覧</a></header>
+<main>
 <article>
   <time datetime="{{DATE}}">{{DATE_DISPLAY}}</time>
   <h1>{{TITLE}}</h1>
   {{BODY}}
   <div class="cta">
-    <p>MASTRY — ギリシャ・ヒオス島のマスティハ × 日本の湧水。<br>数量限定の初回ロットを先行販売中です。</p>
-    <a href="/#offer">先行販売に登録する →</a>
+    <p>MASTRY — ギリシャ・<wbr>ヒオス島の<wbr>マスティハ × <wbr>日本の湧水。<br>数量限定の<wbr>初回ロット、<wbr>先行販売の登録を<wbr>受付中です。</p>
+    <a href="/#offer">先行販売に登録する <span aria-hidden="true">→</span></a>
   </div>
 </article>
-<footer><a href="/">ホーム</a> · <a href="/journal/">ジャーナル</a> · <a href="/story.html">ブランドストーリー</a> · <a href="/contact.html">お問い合わせ</a><br>© MMXXVI MASTRY合同会社</footer>
+</main>
+<footer><a href="/">ホーム</a> · <a href="/journal/">ジャーナル</a> · <a href="/story.html">ブランドストーリー</a> · <a href="/contact.html">お問い合わせ</a><br><a href="/privacy.html">プライバシーポリシー</a> · <a href="/tokushoho.html">特定商取引法に基づく表記</a><br>© MMXXVI MASTRY合同会社</footer>
+<script src="../assets/ja-lastline.js?v=1"></script>
 <script>/* Japanese headings break between phrases, never inside a word: particles, katakana words, one-kanji suffixes and the last short word stay attached */
 (function(){if(!window.Intl||!Intl.Segmenter)return;var seg=new Intl.Segmenter('ja',{granularity:'word'});
-function glue(p,w,last){if(!p)return true;
+function glue(p,w,last){if(!p)return true;if(p==='ただ'&&/^ひと/.test(w))return true;
 if(/[\u2014\u2015]$/.test(p)&&!/^[\u3001\u3002\u300D\u300F\uFF09)\]\u3011\u2026\u2014\u2015]/.test(w))return false;
 if(/^[\u3001\u3002\uFF0C\uFF0E\u30FB\uFF1A\uFF1B\uFF01\uFF1F!?\u300D\u300F\uFF09)\]\u3011\u3009\u300B\u2026\u2014\u2015\u30FC\uFF5E\s%\uFF05]/.test(w))return true;
 if(/[\u300C\u300E\uFF08(\[\u3010\u3008\u300A\s]$/.test(p))return true;
@@ -69,7 +79,9 @@ return last&&w.length<=2;}
 document.querySelectorAll('h1,h2,.lede').forEach(function(el){if(el.children.length)return;
 var ws=Array.from(seg.segment(el.textContent)).map(function(s){return s.segment;}),li=ws.length-1;
 while(li>0&&/^[\u3001\u3002\uFF01\uFF1F!?\u300D\u300F\uFF09)\s]+$/.test(ws[li]))li--;
-var out='';ws.forEach(function(w,i){out+=(glue(ws[i-1],w,i>=li)?'':'<wbr>')+w.replace(/&/g,'&amp;').replace(/</g,'&lt;');});
-el.innerHTML=out;el.style.wordBreak='keep-all';el.style.overflowWrap='anywhere';});})();</script>
+var q=[],o=-1;ws.forEach(function(w,i){if(/^[\u300C\u300E]$/.test(w))o=i;else if(o>=0&&/^[\u300D\u300F]$/.test(w)){if(ws.slice(o+1,i).join('').length<=5)for(var k=o+1;k<=i;k++)q[k]=1;o=-1;}});
+var out='';ws.forEach(function(w,i){out+=(q[i]||glue(ws[i-1],w,i>=li)?'':'<wbr>')+w.replace(/&/g,'&amp;').replace(/</g,'&lt;');});
+el.innerHTML=out.split('<wbr>').map(function(c){c=c.replace(/[\u300D\u300F][\u3041-\u309F]{1,2}/g,function(m){return '<span style="white-space:nowrap">'+m+'</span>';});return /^[「『（(]/.test(c)?'<span style="white-space:nowrap">'+c+'</span>':c;}).join('<wbr>').replace(/——/g,'<span style="white-space:nowrap">——</span>');el.style.wordBreak='keep-all';el.style.overflowWrap='anywhere';});})();
+if(window.mastryLastLine)mastryLastLine('main');</script>
 </body>
 </html>

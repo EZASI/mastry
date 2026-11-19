@@ -2,6 +2,15 @@
 <html lang="ja" data-tone="light">
 <head>
 <meta charset="UTF-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZRJDDMG45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  var R=null;try{R=sessionStorage.getItem('mastry-entry-ref');sessionStorage.removeItem('mastry-entry-ref')}catch(e){}
+  gtag('config', 'G-8ZRJDDMG45', R!==null?{page_referrer:R}:{});
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>MASTRY — The Dive</title>
 <meta name="description" content="MASTRY The Dive — スクロールで海へ。水面から、木の涙の深さまで。" />
@@ -12,7 +21,8 @@
 <meta property="og:url" content="https://mastry.jp/dive.html" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#c9ebff" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%232563eb' stroke-width='4'/%3E%3Ccircle cx='50' cy='23' r='3' fill='%232563eb'/%3E%3Cpath d='M31 71 L31 33 L50 53 L69 33 L69 71' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50 51 C45 61 45 70 50 75 C55 70 55 61 50 51 Z' fill='%232563eb'/%3E%3C/svg%3E" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Jost:wght@300;400&amp;family=Zen+Old+Mincho:wght@400;600&amp;display=swap" rel="stylesheet" />
@@ -95,7 +105,7 @@ html[lang="en"] .hero .lede{font-family:var(--serif);font-weight:500;font-size:c
 br.m{display:none}
 .cue{position:fixed;z-index:11;left:50%;bottom:calc(env(safe-area-inset-bottom) + 1.3rem);transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:.7rem;font-size:.8125rem;letter-spacing:.2em;padding-left:.2em;
-  color:#fff;text-shadow:0 1px 12px rgba(6,40,110,.85);opacity:0;transition:opacity .5s ease;pointer-events:none;white-space:nowrap}
+  color:#fff;text-shadow:0 1px 2px rgba(6,40,110,.9),0 1px 12px rgba(6,40,110,.85);opacity:0;transition:opacity .5s ease;pointer-events:none;white-space:nowrap}
 .ready .cue.on{opacity:1;transition-delay:.9s}
 .cue i{width:1px;height:38px;background:linear-gradient(#fff,rgba(255,255,255,0));animation:cue 2.2s var(--ease) infinite}
 html[lang="en"] .cue{font-family:var(--sans);letter-spacing:.1em}
@@ -195,7 +205,7 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
 
   <section class="beat hero" id="bHero" aria-hidden="true" data-screen-label="Dive — Surface">
     <p class="wm" aria-hidden="true">MASTRY</p>
-    <p class="lede" data-en="A resin born on one island in all the world, and the spring water of Japan. Dive down to the depth where they meet.">世界でただひとつの島が生む樹脂と、<br class="m" />日本の湧水。<br />その出会いの深さまで、潜ってみてください。</p>
+    <p class="lede" data-en="A resin born on one island in all the world, and the spring water of Japan. Dive down to the depth where they&amp;nbsp;meet.">世界でただひとつの島が生む樹脂と、<br class="m" />日本の湧水。<br />その出会いの深さまで、<wbr><span style="white-space:nowrap">潜ってみてください。</span></p>
   </section>
   <div class="cue" id="cue" aria-hidden="true"><span data-en="Scroll to dive">スクロールして潜る</span><i></i></div>
 
@@ -229,7 +239,7 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
     <div class="in">
       <h2 class="closing" data-en="Only those who know the depth&lt;br&gt;know the taste of stillness.">深さを知った者だけが、<br />静けさの味を知っている。</h2>
       <div class="acts">
-        <a class="btn" href="/#offer" data-en="Reserve the first lot">先行販売に登録する</a>
+        <a class="btn" href="/#offer" data-en="Reserve early access">先行販売に登録する</a>
         <a class="lnk" href="/"><span data-en="View the site">サイトを見る</span></a>
       </div>
     </div>
@@ -240,6 +250,6 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
 <div class="runway" aria-hidden="true"></div>
 
 <script>try{sessionStorage.setItem('mastry-dived','1')}catch(e){}</script>
-<script src="/assets/dive.js?v=8"></script>
+<script src="/assets/dive.js?v=9"></script>
 </body>
 </html>
