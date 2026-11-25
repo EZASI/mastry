@@ -13,22 +13,26 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>MASTRY — The Dive</title>
-<meta name="description" content="MASTRY The Dive — スクロールで海へ。水面から、木の涙の深さまで。" />
+<meta name="description" content="MASTRY The Dive — スクロールで海へ。ヒオス島の木の涙が日本の湧水に沈む深さまで、一本の瓶と潜る。砂糖・甘味料不使用、アルコール0.00%のプレミアム・スパークリングウォーター。" />
 <link rel="canonical" href="https://mastry.jp/dive.html" />
 <meta property="og:title" content="MASTRY — The Dive ｜ 息を止めて、潜る。" />
 <meta property="og:description" content="スクロールで海へ。ヒオス島の木の涙が、日本の湧水に沈むまで。" />
-<meta property="og:image" content="https://mastry.jp/assets/og.jpg" />
+<meta property="og:image" content="https://mastry.jp/assets/og-dive.jpg" />
+<meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://mastry.jp/dive.html" />
+<meta property="og:type" content="website" /><meta property="og:site_name" content="MASTRY" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#c9ebff" />
+<meta name="twitter:image" content="https://mastry.jp/assets/og-dive.jpg" />
+<meta name="theme-color" content="#cfe3f8" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Jost:wght@300;400&amp;family=Zen+Old+Mincho:wght@400;600&amp;display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/assets/dive/bottle-n.webp" type="image/webp" />
+<link rel="preload" as="image" href="/assets/dive/bottle-m.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Jost:wght@300;400;500&amp;family=Zen+Old+Mincho:wght@400;600&amp;display=swap" rel="stylesheet" />
 <style>
 :root{
-  --sky:#eef4fb;
   --ink:#0c1a2b;
   --resin:#2563eb;
   --resin-deep:#174394;
@@ -36,109 +40,144 @@
   --bone-dim:#a9bcd6;
   --serif:"Cormorant Garamond",Georgia,serif;
   --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
-  --sans:"Jost","Hiragino Sans","Yu Gothic",sans-serif;
+  --sans:"Jost","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
-  --pad:clamp(1.1rem,3.2vw,2.2rem);
+  --pad:clamp(1.1rem,3.2vw,2.4rem);
   --fg:var(--ink);
+  --bx:50vw;--by:20vh;--bw:20vw;--bh:50vh;
 }
 html[data-tone="dark"]{--fg:var(--bone)}
 *{margin:0;padding:0;box-sizing:border-box}
-html{background:#c9ebff;-webkit-text-size-adjust:100%}
+html{background:#cfe3f8;-webkit-text-size-adjust:100%}
 body{color:var(--bone);font-family:var(--mincho);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:var(--resin);color:#fff}
 a:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
 
 /* the scene */
-#gl{position:fixed;left:0;top:0;width:100%;height:100vh;z-index:0;display:block;opacity:0;transition:opacity 1.1s ease}
+#gl{position:fixed;left:0;top:0;width:100%;height:100vh;z-index:0;display:block;opacity:0;transition:opacity 1.2s ease}
 #gl.on{opacity:1}
 .fallback{position:fixed;inset:0;z-index:0;display:none;
-  background:linear-gradient(#a9c9f2 0%,#eaf1fb 5.5%,#2f7de0 7%,#0e3a7a 20%,#061a38 44%,#02060d 76%,#02060d 85%,#0e3a7a 91%,#eaf1fb 95%,#b6d2f5 100%);
+  background:linear-gradient(#b9d4f4 0%,#eaf1fb 5.5%,#2f7de0 7%,#0e3a7a 20%,#061a38 44%,#02060d 72%,#02060d 85%,#0e3a7a 91%,#eaf1fb 95%,#c2d9f5 100%);
   background-size:100% 1200%;background-position:0 calc(var(--p,0)*100%)}
+.fb-bottle{display:none;position:fixed;z-index:5;left:var(--fx,50%);top:var(--fy,30vh);height:var(--fh,52vh);width:auto;transform:translateX(-50%);pointer-events:none}
 .nogl #gl{display:none}
-.nogl .fallback{display:block}
+.nogl .fallback,.nogl .fb-bottle{display:block}
 .wm{display:none}
-.nogl .wm{display:block;position:absolute;left:0;right:0;top:27vh;text-align:center;font-family:var(--serif);font-weight:600;
-  font-size:clamp(3rem,15vw,11rem);letter-spacing:.1em;padding-left:.1em;color:#0f40cc;line-height:1}
+.nogl .wm{display:block;position:absolute;left:0;right:0;top:25vh;text-align:center;font-family:var(--serif);font-weight:600;
+  font-size:clamp(3rem,15vw,11rem);letter-spacing:.1em;padding-left:.1em;color:#103fba;line-height:1}
 
 /* soft strips at the screen edges: mobile browsers take their bar colour from the topmost fixed layer at each edge,
    so these sit above everything else */
 .edge{position:fixed;left:0;right:0;height:16px;z-index:30;pointer-events:none;display:none}
-.et{top:0;background:#c9ebff;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
-.eb{bottom:0;background:#5677b1;-webkit-mask-image:linear-gradient(transparent,#000);mask-image:linear-gradient(transparent,#000)}
+.et{top:0;background:#cfe3f8;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+.eb{bottom:0;background:#0c3f8f;-webkit-mask-image:linear-gradient(transparent,#000);mask-image:linear-gradient(transparent,#000)}
 @media (pointer:coarse){.edge{display:block}}
 
 /* top bar */
-.bar{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;
+.bar{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;align-items:center;gap:1.1rem;
   padding:calc(env(safe-area-inset-top) + .7rem) var(--pad) .7rem;color:var(--fg);transition:color .6s ease;pointer-events:none}
 .bar a{color:inherit;text-decoration:none;pointer-events:auto;transition:text-shadow .6s ease}
 html[data-tone="dark"] .bar a{text-shadow:0 0 14px rgba(2,16,50,.65)}
 .brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:.42em;padding:.6rem 0;opacity:0;visibility:hidden;
   transition:opacity .6s ease,visibility .6s}
 .brand.on{opacity:1;visibility:visible}
-.skip{margin-left:auto;font-size:.8125rem;letter-spacing:.14em;padding:.8rem 0 .8rem 1.2rem}
+.skip{margin-left:auto;font-size:.8125rem;letter-spacing:.14em;padding:.8rem 0;white-space:nowrap}
 .skip span{border-bottom:1px solid currentColor;padding-bottom:.3em}
-html[lang="en"] .skip,html[lang="en"] .lnk{font-family:var(--sans);letter-spacing:.06em;font-size:.875rem}
+.join{font-family:var(--mincho);font-weight:600;font-size:.8125rem;letter-spacing:.14em;padding:.56rem 1.05rem;border-radius:999px;
+  border:1px solid currentColor;white-space:nowrap;transition:background-color .3s ease,color .3s ease,border-color .3s ease,opacity .5s ease}
+html[data-tone="dark"] .join{text-shadow:none;background:rgba(238,244,251,.08)}
+@media (hover:hover){.join:hover{background:var(--resin);border-color:var(--resin);color:#fff}}
+.bar.end .join{opacity:0;pointer-events:none}
+html[lang="en"] .skip,html[lang="en"] .lnk,html[lang="en"] .join{font-family:var(--sans);font-weight:400;letter-spacing:.06em;font-size:.875rem}
 
-/* depth gauge and progress */
+/* instruments: progress, depth, water temperature */
 .prog{position:fixed;z-index:20;left:0;top:0;width:2px;height:100%;background:var(--fg);opacity:.42;transform-origin:top;
   transform:scaleY(0);transition:background .6s ease;pointer-events:none}
+.ticks{position:fixed;z-index:20;left:0;top:0;bottom:0;width:8px;pointer-events:none;color:var(--fg);transition:color .6s ease}
+.ticks i{position:absolute;left:0;width:7px;height:1px;background:currentColor;opacity:.5}
 .gauge{position:fixed;z-index:20;left:var(--pad);bottom:calc(env(safe-area-inset-bottom) + 1.1rem);color:var(--bone);
-  opacity:0;transition:opacity .6s ease;pointer-events:none}
+  opacity:0;transition:opacity .6s ease;pointer-events:none;font-family:var(--sans)}
 .gauge.on{opacity:1}
-.gauge .num{font-family:var(--sans);font-weight:300;font-size:clamp(1.85rem,2.4vw,2.4rem);line-height:1;letter-spacing:.02em;
-  font-variant-numeric:tabular-nums lining-nums}
+.gauge .num{font-weight:300;font-size:clamp(1.85rem,2.4vw,2.4rem);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums lining-nums}
 .gauge .num small{font-size:.48em;font-weight:400;margin-left:.22em;letter-spacing:.04em}
-.gauge .st{margin-top:.5rem;font-size:.8125rem;letter-spacing:.14em;color:var(--bone-dim)}
-html[lang="en"] .gauge .st{font-family:var(--sans);letter-spacing:.05em;font-size:.875rem}
+.gauge .st{margin-top:.55rem;font-size:.78rem;letter-spacing:.12em;color:var(--bone-dim);display:flex;gap:.9em;align-items:baseline;white-space:nowrap}
+.gauge .st b{font-weight:400;color:var(--bone);font-variant-numeric:tabular-nums lining-nums;letter-spacing:.04em}
+.gauge .st i{font-style:normal;opacity:.5}
+html[lang="en"] .gauge .st{letter-spacing:.06em;font-size:.82rem}
 
 /* story beats */
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .beat{position:fixed;inset:0;z-index:10;opacity:0;visibility:hidden;pointer-events:none;will-change:opacity,transform}
 .beat.on{visibility:visible}
 
-.hero .lede{position:absolute;left:50%;top:53vh;transform:translateX(-50%);width:min(36em,calc(100% - 2*var(--pad)));
-  text-align:center;color:var(--ink);font-size:clamp(.92rem,.5vw + .82rem,1.06rem);line-height:2.15;letter-spacing:.07em;
-  opacity:0;transition:opacity 1.4s ease}
-.ready .hero .lede{opacity:1}
-html[lang="en"] .hero .lede{font-family:var(--serif);font-weight:500;font-size:clamp(1.15rem,.8vw + 1rem,1.5rem);line-height:1.5;
-  letter-spacing:.005em;width:min(27em,calc(100% - 2*var(--pad)))}
+/* the surface: what it is, in the air above the bottle */
+.hero{color:var(--ink)}
+.hero .top{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 4.3rem);padding:0 var(--pad);text-align:center;
+  opacity:0;transform:translateY(10px);transition:opacity 1.3s ease .15s,transform 1.3s var(--ease) .15s}
+.ready .hero .top{opacity:1;transform:none}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;color:#2a4d86;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;row-gap:.25rem}
+.eyebrow span,.eyebrow b{white-space:nowrap}
+.eyebrow b{font-weight:500;color:var(--resin-deep)}
+.eyebrow i{font-style:normal;display:block;width:1.6em;height:1px;background:currentColor;opacity:.45;margin:0 .7em}
+.lede{margin-top:.9rem;font-size:clamp(.92rem,.45vw + .78rem,1.3rem);line-height:2.05;letter-spacing:.07em}
+html[lang="en"] .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.7rem}
+html[lang="en"] .lede{font-family:var(--serif);font-weight:500;font-size:clamp(1.18rem,.8vw + 1rem,1.85rem);line-height:1.42;letter-spacing:.005em;
+  max-width:24em;margin-left:auto;margin-right:auto}
 br.m{display:none}
+.facts{display:none}
+.datum{position:absolute;left:var(--pad);top:calc(var(--wl,70vh) + .95rem);font-family:var(--sans);color:#fff;text-shadow:0 1px 10px rgba(6,40,110,.8);
+  opacity:0;transition:opacity 1.3s ease .5s}
+.ready .datum{opacity:1}
+.datum b{display:block;font-weight:300;font-size:1.35rem;line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums lining-nums}
+.datum b small{font-size:.5em;font-weight:400;margin-left:.22em}
+.datum span{display:block;margin-top:.42rem;font-size:.68rem;letter-spacing:.12em;opacity:.82;white-space:nowrap}
 .cue{position:fixed;z-index:11;left:50%;bottom:calc(env(safe-area-inset-bottom) + 1.3rem);transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:.7rem;font-size:.8125rem;letter-spacing:.2em;padding-left:.2em;
   color:#fff;text-shadow:0 1px 2px rgba(6,40,110,.9),0 1px 12px rgba(6,40,110,.85);opacity:0;transition:opacity .5s ease;pointer-events:none;white-space:nowrap}
 .ready .cue.on{opacity:1;transition-delay:.9s}
-.cue i{width:1px;height:38px;background:linear-gradient(#fff,rgba(255,255,255,0));animation:cue 2.2s var(--ease) infinite}
+.cue i{width:1px;height:34px;background:linear-gradient(#fff,rgba(255,255,255,0));animation:cue 2.2s var(--ease) infinite}
 html[lang="en"] .cue{font-family:var(--sans);letter-spacing:.1em}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* underwater lines hang like a scroll: vertical, top-aligned, reading downward */
 .v .txt{position:absolute;top:19vh;right:clamp(1.4rem,11vw,12rem);writing-mode:vertical-rl;text-orientation:mixed}
 .v h2{font-weight:600;font-size:clamp(1.75rem,min(3.5vw,6.4vh),3.4rem);line-height:1.85;letter-spacing:.16em;color:var(--bone);
-  text-shadow:0 0 30px rgba(2,10,30,.6),0 0 3px rgba(2,10,30,.35)}
-.v .note{margin-block-start:1.7rem;font-size:clamp(.875rem,.35vw + .8rem,1rem);line-height:2;letter-spacing:.15em;color:#c3d2e6;
-  text-shadow:0 0 18px rgba(2,10,30,.7)}
-.cap{position:absolute;left:calc(50% + var(--subx,0px));transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 2.2rem);
-  width:max-content;max-width:calc(100% - 2*var(--pad));text-align:center;font-size:.875rem;letter-spacing:.12em;color:#c3d2e6;
-  text-shadow:0 0 18px rgba(2,10,30,.7)}
-
+  text-shadow:0 0 34px rgba(2,10,30,.85),0 0 12px rgba(2,10,30,.55),0 0 3px rgba(2,10,30,.4)}
+.v .note{margin-block-start:1.7rem;font-size:clamp(.875rem,.35vw + .8rem,1rem);line-height:2;letter-spacing:.15em;color:#d3dff0;
+  text-shadow:0 0 18px rgba(2,10,30,.9),0 0 6px rgba(2,10,30,.7)}
 html[lang="en"] .v .txt{writing-mode:horizontal-tb;top:50%;transform:translateY(-50%);left:calc(50% + 9vw);right:auto}
 html[lang="en"] .v h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,min(3.9vw,7vh),3.9rem);line-height:1.1;letter-spacing:.004em;white-space:nowrap}
-html[lang="en"] .v .note,html[lang="en"] .cap{font-family:var(--sans);font-weight:300;font-size:1rem;line-height:1.7;letter-spacing:.02em}
-html[lang="en"] .v .note{margin-block-start:1.2rem;max-width:21rem}
+html[lang="en"] .v .note{font-family:var(--sans);font-weight:300;font-size:1rem;line-height:1.7;letter-spacing:.02em;margin-block-start:1.2rem;max-width:21rem}
+
+/* the label, read out: three figures beside the bottle, each tied to the glass by a hairline */
+.specs{position:absolute;left:calc(var(--bx) + var(--bw)*.5 + var(--lead));top:calc(var(--by) + var(--bh)*.40);--lead:clamp(1.6rem,4.4vw,4.6rem);
+  display:grid;gap:clamp(1rem,2.6vh,1.7rem);font-family:var(--sans);color:var(--bone);text-shadow:0 0 16px rgba(2,10,30,.75)}
+.specs div{position:relative}
+.specs div::before{content:"";position:absolute;right:calc(100% + .7rem);top:.42rem;width:calc(var(--lead) - .2rem);height:1px;
+  background:linear-gradient(90deg,rgba(238,244,251,.75),rgba(238,244,251,.18))}
+.specs div::after{content:"";position:absolute;right:calc(100% + .5rem + var(--lead));top:calc(.42rem - 2px);width:5px;height:5px;border-radius:50%;background:var(--bone)}
+.specs dt{font-size:.72rem;letter-spacing:.16em;color:var(--bone-dim);white-space:nowrap}
+.specs dd{margin-top:.2rem;font-weight:300;font-size:clamp(1.45rem,min(2.2vw,3.6vh),2rem);line-height:1.1;letter-spacing:.03em;white-space:nowrap;
+  font-variant-numeric:tabular-nums lining-nums}
+.specs dd small{font-size:.5em;font-weight:400;margin-left:.2em;letter-spacing:.04em}
+.specs dd.w{font-family:var(--mincho);font-weight:600;font-size:clamp(1.05rem,min(1.5vw,2.6vh),1.35rem);letter-spacing:.12em;line-height:1.5}
+html[lang="en"] .specs dt{letter-spacing:.1em;text-transform:uppercase;font-size:.68rem}
+html[lang="en"] .specs dd.w{font-family:var(--sans);font-weight:300;font-size:clamp(1.45rem,min(2.2vw,3.6vh),2rem);letter-spacing:.03em;line-height:1.1}
 
 /* back in the light */
 .end{color:var(--ink);text-align:center}
-.end .in{position:absolute;left:0;right:0;top:43vh;display:flex;flex-direction:column;align-items:center;gap:clamp(1.3rem,3.2vh,2.1rem);padding:0 var(--pad)}
+.end .in{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 5.2rem);display:flex;flex-direction:column;align-items:center;
+  gap:clamp(1.1rem,2.6vh,1.8rem);padding:0 var(--pad)}
 .closing{font-weight:600;font-size:clamp(1.3rem,min(2.5vw,4.3vh),2.2rem);line-height:1.75;letter-spacing:.1em}
 html[lang="en"] .closing{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,min(3.2vw,5.4vh),2.9rem);line-height:1.18;letter-spacing:.004em}
-.acts{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.acts{display:flex;flex-direction:column;align-items:center;gap:.4rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:3.5rem;padding:0 2.5rem;border-radius:999px;
-  background:var(--resin);color:#fff;text-decoration:none;font-size:1rem;font-weight:600;letter-spacing:.16em;
+  background:var(--resin);color:#fff;text-decoration:none;font-size:1rem;font-weight:600;letter-spacing:.16em;white-space:nowrap;
   box-shadow:0 14px 34px rgba(37,99,235,.28);transition:background .3s ease,transform .3s var(--ease),box-shadow .3s ease}
 .btn:hover{background:var(--resin-deep);transform:translateY(-2px);box-shadow:0 18px 42px rgba(23,67,148,.34)}
 .btn:focus-visible{outline-color:var(--ink)}
 html[lang="en"] .btn{font-family:var(--sans);font-weight:400;letter-spacing:.05em;font-size:1.05rem}
-.lnk{color:var(--ink);text-decoration:none;font-size:.875rem;letter-spacing:.14em;padding:.8rem .6rem}
+.lnk{color:var(--ink);text-decoration:none;font-size:.875rem;letter-spacing:.14em;padding:.8rem .6rem;white-space:nowrap}
 .lnk span{border-bottom:1px solid rgba(12,26,43,.5);padding-bottom:.3em}
 .end.on .btn,.end.on .lnk{pointer-events:auto}
 .foot{position:absolute;left:var(--pad);right:var(--pad);bottom:calc(env(safe-area-inset-bottom) + 1.1rem);display:flex;
@@ -146,38 +185,97 @@ html[lang="en"] .btn{font-family:var(--sans);font-weight:400;letter-spacing:.05e
 .foot span{white-space:nowrap}
 html[lang="en"] .foot{font-family:var(--sans);letter-spacing:.06em;font-size:.8125rem}
 
-.runway{height:820vh}
+.runway{height:800vh}
 
+/* wide screens: the copy and the figures stand either side of the bottle */
+@media (min-aspect-ratio:17/20){
+  .hero .top{left:var(--pad);right:auto;padding:0;text-align:left;width:min(29rem,33vw);top:43vh}
+  .eyebrow{justify-content:flex-start;flex-wrap:nowrap;letter-spacing:.16em}
+  .datum{left:auto;right:var(--pad);text-align:right}
+  br.m{display:inline}
+  html[lang="en"] .lede{margin-left:0}
+  .facts{display:grid;grid-template-columns:auto auto;gap:.5rem 1.3rem;position:absolute;right:var(--pad);top:calc(43vh + .2rem);
+    font-family:var(--sans);font-size:.8rem;letter-spacing:.08em;color:var(--ink);opacity:0;transition:opacity 1.3s ease .35s}
+  .ready .facts{opacity:1}
+  .facts dt{color:#2a4d86;letter-spacing:.16em;font-size:.72rem;padding-top:.08rem;white-space:nowrap}
+  .facts dd{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .facts dt,.facts dd{padding-bottom:.5rem;border-bottom:1px solid rgba(12,26,43,.14)}
+  html[lang="en"] .facts dt{text-transform:uppercase;letter-spacing:.1em;font-size:.68rem}
+  .end .in{left:var(--pad);right:auto;align-items:flex-start;text-align:left;top:44vh;width:min(38rem,44vw)}
+  .acts{flex-direction:row;gap:1.2rem;align-items:center}
+  html[lang="en"] .closing{font-size:clamp(1.5rem,min(2.6vw,5vh),2.6rem)}
+  html[lang="en"] #b4 .txt{top:27%}
+  .hero .top{width:min(29rem,33vw)}
+}
+@media (min-aspect-ratio:17/20) and (max-width:699px){.facts{display:none}}
+@media (min-aspect-ratio:17/20) and (min-width:1700px){
+  .hero .top{width:min(36rem,33vw)}
+  .facts{font-size:.95rem}.facts dt{font-size:.82rem}
+  .eyebrow{font-size:.82rem}
+}
 @media (max-aspect-ratio:17/20){
   br.m{display:inline}
-  .hero .lede{top:42vh}
-  .v .txt{top:15vh;right:1.4rem}
-  .v h2{font-size:clamp(1.65rem,7.3vw,2.15rem)}
-  .v .note{margin-block-start:1.2rem;font-size:.875rem}
-  .cap{left:50%;bottom:calc(env(safe-area-inset-bottom) + 6rem)}
-  .end .in{top:38.5vh}
-  html[lang="en"] .v .txt{top:auto;transform:none;left:1.4rem;right:1.4rem;width:auto;bottom:calc(env(safe-area-inset-bottom) + 8.6rem)}
+  .eyebrow{font-size:.68rem;letter-spacing:.07em}
+  .eyebrow i{width:.9em;margin:0 .5em}
+  .v .txt{top:14.5vh;right:1.3rem}
+  .v h2{font-size:clamp(1.6rem,7.1vw,2.1rem)}
+  .v .note{position:fixed;left:1.3rem;right:1.3rem;top:auto;bottom:calc(env(safe-area-inset-bottom) + 5.6rem);writing-mode:horizontal-tb;margin:0;
+    font-size:.875rem;line-height:1.9;letter-spacing:.1em}
+  .specs{--lead:1.5rem;top:calc(var(--by) + var(--bh)*.46)}
+  .specs dd{font-size:1.4rem}
+  .specs dd.w{font-size:1rem}
+  .bar{gap:.9rem}
+  html[lang="en"] .v .txt{top:auto;transform:none;left:1.3rem;right:1.3rem;width:auto;bottom:calc(env(safe-area-inset-bottom) + 8.4rem)}
   html[lang="en"] .v h2{font-size:clamp(1.9rem,8.4vw,2.5rem);white-space:normal}
-  html[lang="en"] .cap{left:1.4rem;transform:none;text-align:left}
+  html[lang="en"] .v .note{position:static;max-width:none;margin-block-start:1rem}
+}
+@media (max-height:700px) and (max-aspect-ratio:17/20){
+  .hero .top{top:calc(env(safe-area-inset-top) + 3.7rem)}
+  .lede{margin-top:.55rem;line-height:1.85}
+  .end .in{top:calc(env(safe-area-inset-top) + 4.2rem);gap:.9rem}
+  .closing{line-height:1.6}
+  .btn{min-height:3.1rem}
+  .end .lnk{display:none}
+}
+@media (max-width:350px){
+  .eyebrow{font-size:.66rem;letter-spacing:.06em}
+  .eyebrow i{display:none}
+  .eyebrow span{flex-basis:100%}
+  .skip{display:none}
+  .join{margin-left:auto}
+  .foot{letter-spacing:.06em;font-size:.7rem}
+  .lede{font-size:.86rem;letter-spacing:.04em}
+  .specs dd{font-size:1.2rem}
 }
 @media (max-height:480px) and (min-aspect-ratio:17/20){
-  .hero .lede{top:50vh;line-height:1.8}
-  .cue i{height:22px}
-  .end .in{top:37vh;gap:.8rem}
-  .closing{line-height:1.5}
-  .btn{min-height:2.8rem}
+  .hero .top{top:41vh}
+  .lede{line-height:1.6;margin-top:.4rem;font-size:.84rem}
+  .facts{top:41vh;font-size:.72rem;gap:.3rem 1rem}
+  .facts dt,.facts dd{padding-bottom:.3rem}
+  .cue i{height:16px}
+  .cue{bottom:calc(env(safe-area-inset-bottom) + .6rem)}
+  .end .in{top:42vh;gap:.6rem}
+  .closing{line-height:1.4;font-size:1.15rem}
+  .btn{min-height:2.6rem;padding:0 1.8rem;font-size:.9rem}
   .lnk{padding:.4rem .6rem}
+  .v .txt{top:16vh}
+  .v h2{font-size:1.5rem;line-height:1.7}
+  .specs{gap:.5rem;top:calc(var(--by) + var(--bh)*.30)}
+  .specs dd{font-size:1.15rem}
+  .specs dd.w{font-size:.95rem}
+  .gauge .num{font-size:1.5rem}
 }
-@media (prefers-reduced-motion:reduce){.cue i{animation:none}#gl{transition:none}}
+@media (prefers-reduced-motion:reduce){.cue i{animation:none}#gl{transition:none}.hero .top,.facts,.datum{transition:none}}
 </style>
 <noscript><style>
-html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02060d 72%,#eaf1fb 82%)}
-#gl,.runway,.prog,.gauge,.cue,.edge{display:none}
+html{background:linear-gradient(#b9d4f4 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02060d 72%,#eaf1fb 82%)}
+#gl,.runway,.prog,.ticks,.gauge,.cue,.edge,.specs,.datum{display:none}
 .beat{position:relative;inset:auto;opacity:1;visibility:visible;min-height:72vh;pointer-events:auto}
 .beat.v{min-height:92vh}
-.wm{display:block;padding-top:16vh;text-align:center;font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(3rem,15vw,11rem);letter-spacing:.1em;color:#0f40cc}
-.hero .lede{position:static;transform:none;margin:2rem auto 0;opacity:1}
-.end .in{position:static;padding-top:8vh}
+.wm{display:block;padding-top:14vh;text-align:center;font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(3rem,15vw,11rem);letter-spacing:.1em;color:#103fba}
+.hero .top{position:static;opacity:1;transform:none;margin-top:1.5rem}
+.fb-bottle{display:block;position:static;transform:none;height:56vh;margin:0 auto 4rem}
+.end .in{position:static;padding-top:8vh;width:auto;align-items:center;text-align:center}
 .foot{position:static;margin-top:4rem;color:#0c1a2b;text-shadow:none}
 </style></noscript>
 </head>
@@ -188,25 +286,37 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
 <div class="edge et" id="edgeT" aria-hidden="true"></div>
 <div class="edge eb" id="edgeB" aria-hidden="true"></div>
 
-<header class="bar">
+<header class="bar" id="bar">
   <a class="brand" id="brand" href="/" aria-label="MASTRY ホーム" data-en-label="MASTRY home">MASTRY</a>
   <a class="skip" href="/"><span data-en="View the site">サイトを見る</span></a>
+  <a class="join" id="join" href="/#offer" data-en="Reserve">先行登録</a>
 </header>
 
 <div class="prog" id="prog" aria-hidden="true"></div>
+<div class="ticks" aria-hidden="true"><i style="top:8.5%"></i><i style="top:31%"></i><i style="top:50%"></i><i style="top:66.5%"></i><i style="top:84.5%"></i></div>
 <div class="gauge" id="gauge" aria-hidden="true">
   <p class="num"><span id="depthNum">0</span><small>m</small></p>
-  <p class="st" id="station">水面</p>
+  <p class="st"><span id="station">水面</span><i>/</i><span><span data-en="Water">水温</span> <b id="tempNum">24.0</b><span data-en="°C">℃</span></span></p>
 </div>
 
 <main>
   <h1 class="sr">MASTRY — The Dive</h1>
-  <p class="sr" data-en="A resin born on one island in all the world, and the spring water of Japan. Hold your breath, and dive. In summer, the trees of Chios shed tears; for 2,500 years the world has sought this one scent from a single island. Those tears sink into the spring water of Japan. Drink the stillness: no sugar, 0.00% alcohol, in glass.">世界でただひとつの島が生む樹脂と、日本の湧水。息を止めて、潜る。夏、ヒオス島の木は涙を流す。二千五百年、世界がただひとつの島に求めつづけた香り。その涙が、日本の湧水に沈む。静けさを、飲む。砂糖不使用、アルコール0.00%、ガラスボトル。</p>
+  <p class="sr" data-en="MASTRY is a premium sparkling water: mastiha resin from the island of Chios, Greece, and the spring water of Japan. Hold your breath, and dive. In summer, the trees of Chios shed tears; for 2,500 years the world has sought this one scent from a single island. Those tears sink into the spring water of Japan. Drink the stillness: 0.00% alcohol, no sugar or sweeteners, best served at 6 to 8 degrees Celsius.">MASTRYは、ギリシャ・ヒオス島のマスティハと日本の湧水でつくるプレミアム・スパークリングウォーターです。世界でただひとつの島が生む樹脂と、日本の湧水。息を止めて、潜る。夏、ヒオス島の木は涙を流す。二千五百年、世界がただひとつの島に求めつづけた香り。その涙が、日本の湧水に沈む。静けさを、飲む。アルコール0.00%、砂糖・甘味料不使用、適温は6〜8℃。</p>
 
   <section class="beat hero" id="bHero" aria-hidden="true" data-screen-label="Dive — Surface">
     <p class="wm" aria-hidden="true">MASTRY</p>
-    <p class="lede" data-en="A resin born on one island in all the world, and the spring water of Japan. Dive down to the depth where they&amp;nbsp;meet.">世界でただひとつの島が生む樹脂と、<br class="m" />日本の湧水。<br />その出会いの深さまで、<wbr><span style="white-space:nowrap">潜ってみてください。</span></p>
+    <div class="top">
+      <p class="eyebrow"><span data-en="Premium sparkling water">プレミアム・スパークリングウォーター</span><i></i><b data-en="0.00% alcohol">アルコール0.00%</b></p>
+      <p class="lede" data-en="A resin born on one island in all the world, and the spring water of Japan. Dive down to the depth where they&amp;nbsp;meet.">世界でただひとつの島が生む樹脂と、<br class="m" />日本の湧水。<br />その出会いの深さまで、<wbr><span style="white-space:nowrap">潜ってみてください。</span></p>
+    </div>
+    <p class="datum" aria-hidden="true"><b>0<small>m</small></b><span>38.25°N 25.98°E</span></p>
+    <dl class="facts">
+      <dt data-en="Resin">樹脂</dt><dd data-en="Chios mastiha (PDO), Greece">ヒオス島産マスティハ（PDO）</dd>
+      <dt data-en="Water">水</dt><dd data-en="Japanese spring water, soft">日本の湧水（軟水）</dd>
+      <dt data-en="Sugar · sweeteners">砂糖・甘味料</dt><dd data-en="None">不使用</dd>
+    </dl>
   </section>
+  <img class="fb-bottle" src="/assets/dive/bottle-cut.webp" alt="" width="236" height="815" loading="lazy" decoding="async" />
   <div class="cue" id="cue" aria-hidden="true"><span data-en="Scroll to dive">スクロールして潜る</span><i></i></div>
 
   <section class="beat v" id="b1" aria-hidden="true" data-screen-label="Dive — Plunge">
@@ -222,24 +332,28 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
     </div>
   </section>
 
-  <section class="beat v" id="b3" aria-hidden="true" data-screen-label="Dive — Marriage">
+  <section class="beat v" id="b3" aria-hidden="true" data-screen-label="Dive — Spring">
     <div class="txt">
       <h2 data-en="Those tears sink&lt;br&gt;into the spring water&lt;br&gt;of Japan.">その涙が、<br />日本の湧水に沈む。</h2>
     </div>
   </section>
 
-  <section class="beat v" id="b4" aria-hidden="true" data-screen-label="Dive — Bottle">
+  <section class="beat v" id="b4" aria-hidden="true" data-screen-label="Dive — Stillness">
     <div class="txt">
       <h2 data-en="Drink&lt;br&gt;the stillness.">静けさを、<br />飲む。</h2>
     </div>
-    <p class="cap" data-en="No sugar. 0.00% alcohol. In glass.">砂糖不使用・アルコール0.00%・ガラスボトル</p>
+    <dl class="specs">
+      <div><dt data-en="Alcohol">アルコール</dt><dd>0.00<small>%</small></dd></div>
+      <div><dt data-en="Sugar · sweeteners">砂糖・甘味料</dt><dd class="w" data-en="None">不使用</dd></div>
+      <div><dt data-en="Serve at">適温</dt><dd data-en="6–8&lt;small&gt;°C&lt;/small&gt;">6〜8<small>℃</small></dd></div>
+    </dl>
   </section>
 
   <section class="beat end" id="bEnd" data-screen-label="Dive — Resurface CTA">
     <div class="in">
       <h2 class="closing" data-en="Only those who know the depth&lt;br&gt;know the taste of stillness.">深さを知った者だけが、<br />静けさの味を知っている。</h2>
       <div class="acts">
-        <a class="btn" href="/#offer" data-en="Reserve early access">先行販売に登録する</a>
+        <a class="btn" id="endBtn" href="/#offer" data-en="Reserve early access">先行販売に登録する</a>
         <a class="lnk" href="/"><span data-en="View the site">サイトを見る</span></a>
       </div>
     </div>
@@ -250,6 +364,6 @@ html{background:linear-gradient(#a9c9f2 0,#eaf1fb 7%,#0e3a7a 15%,#02060d 50%,#02
 <div class="runway" aria-hidden="true"></div>
 
 <script>try{sessionStorage.setItem('mastry-dived','1')}catch(e){}</script>
-<script src="/assets/dive.js?v=9"></script>
+<script src="/assets/dive.js?v=10"></script>
 </body>
 </html>
