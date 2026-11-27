@@ -3,7 +3,7 @@
 import glob, os, json
 
 SITE='https://mastry.jp'
-OG=SITE+'/assets/og.jpg'
+OG=SITE+'/assets/og.jpg?v=2'
 TODAY='2026-06-04'
 
 # key -> (title, description(JP), path)
