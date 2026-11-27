@@ -1,7 +1,7 @@
 # Builds the Dive's bottle textures from the brand's hero render.
 #   in : ../src/hero-orig.png (633x951), hero-mask.png (macOS Vision subject mask, see lift.swift)
-#   out: bottle-n2.png  RGB  = photo divided by the studio backdrop (x0.75 headroom): glass → transmission, label/cap → reflectance
-#        bottle-m.png   R = silhouette, G = opaque parts (label, cap), B = rim (1 at the glass edge → 0 inside)
+#   out: bottle-n3.png  RGB  = photo divided by the studio backdrop (x0.75 headroom): glass → transmission, label/cap → reflectance
+#        bottle-m2.png  R = silhouette, G = opaque parts (label, cap), B = rim (1 at the glass edge → 0 inside)
 #   both 512x2048 (power of two, so WebGL1 can mipmap); the bottle sits in the UV rect printed at the end.
 import numpy as np, json
 from PIL import Image, ImageFilter
@@ -66,7 +66,7 @@ rowb=np.array([blue[y,int(cx-18):int(cx+18)].mean() for y in range(H)])
 rowv=np.array([P[y,int(cx-18):int(cx+18)].mean() for y in range(H)])
 print('cap rows (y: blue, value):',' '.join('%d:%.2f/%.2f'%(y,rowb[y],rowv[y]) for y in range(34,140,6)))
 
-CAP=np.clip(103.5-yy+0.5,0,1)*S
+CAP=np.clip(92.5-yy+0.5,0,1)*S
 OPQ=np.clip(LBL+CAP,0,1)
 # rim: 1 at the glass edge, falling to 0 over 22% of the local half-width (used for edge light under water)
 RIM=np.clip(1-sd/np.maximum(half_b*0.22,1.0),0,1)*S
@@ -104,7 +104,7 @@ Nfull=np.asarray(Nn).astype(np.uint8)
 canvasN=np.zeros((TH,TW,3),np.uint8); canvasN[...]=Nfull.reshape(-1,3).mean(0).astype(np.uint8)
 canvasN[oy:oy+h,ox:ox+w]=Nfull
 canvasM=np.zeros((TH,TW,3),np.uint8); canvasM[oy:oy+h,ox:ox+w]=Mm
-Image.fromarray(canvasN).save('bottle-n2.png'); Image.fromarray(canvasM).save('bottle-m.png')
+Image.fromarray(canvasN).save('bottle-n3.png'); Image.fromarray(canvasM).save('bottle-m2.png')
 meta={'tex':[TW,TH],'rect':[ox,oy,w,h],'bottle_px':[int(2*(2*prof_s.max())),int(2*(yb-y0+1))],
       'axis_u':(ox+2*(cx-cx0))/TW,'base_v':1-(oy+2*(yb-cy0))/TH,'top_v':1-(oy+2*(y0-cy0))/TH,
       'label_v':[1-(oy+2*(float(np.median(bots))-cy0))/TH,1-(oy+2*(float(np.median(tops))-cy0))/TH],

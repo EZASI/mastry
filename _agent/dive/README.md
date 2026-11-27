@@ -8,12 +8,13 @@ Source picture: the hero render, 633×951 (`git show e91c127:sales-assets/4c862b
 1. `swift lift.swift hero-orig.png hero-mask.png` — macOS Vision lifts the bottle's silhouette.
 2. `python3 make_bottle.py` (paths at the top of the file) — divides the photo by the studio backdrop, so glass
    becomes "how much light it lets through" and the label and cap become their own colour; writes
-   `bottle-n.png` (colour, ×0.75 headroom) and `bottle-m.png` (R silhouette, G label and cap, B glass rim),
+   `bottle-n3.png` (colour, ×0.75 headroom, the photographed droplets filtered off the glass) and `bottle-m2.png` (R silhouette, G label and cap, B glass rim),
    both 512×2048, and prints the numbers used in the shader (`B_UV`, `B_ASP`).
-3. Export: `bottle-n.webp` (cwebp -q 86) and `bottle-n.jpg` (fallback), `bottle-m.png`, `bottle-cut.webp`
+3. Export: `bottle-n3.webp` (cwebp -q 86) and `bottle-n3.jpg` (fallback), `bottle-m2.png`, `bottle-cut2.webp`
    (plain cut-out for the no-WebGL page).
 
 `vis-resin.jpg` and `vis-spring.jpg` are 768×1024 crops of `assets/origin-crop.jpg` and `assets/craft-spring.jpg`.
 `assets/og-dive.jpg` is the first screen of the Dive without its copy, 1200×630.
 
-A larger bottle render would make the label sharper: replace the source picture and run the three steps again.
+The condensation on the glass is drawn in the shader (`dew()` in assets/dive.js): it exists only below the liquid's
+surface and only in the air. A larger bottle render would make the label sharper: replace the source picture and run the three steps again.

@@ -428,7 +428,11 @@ vec4 dew(vec2 b,float n,float dens,float seed,float px){
   vec2 g=b*n;
   vec2 id=floor(g),f=fract(g);
   vec2 h=hash22(id+seed);
-  float on=step(1.-dens,hash12(id*1.31+seed+.7));
+  /* condensation needs cold glass: it forms where the liquid touches it, up to the liquid's surface in the neck and no higher */
+  vec2 cc=(id+.5)/n;
+  float top=.822+(noise(vec2(cc.x*55.,seed))-.5)*.016;
+  dens*=smoothstep(top,top-.07,cc.y+.5/n)*smoothstep(.0,.05,cc.y);
+  float on=step(1.-dens,hash12(id*1.31+seed+.7))*step(cc.y+.5/n,top);
   float r=mix(.14,.36,h.x*h.x);
   float tall=mix(1.,.78,h.y*h.y);
   vec2 rr=vec2(r,r/tall)+.02;
@@ -641,10 +645,9 @@ void main(){
     if(wet>.01){
       vec2 bq=q/H;
       float px=1./(uRes.y*H);
-      float thin=mix(.50,1.,smoothstep(.97,.72,bq.y))*smoothstep(.0,.05,bq.y);
-      g=dewOn(g,dew(bq,36.,.40*thin,3.1,px),wet);
-      g=dewOn(g,dew(bq+vec2(.013,.007),80.,.50*thin,7.7,px),wet);
-      if(uQ>.5)g=dewOn(g,dew(bq+vec2(.004,.019),168.,.44*thin,12.9,px),wet*.8);
+      g=dewOn(g,dew(bq,36.,.40,3.1,px),wet);
+      g=dewOn(g,dew(bq+vec2(.013,.007),80.,.50,7.7,px),wet);
+      if(uQ>.5)g=dewOn(g,dew(bq+vec2(.004,.019),168.,.44,12.9,px),wet*.8);
     }
     /* paper and metal, under whatever light there is */
     vec3 o=min(N,vec3(1.25))*amb;
@@ -885,8 +888,8 @@ function load(src,done,alt){
 function pictures(){
   var need=2;
   function got(){if(--need===0){haveBottle=!!(img.n&&img.m);if(!haveBottle){intro=1;}}}
-  load('/assets/dive/bottle-n2.webp',function(im){img.n=im;if(im)setTex('n',im);got();},'/assets/dive/bottle-n2.jpg');
-  load('/assets/dive/bottle-m.png',function(im){img.m=im;if(im)setTex('m',im);got();},null);
+  load('/assets/dive/bottle-n3.webp',function(im){img.n=im;if(im)setTex('n',im);got();},'/assets/dive/bottle-n3.jpg');
+  load('/assets/dive/bottle-m2.png',function(im){img.m=im;if(im)setTex('m',im);got();},null);
   /* the two photographs are not needed until a third of the way down */
   var later=function(){
     load('/assets/dive/vis-resin.jpg',function(im){img.a=im;if(im)setTex('a',im);},null);
