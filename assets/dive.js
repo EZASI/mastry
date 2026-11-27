@@ -2,7 +2,7 @@
    One split-level shot. The bottle stays in frame from the first screen to the last; scrolling raises the sea over it,
    follows it down to the still water where the resin tear meets the spring, and lifts it back into the light.
    One fragment shader draws the sea, the sky and the water; the bottle is the brand's own render, cut out and
-   re-lit so the glass lets whatever is behind it through. No libraries. */
+   re-lit so the glass lets whatever is behind it through. Its condensation is drawn here too. No libraries. */
 (function(){
 'use strict';
 var doc=document, root=doc.documentElement, win=window;
@@ -145,6 +145,7 @@ function compute(P){
   var fz=lerp(0.55,0.12,ss(seg(P,0.07,0.20)));
   fz=lerp(fz,1,ss(seg(P,0.56,0.66)));
   S.fizz=lerp(fz,0.7,ss(seg(P,0.90,0.95)));
+  S.dew=P<0.5?1:ss(seg(P,0.93,0.99));
   /* the wordmark stands in the air behind the bottle's shoulder, first screen and last */
   S.wm=P<0.5
     ?[0,L.heroBase+L.wmAt*L.heroH,L.span,1-ss(seg(P,0.105,0.20))]
@@ -421,6 +422,35 @@ float strings(vec2 b,float t){
   float rr=.05+.07*h;
   return on*step(.22,h)*smoothstep(rr,rr*.3,d);
 }
+/* one layer of condensation, in bottle units (height = 1):
+   x = how much of this pixel is drop, y = -1 at the drop's foot … 1 at its head, z = glint, w = 0 at its centre … 1 at its edge */
+vec4 dew(vec2 b,float n,float dens,float seed,float px){
+  vec2 g=b*n;
+  vec2 id=floor(g),f=fract(g);
+  vec2 h=hash22(id+seed);
+  float on=step(1.-dens,hash12(id*1.31+seed+.7));
+  float r=mix(.14,.36,h.x*h.x);
+  float tall=mix(1.,.78,h.y*h.y);
+  vec2 rr=vec2(r,r/tall)+.02;
+  vec2 c=rr+(1.-2.*rr)*hash22(id+seed+5.1);
+  vec2 d=(f-c)/r;
+  d.y*=tall;
+  float l=length(d)*(1.+.09*sin(atan(d.y,d.x)*3.+h.x*37.)+.05*sin(atan(d.y,d.x)*5.+h.y*23.));
+  float aa=clamp(px*n/r,.04,.9);
+  float m=on*smoothstep(1.,1.-aa,l);
+  float gl=smoothstep(.36,.06,length(d-vec2(-.34,.40)));
+  return vec4(m,d.y,gl*m,l);
+}
+/* a drop is a small lens: dark under its upper edge, light gathered at its foot, one hard point of sun */
+vec3 dewOn(vec3 g,vec4 D,float wet){
+  float mm=D.x*wet;
+  if(mm<.003)return g;
+  vec3 body=g*(1.-.22*smoothstep(-.2,1.,D.y))+(g*.10+vec3(.034,.038,.042))*smoothstep(.1,-1.,D.y);
+  body*=1.-.30*smoothstep(.62,1.,D.w)*smoothstep(-.25,.9,D.y);
+  body+=vec3(.050,.056,.062)*smoothstep(.60,.97,D.w)*smoothstep(-.1,-.95,D.y);
+  body+=vec3(1.)*D.z*.78;
+  return mix(g,body,mm);
+}
 /* a photograph held in the water: two tones, soft at the edges, moving with the swell */
 vec3 vision(vec2 p,vec3 c,sampler2D tex,vec4 v,float t,float flip){
   if(v.w<=.001)return c;
@@ -603,6 +633,19 @@ void main(){
       ca=ca*ca*L;
       g+=vec3(.60,.86,1.)*ca*.085;
     }
+    /* the glass has a thickness: a thin dark line where it turns away from us */
+    g*=1.-.15*Rm*Rm*Rm*Rm*(1.-.5*undP);
+    /* condensation, drawn rather than photographed: it stays sharp, takes the colour of whatever is behind the glass,
+       and is gone wherever the sea has closed over the bottle */
+    float wet=(1.-undP)*uBotF.w*(1.-O);
+    if(wet>.01){
+      vec2 bq=q/H;
+      float px=1./(uRes.y*H);
+      float thin=mix(.50,1.,smoothstep(.97,.72,bq.y))*smoothstep(.0,.05,bq.y);
+      g=dewOn(g,dew(bq,36.,.40*thin,3.1,px),wet);
+      g=dewOn(g,dew(bq+vec2(.013,.007),80.,.50*thin,7.7,px),wet);
+      if(uQ>.5)g=dewOn(g,dew(bq+vec2(.004,.019),168.,.44*thin,12.9,px),wet*.8);
+    }
     /* paper and metal, under whatever light there is */
     vec3 o=min(N,vec3(1.25))*amb;
     o+=N*vec3(.90,.96,1.)*uBotF.y*.36*undP+N*vec3(.60,.86,1.)*ca*.13;
@@ -762,7 +805,7 @@ function draw(S,t,slosh){
   var px=coarse?0:Math.max(-0.6,Math.min(0.6,mouse.x)), py=coarse?0:mouse.y;
   var tilt=S.bot[3]+Math.sin(t*0.5)*0.011*S.surf+Math.sin(t*0.27+0.6)*0.020*free-px*0.030*(1-S.still*0.6);
   gl.uniform4f(u.uBot,S.bot[0]+px*0.012,S.bot[1]+bob-0.040*(1-e)+py*0.004,S.bot[2],tilt);
-  gl.uniform4f(u.uBotF,haveBottle?e:0,S.glow,S.fizz,0);
+  gl.uniform4f(u.uBotF,haveBottle?e:0,S.glow,S.fizz,S.dew);
   gl.uniform4f(u.uWm,S.wm[0]-px*0.007,S.wm[1]-py*0.003,S.wm[2],S.wm[3]*(atlas?cl(intro*1.6):0));
   gl.uniform4f(u.uWmUV,wmUV[0],wmUV[1],wmUV[2],wmUV[3]);
   gl.uniform4f(u.uGly,S.gly[0]-px*0.010,S.gly[1],S.gly[2],atlas?S.gly[3]:0);
@@ -842,7 +885,7 @@ function load(src,done,alt){
 function pictures(){
   var need=2;
   function got(){if(--need===0){haveBottle=!!(img.n&&img.m);if(!haveBottle){intro=1;}}}
-  load('/assets/dive/bottle-n.webp',function(im){img.n=im;if(im)setTex('n',im);got();},'/assets/dive/bottle-n.jpg');
+  load('/assets/dive/bottle-n2.webp',function(im){img.n=im;if(im)setTex('n',im);got();},'/assets/dive/bottle-n2.jpg');
   load('/assets/dive/bottle-m.png',function(im){img.m=im;if(im)setTex('m',im);got();},null);
   /* the two photographs are not needed until a third of the way down */
   var later=function(){

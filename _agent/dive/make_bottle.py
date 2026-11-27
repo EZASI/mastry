@@ -1,6 +1,6 @@
 # Builds the Dive's bottle textures from the brand's hero render.
 #   in : ../src/hero-orig.png (633x951), hero-mask.png (macOS Vision subject mask, see lift.swift)
-#   out: bottle-n.png   RGB  = photo divided by the studio backdrop (x0.75 headroom): glass → transmission, label/cap → reflectance
+#   out: bottle-n2.png  RGB  = photo divided by the studio backdrop (x0.75 headroom): glass → transmission, label/cap → reflectance
 #        bottle-m.png   R = silhouette, G = opaque parts (label, cap), B = rim (1 at the glass edge → 0 inside)
 #   both 512x2048 (power of two, so WebGL1 can mipmap); the bottle sits in the UV rect printed at the end.
 import numpy as np, json
@@ -71,6 +71,18 @@ OPQ=np.clip(LBL+CAP,0,1)
 # rim: 1 at the glass edge, falling to 0 over 22% of the local half-width (used for edge light under water)
 RIM=np.clip(1-sd/np.maximum(half_b*0.22,1.0),0,1)*S
 
+# --- the glass without its photographed droplets (they are drawn in the shader instead, so they stay sharp,
+#     take the colour of what is behind the glass, and can be washed off by the sea).
+#     Keep what is long (the glass's own streaks and edges, the liquid line), drop what is small and round.
+def _clean(ch):
+    mh=median_filter(ch,size=(3,27),mode='nearest')
+    mv=median_filter(ch,size=(27,3),mode='nearest')
+    return np.where(np.abs(mv-ch)<np.abs(mh-ch),mv,mh)
+_C=np.dstack([median_filter(_clean(N[...,k]),size=5,mode='nearest') for k in range(3)])
+_C=gaussian_filter(_C,(1.1,1.1,0))
+_g=gaussian_filter(((S>0.02)&(OPQ<0.5)).astype(np.float32),1.2)[...,None]
+N=N*(1-_g)+_C*_g
+
 # --- crop, upscale x2, place into 512x2048
 pad=6
 cx0,cx1,cy0,cy1=int(np.floor(cx-prof_s.max()))-pad,int(np.ceil(cx+prof_s.max()))+pad,y0-pad,yb+pad
@@ -78,7 +90,10 @@ def crop(a): return a[cy0:cy1+1,cx0:cx1+1]
 def up(a,mode=Image.LANCZOS):
     im=Image.fromarray(np.clip(a*255,0,255).astype(np.uint8))
     return im.resize((im.width*2,im.height*2),mode)
-Nn=up(crop(N)*0.75).filter(ImageFilter.UnsharpMask(radius=1.4,percent=55,threshold=2))
+_n=up(crop(N)*0.75)
+_sh=_n.filter(ImageFilter.UnsharpMask(radius=1.4,percent=55,threshold=2))
+_om=up(crop(OPQ),Image.BICUBIC)
+Nn=Image.composite(_sh,_n,_om)
 Mm=np.dstack([np.asarray(up(crop(c),Image.BICUBIC)) for c in (S,OPQ,RIM)])
 w,h=Nn.size
 TW,TH=512,2048
@@ -89,7 +104,7 @@ Nfull=np.asarray(Nn).astype(np.uint8)
 canvasN=np.zeros((TH,TW,3),np.uint8); canvasN[...]=Nfull.reshape(-1,3).mean(0).astype(np.uint8)
 canvasN[oy:oy+h,ox:ox+w]=Nfull
 canvasM=np.zeros((TH,TW,3),np.uint8); canvasM[oy:oy+h,ox:ox+w]=Mm
-Image.fromarray(canvasN).save('bottle-n.png'); Image.fromarray(canvasM).save('bottle-m.png')
+Image.fromarray(canvasN).save('bottle-n2.png'); Image.fromarray(canvasM).save('bottle-m.png')
 meta={'tex':[TW,TH],'rect':[ox,oy,w,h],'bottle_px':[int(2*(2*prof_s.max())),int(2*(yb-y0+1))],
       'axis_u':(ox+2*(cx-cx0))/TW,'base_v':1-(oy+2*(yb-cy0))/TH,'top_v':1-(oy+2*(y0-cy0))/TH,
       'label_v':[1-(oy+2*(float(np.median(bots))-cy0))/TH,1-(oy+2*(float(np.median(tops))-cy0))/TH],
